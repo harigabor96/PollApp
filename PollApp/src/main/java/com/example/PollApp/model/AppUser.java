@@ -10,7 +10,7 @@ public class AppUser {
     private Integer userId;
     private String username;
     private String passwordHash;
-    private String roleId;
+    private Integer roleId;
 
     public Integer getUserId() { return userId; }
 
@@ -24,7 +24,7 @@ public class AppUser {
 
     public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
 
-    public String getRoleId() { return roleId; }
+    public Integer getRoleId() { return roleId; }
 
-    public void setRoleId(String userRole) { this.roleId = userRole; }
+    public void setRoleId(Integer userRole) { this.roleId = userRole; }
 }

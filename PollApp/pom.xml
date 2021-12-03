@@ -57,6 +57,13 @@
 			<version>2.6.1</version>
 		</dependency>
 		<!-- Ez pedig a Spring Data JPA az adatbáziskezeléshez END-->
+		<!-- Ez a hashelő library BEGIN -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>31.0.1-jre</version>
+		</dependency>
+		<!-- Ez a hashelő library END -->
 	</dependencies>
 
 	<build>
