@@ -59,7 +59,11 @@ public class MainController {
 
         }
         if(action.equals("register")) {
-
+            if (appUserRepository.findAppUserByUsername(currentUser.getUsername()) == null) {
+                System.out.println("Még nincs ilyen user");
+            } else {
+                System.out.println("Már van ilyen user");
+            }
         }
         return "redirect:/login";
     }
