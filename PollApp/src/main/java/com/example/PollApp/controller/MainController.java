@@ -1,8 +1,8 @@
 package com.example.PollApp.controller;
 
 import com.example.PollApp.model.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,6 +41,13 @@ public class MainController {
     public @ResponseBody Iterable<Vote> listAllVotes() {
         /* 01:17 sikeres teszt... ez jó kör volt */
         return voteRepository.findAll();
+    }
+
+    @GetMapping("/appUserList")
+    public String appUserList(ModelMap model) {
+        List<AppUser> appUserList = appUserRepository.findAll();
+        model.addAttribute("appUsers", appUserList);
+        return "login";
     }
 }
 
