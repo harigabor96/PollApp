@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -50,18 +51,24 @@ public class MainController {
         /* 01:17 sikeres teszt... ez jó kör volt */
         return voteRepository.findAll();
     }
-/*
-    @PostMapping("/signInRegister")
-    public String signInRegister(@ModelAttribute(name="loginForm") LoginForm loginForm, ModelMap model){
-        String username = loginForm.getUsername();
-        return "";
-    } */
+
+    @PostMapping("/login")
+    public String login(@ModelAttribute(name="currentUser") AppUser currentUser,
+                                 @RequestParam(value ="action") String action) {
+        if(action.equals("login")) {
+
+        }
+        if(action.equals("register")) {
+
+        }
+        return "redirect:/login";
+    }
 
     @GetMapping("/login")
     public String login(ModelMap model) {
         List<UserRole> userRoles = userRoleRepository.findAll();
         model.addAttribute("userRoles", userRoles);
-        model.addAttribute("loginUser", new AppUser());
+        model.addAttribute("currentUser", new AppUser());
         return "login";
     }
 }

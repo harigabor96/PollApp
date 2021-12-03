@@ -7,7 +7,7 @@
 <tbody>
     <!-- We didn't include a separate registration form -->
     <h1>Please, sign in (or register)</h1>
-    <form th:action="@{/signInRegister}" th:object="${loginUser}" method="post">
+    <form th:action="@{/login}" th:object="${currentUser}" method="post">
         <table>
             <tr>
                 <td>
