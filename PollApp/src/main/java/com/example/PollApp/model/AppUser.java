@@ -26,5 +26,5 @@ public class AppUser {
 
     public Integer getRoleId() { return roleId; }
 
-    public void setRoleId(Integer userRole) { this.roleId = userRole; }
+    public void setRoleId(Integer roleId) { this.roleId = roleId; }
 }
