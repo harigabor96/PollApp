@@ -42,7 +42,7 @@
                 <td>
                     As
                     <select th:field="*{roleId}">
-                        <option th:each="userRole : ${userRoles}" value="${userRole.roleId}"
+                        <option th:each="userRole : ${userRoles}" th:value="${userRole.roleId}"
                                 th:text="${userRole.roleDescription}">
                         </option>
                     </select>
