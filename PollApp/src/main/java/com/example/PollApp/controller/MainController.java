@@ -1,12 +1,14 @@
 package com.example.PollApp.controller;
 
 import com.example.PollApp.model.*;
+import com.google.common.hash.Hashing;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -54,16 +56,21 @@ public class MainController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute(name="currentUser") AppUser currentUser,
-                                 @RequestParam(value ="action") String action) {
+                                 @RequestParam(value ="action") String action,
+                                 @RequestParam(value ="password") String plainPassword) {
         if(action.equals("login")) {
 
         }
         if(action.equals("register")) {
             if (appUserRepository.findAppUserByUsername(currentUser.getUsername()) == null) {
-                System.out.println("Még nincs ilyen user");
-            } else {
-                System.out.println("Már van ilyen user");
+                //Not salted for simplicity's sake
+                String hashedPassword = Hashing.sha256()
+                        .hashString(plainPassword, StandardCharsets.UTF_8)
+                        .toString();
+                currentUser.setPasswordHash(hashedPassword);
+                appUserRepository.save(currentUser);
             }
+            System.out.println("Már van ilyen user!");
         }
         return "redirect:/login";
     }
