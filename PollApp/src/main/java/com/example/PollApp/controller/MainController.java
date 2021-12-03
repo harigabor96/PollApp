@@ -3,6 +3,7 @@ package com.example.PollApp.controller;
 import com.example.PollApp.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,11 +50,18 @@ public class MainController {
         /* 01:17 sikeres teszt... ez jó kör volt */
         return voteRepository.findAll();
     }
+/*
+    @PostMapping("/signInRegister")
+    public String signInRegister(@ModelAttribute(name="loginForm") LoginForm loginForm, ModelMap model){
+        String username = loginForm.getUsername();
+        return "";
+    } */
 
     @GetMapping("/login")
-    public String appUserList(ModelMap model) {
+    public String login(ModelMap model) {
         List<UserRole> userRoles = userRoleRepository.findAll();
         model.addAttribute("userRoles", userRoles);
+        model.addAttribute("loginUser", new AppUser());
         return "login";
     }
 }

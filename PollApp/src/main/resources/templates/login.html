@@ -7,14 +7,14 @@
 <tbody>
     <!-- We didn't include a separate registration form -->
     <h1>Please, sign in (or register)</h1>
-    <form th:action="@{/}">
+    <form th:action="@{/signInRegister}" th:object="${loginUser}" method="post">
         <table>
             <tr>
                 <td>
                     Username
                 </td>
                 <td>
-                    <input type="text" th:name="username" />
+                    <input type="text" name="username" />
                 </td>
             </tr>
             <tr>
@@ -22,12 +22,12 @@
                     Password
                 </td>
                 <td>
-                    <input type="text" th:name="password" />
+                    <input type="text" name="passwordHash" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button type="submit" th:name="action" th:value="login">Login</button>
+                    <button type="submit" name="action" value="login">Login</button>
                 </td>
             </tr>
             <tr>
@@ -37,12 +37,13 @@
             </tr>
             <tr>
                 <td>
-                    <button type="submit" th:name="action" th:value="register">Register</button>
+                    <button type="submit" name="action" value="register">Register</button>
                 </td>
                 <td>
                     As
-                    <select th:field="*{userRoles}">
-                        <option th:each="userRole : ${userRoles}" th:value="${userRole.roleId}" th:text="${userRole.roleDescription}">
+                    <select th:field="*{roleId}">
+                        <option th:each="userRole : ${userRoles}" value="${userRole.roleId}"
+                                th:text="${userRole.roleDescription}">
                         </option>
                     </select>
                 </td>
