@@ -50,10 +50,10 @@ public class MainController {
         return voteRepository.findAll();
     }
 
-    @GetMapping("/appUserList")
+    @GetMapping("/login")
     public String appUserList(ModelMap model) {
-        List<AppUser> appUserList = appUserRepository.findAll();
-        model.addAttribute("appUsers", appUserList);
+        List<UserRole> userRoles = userRoleRepository.findAll();
+        model.addAttribute("userRoles", userRoles);
         return "login";
     }
 }
