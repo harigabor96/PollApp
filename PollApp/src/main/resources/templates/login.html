@@ -7,7 +7,7 @@
 <tbody>
     <!-- We didn't include a separate registration form -->
     <h1>Please, sign in (or register)</h1>
-    <form th:action="@{/login}" th:object="${currentUser}" method="post">
+    <form th:action="@{/signInRegister}" th:object="${currentUser}" method="post">
         <table>
             <tr>
                 <td>
@@ -27,7 +27,7 @@
             </tr>
             <tr>
                 <td>
-                    <button type="submit" name="action" value="login">Login</button>
+                    <button type="submit" name="action" value="signin">Sign In</button>
                 </td>
             </tr>
             <tr>
@@ -50,5 +50,6 @@
             </tr>
         </table>
     </form>
+    <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
 </tbody>
 </html>

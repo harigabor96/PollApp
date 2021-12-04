@@ -1,8 +1,8 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "UserRole")
@@ -11,8 +11,8 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roleId;
 
-    @Max(20)
-    @NotBlank
+    @NotNull
+    @Size(min = 1, max = 20)
     private String roleDescription;
 
     public Integer getRoleId() {

@@ -4,10 +4,11 @@ import com.example.PollApp.model.*;
 import com.google.common.hash.Hashing;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -54,11 +55,12 @@ public class MainController {
         return voteRepository.findAll();
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute(name="currentUser") AppUser currentUser,
-                                 @RequestParam(value ="action") String action,
-                                 @RequestParam(value ="password") String plainPassword) {
-        if(action.equals("login")) {
+    @PostMapping("/signInRegister")
+    public Object login(@ModelAttribute(name="currentUser") AppUser currentUser,
+                        @RequestParam(value ="action") String action,
+                        @RequestParam(value ="password") String plainPassword,
+                        RedirectAttributes redirectAttributes) {
+        if(action.equals("signin")) {
 
         }
         if(action.equals("register")) {
@@ -68,9 +70,27 @@ public class MainController {
                         .hashString(plainPassword, StandardCharsets.UTF_8)
                         .toString();
                 currentUser.setPasswordHash(hashedPassword);
-                appUserRepository.save(currentUser);
+                try {
+                    appUserRepository.save(currentUser);
+                    //Redirect Belső oldal + Sesseion kezelés
+                }
+                catch (Exception e) {
+                    if (e instanceof ConstraintViolationException) {
+                        ConstraintViolationException ce = (ConstraintViolationException)e;
+                        StringBuilder errorMsgString = new StringBuilder();
+                        for (ConstraintViolation violation : ce.getConstraintViolations()) {
+                            errorMsgString.append(violation.getPropertyPath().toString().concat(" "));
+                            errorMsgString.append(violation.getMessage().concat(", "));
+                        }
+                        redirectAttributes.addFlashAttribute("errorMsg", errorMsgString.toString());
+                    } else {
+                        redirectAttributes.addFlashAttribute("errorMsg",
+                                "Something went wrong, please try again!");
+                    }
+                }
+            } else {
+                redirectAttributes.addFlashAttribute("errorMsg", "User already exists!");
             }
-            System.out.println("Már van ilyen user!");
         }
         return "redirect:/login";
     }

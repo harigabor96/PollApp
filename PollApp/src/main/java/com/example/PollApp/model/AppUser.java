@@ -1,9 +1,9 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "AppUser")
@@ -12,8 +12,8 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
 
-    @Max(50)
-    @NotBlank
+    @NotNull
+    @Size(min = 5, max = 50)
     private String username;
 
     @NotBlank
