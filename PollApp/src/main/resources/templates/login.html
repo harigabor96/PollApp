@@ -2,45 +2,45 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Login (Register)</title>
+    <title>Login</title>
 </head>
 <tbody>
     <!-- We didn't include a separate registration form -->
     <h1>Please, sign in (or register)</h1>
-    <form th:action="@{/signInRegister}" th:object="${currentUser}" method="post">
+    <form th:object="${currentUser}" method="post">
         <table>
             <tr>
                 <td>
-                    Username
+                    <label for="username">Username</label>
                 </td>
                 <td>
-                    <input type="text" name="username" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Password
-                </td>
-                <td>
-                    <input type="text" name="password" />
+                    <input type="text" name="username" id="username" required />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button type="submit" name="action" value="signin">Sign In</button>
+                    <label for="password">Password</label>
+                </td>
+                <td>
+                    <input type="password" name="password" id="password" required />
                 </td>
             </tr>
             <tr>
                 <td>
-                    OR
+                    <button type="submit" formaction="/login/signIn">Sign In</button>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button type="submit" name="action" value="register">Register</button>
+                    <label>OR</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" formaction="/login/register">Register</button>
                 </td>
                 <td>
-                    As
+                    <label>As</label>
                     <select th:field="*{roleId}">
                         <option th:each="userRole : ${userRoles}" th:value="${userRole.roleId}"
                                 th:text="${userRole.roleDescription}">
