@@ -1,6 +1,9 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "AppUser")
@@ -8,8 +11,15 @@ public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+
+    @Max(50)
+    @NotBlank
     private String username;
+
+    @NotBlank
     private String passwordHash;
+
+    @NotNull
     private Integer roleId;
 
     public Integer getUserId() { return userId; }

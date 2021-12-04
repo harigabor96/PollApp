@@ -1,6 +1,7 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "Question")
@@ -8,6 +9,8 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer questionId;
+
+    @NotBlank
     private String question;
 
     public Integer getQuestionId() { return questionId; }
