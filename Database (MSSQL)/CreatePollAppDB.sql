@@ -24,7 +24,7 @@ CREATE TABLE dbo.AppUser
  (  
    UserID int identity(1,1) NOT NULL,   
    Username nvarchar(50) NOT NULL UNIQUE,
-   PasswordHash char(64) NOT NULL,
+   Password nvarchar(50) NOT NULL,
    RoleID int NOT NULL,
     
    Primary Key (UserID),

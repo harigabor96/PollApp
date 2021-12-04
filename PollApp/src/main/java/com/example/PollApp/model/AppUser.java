@@ -1,7 +1,6 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -13,11 +12,12 @@ public class AppUser {
     private Integer userId;
 
     @NotNull
-    @Size(min = 5, max = 50)
+    @Size(min = 3, max = 50)
     private String username;
 
-    @NotBlank
-    private String passwordHash;
+    @NotNull
+    @Size(min = 6, max = 50)
+    private String password;
 
     @NotNull
     private Integer roleId;
@@ -30,9 +30,9 @@ public class AppUser {
 
     public void setUsername(String username) { this.username = username; }
 
-    public String getPasswordHash() { return passwordHash; }
+    public String getPassword() { return password; }
 
-    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+    public void setPassword(String password) { this.password = password; }
 
     public Integer getRoleId() { return roleId; }
 

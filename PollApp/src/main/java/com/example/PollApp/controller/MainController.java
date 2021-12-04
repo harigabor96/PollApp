@@ -1,7 +1,6 @@
 package com.example.PollApp.controller;
 
 import com.example.PollApp.model.*;
-import com.google.common.hash.Hashing;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +8,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -58,38 +56,27 @@ public class MainController {
     @PostMapping("/signInRegister")
     public Object login(@ModelAttribute(name="currentUser") AppUser currentUser,
                         @RequestParam(value ="action") String action,
-                        @RequestParam(value ="password") String plainPassword,
                         RedirectAttributes redirectAttributes) {
-        if(action.equals("signin")) {
+        if (action.equals("signin")) {
 
         }
-        if(action.equals("register")) {
-            if (appUserRepository.findAppUserByUsername(currentUser.getUsername()) == null) {
-                //Not salted for simplicity's sake
-                String hashedPassword = Hashing.sha256()
-                        .hashString(plainPassword, StandardCharsets.UTF_8)
-                        .toString();
-                currentUser.setPasswordHash(hashedPassword);
-                try {
-                    appUserRepository.save(currentUser);
-                    //Redirect Belső oldal + Sesseion kezelés
-                }
-                catch (Exception e) {
-                    if (e instanceof ConstraintViolationException) {
-                        ConstraintViolationException ce = (ConstraintViolationException)e;
-                        StringBuilder errorMsgString = new StringBuilder();
-                        for (ConstraintViolation violation : ce.getConstraintViolations()) {
-                            errorMsgString.append(violation.getPropertyPath().toString().concat(" "));
-                            errorMsgString.append(violation.getMessage().concat(", "));
-                        }
-                        redirectAttributes.addFlashAttribute("errorMsg", errorMsgString.toString());
-                    } else {
-                        redirectAttributes.addFlashAttribute("errorMsg",
-                                "Something went wrong, please try again!");
-                    }
-                }
-            } else {
+        if (action.equals("register")) {
+            if (appUserRepository.findAppUserByUsername(currentUser.getUsername()) != null) {
                 redirectAttributes.addFlashAttribute("errorMsg", "User already exists!");
+                return "redirect:/login";
+            }
+            try {
+                appUserRepository.save(currentUser);
+                //session.setattribute();
+                //return "redirect:/pollList";
+            }
+            catch (Exception e) {
+                if (e instanceof ConstraintViolationException) {
+                    redirectAttributes.addFlashAttribute("errorMsg", printErrors((ConstraintViolationException)e));
+                    return "redirect:/login";
+                }
+                redirectAttributes.addFlashAttribute("errorMsg", "Something went wrong!");
+                return "redirect:/login";
             }
         }
         return "redirect:/login";
@@ -101,6 +88,16 @@ public class MainController {
         model.addAttribute("userRoles", userRoles);
         model.addAttribute("currentUser", new AppUser());
         return "login";
+    }
+
+
+    private String printErrors(ConstraintViolationException ce) {
+        StringBuilder errorMsgString = new StringBuilder();
+        for (ConstraintViolation violation : ce.getConstraintViolations()) {
+            errorMsgString.append(violation.getPropertyPath().toString().concat(" "));
+            errorMsgString.append(violation.getMessage().concat("; "));
+        }
+        return errorMsgString.toString();
     }
 }
 
