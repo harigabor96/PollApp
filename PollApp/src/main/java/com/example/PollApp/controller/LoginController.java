@@ -68,7 +68,6 @@ public class LoginController {
         List<UserRole> userRoles = userRoleRepository.findAll();
         model.addAttribute("userRoles", userRoles);
         model.addAttribute("currentUser", new AppUser());
-        model.addAttribute("action","signin");
         return "login";
     }
 
@@ -76,7 +75,8 @@ public class LoginController {
         StringBuilder errorMsgString = new StringBuilder();
         for (ConstraintViolation violation : ce.getConstraintViolations()) {
             String propertyStr = violation.getPropertyPath().toString().concat(" ");
-            errorMsgString.append(propertyStr.substring(0, 1).toUpperCase() + propertyStr.substring(1));
+            errorMsgString.append(propertyStr.substring(0, 1).toUpperCase());
+            errorMsgString.append(propertyStr.substring(1));
             errorMsgString.append(violation.getMessage().concat("! "));
         }
         return errorMsgString.toString();
