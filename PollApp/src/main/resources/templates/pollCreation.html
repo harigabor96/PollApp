@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Create a Poll</h1>
+    <form th:action="@{/pollCreation/create}" th:object="${pollForm}" method="post">
+        <p>
+            <label>Question</label><br>
+            <input type="text" th:field="*{question.question}" required />
+        </p>
+        <p>
+            <label>Answers</label><br>
+            <span th:each="currAnswer, stat : *{answerList}" th:id="${'answerSpan' + stat.index}" hidden>
+                 <input th:field="*{answerList[__${stat.index}__].answer}" /><br>
+            </span>
+            <br>
+            <button type="button" onclick="showAnswerInput()"> Add answer </button>
+            <button type="button" onclick="hideClearAnswerInput()"> Remove answer </button>
+            <p>
+                <button type="submit">Create Poll</button>
+            </p>
+        </p>
+    </form>
+    <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+    <script>
+        let lastShownAnswerNo = -1;
+
+        const showAnswerInput = () => {
+            let answer = document.getElementById(`answerSpan${lastShownAnswerNo + 1}`);
+            if (answer === null) return;
+            answer.hidden = false;
+            lastShownAnswerNo++;
+        }
+
+        const hideClearAnswerInput = () => {
+            let answer = document.getElementById(`answerSpan${lastShownAnswerNo}`);
+            let input = document.getElementById(`answerList${lastShownAnswerNo}.answer`);
+            if (answer === null) return;
+            answer.hidden = true;
+            input.value = '';
+            lastShownAnswerNo--;
+        }
+    </script>
+</body>
+</html>

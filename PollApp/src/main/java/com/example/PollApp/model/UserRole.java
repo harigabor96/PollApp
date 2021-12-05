@@ -11,8 +11,6 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roleId;
 
-    @NotNull
-    @Size(min = 1, max = 20)
     private String roleDescription;
 
     public Integer getRoleId() {

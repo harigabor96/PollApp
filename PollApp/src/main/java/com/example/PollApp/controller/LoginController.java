@@ -5,8 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.util.List;
 
@@ -55,7 +53,8 @@ public class LoginController {
         }
         catch (Exception e) {
             if (e instanceof ConstraintViolationException) {
-                redirectAttributes.addFlashAttribute("errorMsg", printErrors((ConstraintViolationException)e));
+                redirectAttributes.addFlashAttribute("errorMsg",
+                        printErrors((ConstraintViolationException)e));
                 return "redirect:/login";
             }
             redirectAttributes.addFlashAttribute("errorMsg", "Something went wrong!");
@@ -68,17 +67,17 @@ public class LoginController {
         List<UserRole> userRoles = userRoleRepository.findAll();
         model.addAttribute("userRoles", userRoles);
         model.addAttribute("currentUser", new AppUser());
-        model.addAttribute("action","signin");
         return "login";
     }
 
     private String printErrors(ConstraintViolationException ce) {
         StringBuilder errorMsgString = new StringBuilder();
-        for (ConstraintViolation violation : ce.getConstraintViolations()) {
+        ce.getConstraintViolations().forEach(violation -> {
             String propertyStr = violation.getPropertyPath().toString().concat(" ");
-            errorMsgString.append(propertyStr.substring(0, 1).toUpperCase() + propertyStr.substring(1));
+            errorMsgString.append(propertyStr.substring(0, 1).toUpperCase());
+            errorMsgString.append(propertyStr.substring(1));
             errorMsgString.append(violation.getMessage().concat("! "));
-        }
+        });
         return errorMsgString.toString();
     }
 }

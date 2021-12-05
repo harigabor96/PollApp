@@ -19,7 +19,6 @@ public class AppUser {
     @Size(min = 6, max = 50)
     private String password;
 
-    @NotNull
     private Integer roleId;
 
     public Integer getUserId() { return userId; }
