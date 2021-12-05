@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Create a Poll</h1>
+    <form th:action="@{/pollCreation/create}" method="post">
+        <p>
+            <label for="question">Question</label><br>
+            <input type="text" name="question" id="question" required />
+        </p>
+        <p>
+            <label>Answers</label><br>
+            <span id="answers">
+            </span>
+            <br>
+            <button type="button" onclick="addAnswer()">Add answer</button>
+            <button type="button" onclick="removeAnswer()">Remove answer</button>
+        </p>
+    </form>
+    <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+    <script>
+        let answerCounter = 0;
+
+        const addAnswer = () => {
+            answerCounter++;
+            document.getElementById("answers").innerHTML +=
+              `<span id="answerSpan${answerCounter}">
+                    <input type="text" name="answer${answerCounter}" id="answer${answerCounter}" required><br>
+               </span>`;
+        }
+
+        const removeAnswer = () => {
+            if(answerCounter <= 0) return;
+            document.getElementById(`answerSpan${answerCounter}`).remove();
+            answerCounter--;
+        }
+    </script>
+</body>
+</html>
