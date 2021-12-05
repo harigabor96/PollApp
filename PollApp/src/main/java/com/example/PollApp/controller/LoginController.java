@@ -16,7 +16,7 @@ public class LoginController {
     private final AppUserRepository appUserRepository;
     private final UserRoleRepository userRoleRepository;
 
-    public LoginController(AppUserRepository appUserRepository, UserRoleRepository userRoleRepository , QuestionRepository questionRepository, AnswerRepository answerRepository, VoteRepository voteRepository) {
+    public LoginController(AppUserRepository appUserRepository, UserRoleRepository userRoleRepository) {
         this.appUserRepository = appUserRepository;
         this.userRoleRepository = userRoleRepository;
     }
