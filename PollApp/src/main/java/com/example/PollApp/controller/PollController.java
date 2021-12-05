@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PollController {
@@ -21,7 +22,7 @@ public class PollController {
     @GetMapping("/pollCreation")
     public String pollCreation(ModelMap model) {
         PollForm pollForm = new PollForm();
-        for (int i = 0; i <= 14; i++) {
+        for (int i = 1; i <= 15; i++) {
             pollForm.addAnswer(new Answer());
         }
         model.addAttribute("pollForm", pollForm);
