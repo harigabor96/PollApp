@@ -1,6 +1,7 @@
 package com.example.PollApp.controller;
 
 import com.example.PollApp.model.*;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,8 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("errorMsg", "Wrong username!");
             return "redirect:/login";
         }
-        if(user.getPassword().equals(currentUser.getPassword())) {
+        //Workaround OFC. Also, it's not salted, for simplicity's sake.
+        if(user.getPasswordHash().equals(DigestUtils.sha256Hex(currentUser.getPassword()))) {
             System.out.println("A bejelentkezés sikeres!");
             //session.setuser
             //return "redirect:/pollList"
@@ -45,6 +47,8 @@ public class LoginController {
             return "redirect:/login";
         }
         try {
+            //Workaround OFC. Also, it's not salted, for simplicity's sake.
+            currentUser.setPasswordHash(DigestUtils.sha256Hex(currentUser.getPassword()));
             appUserRepository.save(currentUser);
             System.out.println("A regisztráció sikeres!");
             //session.setuser
