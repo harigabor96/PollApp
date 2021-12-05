@@ -11,10 +11,8 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer answerId;
 
-    @NotNull
     private Integer questionId;
 
-    @NotBlank
     private String answer;
 
     public Integer getAnswerId() { return answerId; }

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>?
+<body>
     <h1>Create a Poll</h1>
     <form th:action="@{/pollCreation/create}" th:object="${pollForm}" method="post">
         <p>
             <label>Question</label><br>
-            <input type="text" th:field="*{question}" required />
+            <input type="text" th:field="*{question.question}" required />
         </p>
         <p>
             <label>Answers</label><br>

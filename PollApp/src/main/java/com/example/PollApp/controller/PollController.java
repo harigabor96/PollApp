@@ -5,8 +5,12 @@ import com.example.PollApp.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.ArrayList;
 
 @Controller
 public class PollController {
@@ -30,7 +34,25 @@ public class PollController {
     }
 
     @PostMapping("/pollCreation/create")
-    public String create(ModelMap model) {
-        return "pollCreation";
+    public String create(@ModelAttribute(name = "pollForm") PollForm pollForm,
+                         RedirectAttributes redirectAttributes) {
+        ArrayList<Answer> answers = pollForm.getAnswerList();
+
+        answers.removeIf(a -> (a.getAnswer().isEmpty()));
+        if(answers.size() == 0) {
+            redirectAttributes.addFlashAttribute("errorMsg", "Please add at least one answer!");
+            return "redirect:/pollCreation";
+        }
+        try {
+            Integer questionId = questionRepository.save(pollForm.getQuestion()).getQuestionId();
+            answers.forEach(a -> a.setQuestionId(questionId));
+            answerRepository.saveAll(answers);
+            //Nyilván ez valahova máshova redirektel
+            System.out.println("Kérdés felvétel sikeres!");
+            return "redirect:/pollCreation";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("errorMsg", "Something went wrong!");
+            return "redirect:/pollCreation";
+        }
     }
 }
