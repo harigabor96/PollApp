@@ -1,12 +1,11 @@
 package com.example.PollApp.controller;
 
+import com.example.PollApp.dto.PollForm;
 import com.example.PollApp.model.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.util.List;
 
 @Controller
 public class PollController {
@@ -21,6 +20,11 @@ public class PollController {
 
     @GetMapping("/pollCreation")
     public String pollCreation(ModelMap model) {
+        PollForm pollForm = new PollForm();
+        for (int i = 0; i <= 14; i++) {
+            pollForm.addAnswer(new Answer());
+        }
+        model.addAttribute("pollForm", pollForm);
         return "pollCreation";
     }
 
