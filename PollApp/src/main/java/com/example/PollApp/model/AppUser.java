@@ -15,14 +15,11 @@ public class AppUser {
     @Size(min = 3, max = 50)
     private String username;
 
-    private String passwordHash;
-
-    private Integer roleId;
-
-    @Transient
     @NotNull
     @Size(min = 6, max = 50)
     private String password;
+
+    private Integer roleId;
 
     public AppUser() {
     }
@@ -35,15 +32,11 @@ public class AppUser {
 
     public void setUsername(String username) { this.username = username; }
 
-    public String getPasswordHash() { return passwordHash; }
+    public String getPassword() { return password; }
 
-    public void setPasswordHash(String password) { this.passwordHash = password; }
+    public void setPassword(String password) { this.password = password; }
 
     public Integer getRoleId() { return roleId; }
 
     public void setRoleId(Integer roleId) { this.roleId = roleId; }
-
-    public String getPassword() { return password; }
-
-    public void setPassword(String password) { this.password = password; }
 }

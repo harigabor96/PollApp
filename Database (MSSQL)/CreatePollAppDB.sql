@@ -7,7 +7,7 @@ GO
 CREATE TABLE dbo.UserRole
 (
    RoleID int identity(1,1) NOT NULL,
-   RoleDescription varchar(20) NOT NULL,
+   RoleDescription varchar(20) NOT NULL CHECK (Len(RTrim([RoleDescription])) > 0),
 
    Primary Key (RoleID),
 );
@@ -23,8 +23,8 @@ GO
 CREATE TABLE dbo.AppUser
  (  
    UserID int identity(1,1) NOT NULL,   
-   Username nvarchar(50) NOT NULL UNIQUE,
-   PasswordHash char(64) NOT NULL,
+   Username nvarchar(50) NOT NULL UNIQUE CHECK (Len(RTrim([Username])) > 0),
+   Password char(64) NOT NULL,
    RoleID int NOT NULL,
     
    Primary Key (UserID),
@@ -36,7 +36,7 @@ GO
 CREATE TABLE dbo.Question
  (  
    QuestionID int identity(1,1) NOT NULL,
-   Question nvarchar(MAX) NOT NULL,
+   Question nvarchar(MAX) NOT NULL CHECK (Len(RTrim([Question])) > 0),
 
    Primary Key (QuestionID)
 );
@@ -46,7 +46,7 @@ CREATE TABLE dbo.Answer
  (  
    AnswerID int identity(1,1) NOT NULL,
    QuestionID int NOT NULL,
-   Answer nvarchar(MAX) NOT NULL,
+   Answer nvarchar(MAX) NOT NULL CHECK (Len(RTrim([Answer])) > 0),
 
    primary key (AnswerID),
    Foreign Key (QuestionID) REFERENCES Question(QuestionID)

@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestController {
 
     private final AppUserRepository appUserRepository;
-    private final UserRoleRepository userRoleRepository;
+    private final UserRoleRepository userRoleService;
     private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final VoteRepository voteRepository;
 
-    public TestController(AppUserRepository appUserRepository, UserRoleRepository userRoleRepository , QuestionRepository questionRepository, AnswerRepository answerRepository, VoteRepository voteRepository) {
+    public TestController(AppUserRepository appUserRepository, UserRoleRepository userRoleService, QuestionRepository questionRepository, AnswerRepository answerRepository, VoteRepository voteRepository) {
         this.appUserRepository = appUserRepository;
-        this.userRoleRepository = userRoleRepository;
+        this.userRoleService = userRoleService;
         this.questionRepository = questionRepository;
         this.answerRepository = answerRepository;
         this.voteRepository = voteRepository;
@@ -31,7 +31,7 @@ public class TestController {
 
     @GetMapping("/testUserRole")
     public @ResponseBody Iterable<UserRole> listAllRoles() {
-        return userRoleRepository.findAll();
+        return userRoleService.findAll();
     }
 
     @GetMapping("/testQuestion")
