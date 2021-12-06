@@ -9,11 +9,13 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 
 @Controller
+@RequestMapping("/pollCreation")
 public class PollController {
 
     private final QuestionRepository questionRepository;
@@ -24,17 +26,17 @@ public class PollController {
         this.answerRepository = answerRepository;
     }
 
-    @GetMapping("/pollCreation")
+    @GetMapping()
     public String pollCreation(ModelMap model) {
         PollForm pollForm = new PollForm();
-        for (int i = 1; i <= 15; i++) {
+        for (int i = 1; i <= 30; i++) {
             pollForm.addAnswer(new Answer());
         }
         model.addAttribute("pollForm", pollForm);
         return "pollCreation";
     }
 
-    @PostMapping("/pollCreation/create")
+    @PostMapping("/create")
     public String create(@ModelAttribute(name = "pollForm") PollForm pollForm,
                          RedirectAttributes redirectAttributes) {
         ArrayList<Answer> answers = pollForm.getAnswerList();

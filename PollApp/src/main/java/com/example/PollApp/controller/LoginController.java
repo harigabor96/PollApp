@@ -12,6 +12,7 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
 
     private final AppUserRepository appUserRepository;
@@ -22,7 +23,15 @@ public class LoginController {
         this.userRoleRepository = userRoleRepository;
     }
 
-    @PostMapping("/login/signIn")
+    @GetMapping("")
+    public String login(ModelMap model) {
+        List<UserRole> userRoles = userRoleRepository.findAll();
+        model.addAttribute("userRoles", userRoles);
+        model.addAttribute("currentUser", new AppUser());
+        return "login";
+    }
+
+    @PostMapping("/signIn")
     public String signIn(@ModelAttribute(name="currentUser") AppUser currentUser,
                          RedirectAttributes redirectAttributes) {
         AppUser user = appUserRepository.findAppUserByUsername(currentUser.getUsername());
@@ -41,7 +50,7 @@ public class LoginController {
         return "redirect:/login";
     }
 
-    @PostMapping("/login/register")
+    @PostMapping("/register")
     public String register(@ModelAttribute(name="currentUser") AppUser currentUser,
                            RedirectAttributes redirectAttributes) {
         if (appUserRepository.findAppUserByUsername(currentUser.getUsername()) != null) {
@@ -66,14 +75,6 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("errorMsg", "Something went wrong!");
             return "redirect:/login";
         }
-    }
-
-    @GetMapping("/login")
-    public String login(ModelMap model) {
-        List<UserRole> userRoles = userRoleRepository.findAll();
-        model.addAttribute("userRoles", userRoles);
-        model.addAttribute("currentUser", new AppUser());
-        return "login";
     }
 
     private String printErrors(ConstraintViolationException ce) {
