@@ -13,6 +13,9 @@ public class UserRole {
 
     private String roleDescription;
 
+    public UserRole() {
+    }
+
     public Integer getRoleId() {
         return roleId;
     }

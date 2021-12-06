@@ -12,6 +12,9 @@ public class Question {
 
     private String question;
 
+    public Question() {
+    }
+
     public Integer getQuestionId() { return questionId; }
 
     public void setQuestionId(Integer questionID) { this.questionId = questionID; }

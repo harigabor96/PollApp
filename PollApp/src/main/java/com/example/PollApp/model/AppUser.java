@@ -24,6 +24,9 @@ public class AppUser {
     @Size(min = 6, max = 50)
     private String password;
 
+    public AppUser() {
+    }
+
     public Integer getUserId() { return userId; }
 
     public void setUserId(Integer userId) { this.userId = userId; }

@@ -1,6 +1,8 @@
 package com.example.PollApp.controller;
 
 import com.example.PollApp.model.*;
+import com.example.PollApp.repository.AppUserRepository;
+import com.example.PollApp.repository.UserRoleRepository;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

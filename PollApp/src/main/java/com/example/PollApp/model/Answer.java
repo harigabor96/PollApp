@@ -15,6 +15,9 @@ public class Answer {
 
     private String answer;
 
+    public Answer() {
+    }
+
     public Integer getAnswerId() { return answerId; }
 
     public void setAnswerId(Integer answerID) { this.answerId = answerID; }
