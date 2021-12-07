@@ -1,4 +1,7 @@
-package com.example.PollApp.dto;
+package com.example.PollApp.form;
+
+import com.example.PollApp.dto.AnswerDTO;
+import com.example.PollApp.dto.QuestionDTO;
 
 import java.util.ArrayList;
 

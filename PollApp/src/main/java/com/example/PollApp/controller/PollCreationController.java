@@ -1,7 +1,7 @@
 package com.example.PollApp.controller;
 
 import com.example.PollApp.dto.AnswerDTO;
-import com.example.PollApp.dto.PollCreationForm;
+import com.example.PollApp.form.PollCreationForm;
 import com.example.PollApp.dto.QuestionDTO;
 import com.example.PollApp.model.*;
 import com.example.PollApp.service.AnswerService;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/pollCreation")
