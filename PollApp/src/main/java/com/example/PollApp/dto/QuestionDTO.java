@@ -11,6 +11,7 @@ public class QuestionDTO {
     }
 
     public QuestionDTO(Question questionEntity) {
+        this.questionId = questionEntity.getQuestionId();
         this.question = questionEntity.getQuestion();
     }
 

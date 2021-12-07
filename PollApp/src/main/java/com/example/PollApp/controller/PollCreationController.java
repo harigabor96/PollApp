@@ -54,18 +54,11 @@ public class PollCreationController {
             return "redirect:/poll-creation";
         }
 
-        try
-        {
-            Integer questionId = questionService.saveQuestion(currentQuestion);
-            currentAnswers.forEach(ans -> ans.setQuestionId(questionId));
-            answerService.saveAnswers(currentAnswers);
-            redirectAttributes.addFlashAttribute("errorMsg",
+        Integer questionId = questionService.saveQuestion(currentQuestion);
+        currentAnswers.forEach(ans -> ans.setQuestionId(questionId));
+        answerService.saveAnswers(currentAnswers);
+        redirectAttributes.addFlashAttribute("errorMsg",
                     "Poll creation successful!");
-            return "redirect:/poll-creation";
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMsg",
-                    "Something went wrong!");
-            return "redirect:/poll-creation";
-        }
+        return "redirect:/poll-creation";
     }
 }

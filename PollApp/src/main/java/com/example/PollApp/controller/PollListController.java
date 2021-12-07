@@ -31,11 +31,4 @@ public class PollListController {
         model.addAttribute("pollListForm", new PollListForm(questionDTOList));
         return "polllist";
     }
-
-    @PostMapping("/select")
-    public String select(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("errorMsg",
-                "Selection successful!");
-        return "redirect:/poll-list";
-    }
 }

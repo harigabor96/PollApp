@@ -6,11 +6,12 @@
 </head>
 <body>
     <h1>Select a poll</h1>
-    <form th:action="@{/poll-list/select}" th:object="${pollListForm}" method="post">
+    <form th:action="@{/poll}" th:object="${pollListForm}" method="get">
         <table>
             <tr th:each="questionDTO, stat : *{questionDTOList}">
                 <td>
-                    <button type="submit" th:name="*{questionDTOList[__${stat.index}__].questionId}"
+                    <button type="submit" name="selectedQuestion"
+                            th:value = "*{questionDTOList[__${stat.index}__].questionId}"
                             th:text="*{questionDTOList[__${stat.index}__].question}" /><br>
                 </td>
             </tr>

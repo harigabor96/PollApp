@@ -25,11 +25,12 @@ public class LoginController {
 
     @GetMapping()
     public String login(ModelMap model) {
-        model.addAttribute("user", new AppUserDTO());
         ArrayList<UserRoleDTO> userRoleDTOList = new ArrayList<>();
         userRoleService.findAllUserRoles().forEach((userRoleEntity) ->
             userRoleDTOList.add(new UserRoleDTO(userRoleEntity))
         );
+
+        model.addAttribute("user", new AppUserDTO());
         model.addAttribute("userRoles", userRoleDTOList);
         return "login";
     }
@@ -76,14 +77,9 @@ public class LoginController {
 
         appUserService.hashPassword(currentUser);
 
-        try {
-            appUserService.saveUser(currentUser);
-            redirectAttributes.addFlashAttribute("errorMsg",
+        appUserService.saveUser(currentUser);
+        redirectAttributes.addFlashAttribute("errorMsg",
                     "Registration successful!");
-            return "redirect:/login";
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMsg", e.getMessage());
-            return "redirect:/login";
-        }
+        return "redirect:/login";
     }
 }
