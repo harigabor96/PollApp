@@ -9,7 +9,9 @@ public class PollCreationForm {
     private QuestionDTO questionDTO;
     private ArrayList<AnswerDTO> answerDTOList;
 
-    public PollCreationForm() {
+    public PollCreationForm(QuestionDTO questionDTO, ArrayList<AnswerDTO> answerDTOList) {
+        this.questionDTO = questionDTO;
+        this.answerDTOList = answerDTOList;
     }
 
     public QuestionDTO getQuestionDTO() { return questionDTO; }

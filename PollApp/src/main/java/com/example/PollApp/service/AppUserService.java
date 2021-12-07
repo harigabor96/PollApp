@@ -42,7 +42,7 @@ public class AppUserService {
         return (appUserRepository.findAppUserByUsername(user.getUsername()) != null);
     }
 
-    public AppUser findExistingUser (AppUser user) {
+    public AppUser findUser(AppUser user) {
         return appUserRepository.findAppUserByUsername(user.getUsername());
     }
 

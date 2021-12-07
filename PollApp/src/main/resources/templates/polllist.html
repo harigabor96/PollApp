@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Poll List</title>
+</head>
+<body>
+    <h1>Select a poll</h1>
+    <form th:action="@{/poll-list/select}" th:object="${pollListForm}" method="post">
+        <table>
+            <tr th:each="questionDTO, stat : *{questionDTOList}">
+                <td>
+                    <button type="submit" th:name="*{questionDTOList[__${stat.index}__].questionId}"
+                            th:text="*{questionDTOList[__${stat.index}__].question}" /><br>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+</body>
+</html>

@@ -23,14 +23,14 @@ public class LoginController {
         this.userRoleService = userRoleService;
     }
 
-    @GetMapping("")
+    @GetMapping()
     public String login(ModelMap model) {
         model.addAttribute("user", new AppUserDTO());
-        ArrayList<UserRoleDTO> UserRoleDTOList = new ArrayList<>();
+        ArrayList<UserRoleDTO> userRoleDTOList = new ArrayList<>();
         userRoleService.findAllUserRoles().forEach((userRoleEntity) ->
-            UserRoleDTOList.add(new UserRoleDTO(userRoleEntity))
+            userRoleDTOList.add(new UserRoleDTO(userRoleEntity))
         );
-        model.addAttribute("userRoles", UserRoleDTOList);
+        model.addAttribute("userRoles", userRoleDTOList);
         return "login";
     }
 
@@ -38,7 +38,7 @@ public class LoginController {
     public String signIn(@ModelAttribute(name="user") AppUserDTO appUserDTO,
                          RedirectAttributes redirectAttributes) {
         AppUser currentUser = appUserDTO.getEntity();
-        AppUser existingUser = appUserService.findExistingUser(currentUser);
+        AppUser existingUser = appUserService.findUser(currentUser);
 
         if (existingUser == null) {
             redirectAttributes.addFlashAttribute("errorMsg",

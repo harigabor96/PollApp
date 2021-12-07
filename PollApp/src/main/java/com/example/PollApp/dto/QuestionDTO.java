@@ -3,12 +3,14 @@ package com.example.PollApp.dto;
 import com.example.PollApp.model.Question;
 
 public class QuestionDTO {
+
+    private Integer questionId;
     private String question;
 
     public QuestionDTO() {
     }
 
-    public QuestionDTO(QuestionDTO questionEntity) {
+    public QuestionDTO(Question questionEntity) {
         this.question = questionEntity.getQuestion();
     }
 
@@ -17,6 +19,10 @@ public class QuestionDTO {
         questionEntity.setQuestion(this.question);
         return questionEntity;
     }
+
+    public Integer getQuestionId() { return questionId; }
+
+    public void setQuestionId(Integer questionId) { this.questionId = questionId; }
 
     public String getQuestion() { return question; }
 

@@ -30,15 +30,13 @@ public class PollCreationController {
 
     @GetMapping()
     public String pollCreation(ModelMap model) {
-        PollCreationForm pollCreationForm = new PollCreationForm();
         ArrayList<AnswerDTO> answerDTOList = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
             answerDTOList.add(new AnswerDTO());
         }
-        pollCreationForm.setQuestionDTO(new QuestionDTO());
-        pollCreationForm.setAnswerDTOList(answerDTOList);
-        model.addAttribute("pollCreationForm", pollCreationForm);
-        return "pollCreation";
+        model.addAttribute("pollCreationForm",
+                new PollCreationForm(new QuestionDTO(), answerDTOList));
+        return "pollcreation";
     }
 
     @PostMapping("/create")
