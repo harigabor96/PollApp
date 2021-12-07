@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.ArrayList;
 
 @Controller
-@RequestMapping("/pollCreation")
+@RequestMapping("/poll-creation")
 public class PollCreationController {
 
     private final QuestionService questionService;
@@ -53,7 +53,7 @@ public class PollCreationController {
         if(currentAnswers.size() == 0) {
             redirectAttributes.addFlashAttribute("errorMsg",
                     "Please add at least one answer!");
-            return "redirect:/pollCreation";
+            return "redirect:/poll-creation";
         }
 
         try
@@ -63,11 +63,11 @@ public class PollCreationController {
             answerService.saveAnswers(currentAnswers);
             redirectAttributes.addFlashAttribute("errorMsg",
                     "Poll creation successful!");
-            return "redirect:/pollCreation";
+            return "redirect:/poll-creation";
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMsg",
                     "Something went wrong!");
-            return "redirect:/pollCreation";
+            return "redirect:/poll-creation";
         }
     }
 }

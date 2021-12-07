@@ -34,7 +34,7 @@ public class LoginController {
         return "login";
     }
 
-    @PostMapping("/signIn")
+    @PostMapping("/sign-in")
     public String signIn(@ModelAttribute(name="user") AppUserDTO appUserDTO,
                          RedirectAttributes redirectAttributes) {
         AppUser currentUser = appUserDTO.getEntity();

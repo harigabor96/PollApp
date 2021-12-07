@@ -2,11 +2,11 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Poll Creation</title>
 </head>
 <body>
     <h1>Create a Poll</h1>
-    <form th:action="@{/pollCreation/create}" th:object="${pollCreationForm}" method="post">
+    <form th:action="@{/poll-creation/create}" th:object="${pollCreationForm}" method="post">
         <p>
             <label>Question</label><br>
             <input type="text" th:field="*{questionDTO.question}" required />
