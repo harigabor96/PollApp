@@ -6,8 +6,14 @@
 </head>
 <body>
     <h1>Time to vote!</h1>
-    <form>
-
+    <form th:object="${pollForm}">
+        <b><span th:text = *{questionDTO.question} /></b><br>
+        <span th:each="answerDTO, stat : *{answerDTOList}">
+            <input type="radio" name="selectedAnswerId"
+                th:value="*{answerDTOList[__${stat.index}__].answerId}"
+                th:text="*{answerDTOList[__${stat.index}__].answer}" /><br>
+        </span>
+        <button type="submit">Vote</button>
     </form>
     <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
 </body>

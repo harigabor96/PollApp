@@ -25,10 +25,10 @@ public class PollController {
     }
 
     @GetMapping()
-    public String poll(ModelMap model, @RequestParam(name = "selectedPoll") Integer questionId) {
+    public String poll(ModelMap model, @RequestParam(name = "selectedPollId") Integer questionId) {
         ArrayList<AnswerDTO> answerDTOList = new ArrayList<>();
 
-        answerService.findAnswersByQuestionId(questionId).forEach( (answerEntity) ->
+        answerService.findAnswersByQuestionId(questionId).forEach((answerEntity) ->
                 answerDTOList.add(new AnswerDTO(answerEntity))
         );
 
