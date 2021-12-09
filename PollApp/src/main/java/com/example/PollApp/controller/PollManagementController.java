@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import java.util.ArrayList;
 
 @Controller
@@ -47,7 +46,7 @@ public class PollManagementController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute(name = "pollCreationForm") PollCreationForm pollCreationForm,
+    public String create(@ModelAttribute("pollCreationForm") PollCreationForm pollCreationForm,
                          RedirectAttributes redirectAttributes) {
         Question currentQuestion = pollCreationForm.getQuestionDTO().getEntity();
         ArrayList<Answer> currentAnswers = new ArrayList<>();

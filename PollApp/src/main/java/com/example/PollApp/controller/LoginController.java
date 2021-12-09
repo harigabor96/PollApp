@@ -36,7 +36,7 @@ public class LoginController {
     }
 
     @PostMapping("/sign-in")
-    public String signIn(@ModelAttribute(name="appUserDTO") AppUserDTO appUserDTO,
+    public String signIn(@ModelAttribute("appUserDTO") AppUserDTO appUserDTO,
                          RedirectAttributes redirectAttributes) {
         AppUser currentUser = appUserDTO.getEntity();
         AppUser existingUser = appUserService.findUser(currentUser);
@@ -57,7 +57,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute(name="user") AppUserDTO appUserDTO,
+    public String register(@ModelAttribute("user") AppUserDTO appUserDTO,
                            RedirectAttributes redirectAttributes) {
         AppUser currentUser = appUserDTO.getEntity();
 

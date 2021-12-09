@@ -2,10 +2,10 @@ package com.example.PollApp.form;
 
 import com.example.PollApp.dto.AnswerDTO;
 import com.example.PollApp.dto.QuestionDTO;
-
 import java.util.ArrayList;
 
 public class PollCreationForm {
+
     private QuestionDTO questionDTO;
     private ArrayList<AnswerDTO> answerDTOList;
 

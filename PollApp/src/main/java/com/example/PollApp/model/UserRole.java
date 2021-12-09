@@ -1,12 +1,11 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "UserRole")
 public class UserRole {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer roleId;

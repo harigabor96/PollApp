@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class VoteId implements Serializable {
+
     private Integer userId;
     private Integer questionId;
 
@@ -14,14 +15,6 @@ public class VoteId implements Serializable {
         this.userId = userId;
         this.questionId = questionId;
     }
-
-    public Integer getUserId() { return userId; }
-
-    public void setUserId(Integer userId) { this.userId = userId; }
-
-    public Integer getQuestionId() { return questionId; }
-
-    public void setQuestionId(Integer questionId) { this.questionId = questionId; }
 
     @Override
     public boolean equals(Object o) {
@@ -41,4 +34,12 @@ public class VoteId implements Serializable {
     public int hashCode() {
         return Objects.hash(this.userId, this.questionId);
     }
+
+    public Integer getUserId() { return userId; }
+
+    public void setUserId(Integer userId) { this.userId = userId; }
+
+    public Integer getQuestionId() { return questionId; }
+
+    public void setQuestionId(Integer questionId) { this.questionId = questionId; }
 }

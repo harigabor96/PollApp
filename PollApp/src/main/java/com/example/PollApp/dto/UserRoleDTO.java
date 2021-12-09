@@ -3,8 +3,8 @@ package com.example.PollApp.dto;
 import com.example.PollApp.model.UserRole;
 
 public class UserRoleDTO {
-    private Integer roleId;
 
+    private Integer roleId;
     private String roleDescription;
 
     public UserRoleDTO() {

@@ -5,9 +5,7 @@ import com.example.PollApp.model.AppUser;
 public class AppUserDTO {
 
     private String username;
-
     private String password;
-
     private Integer roleId;
 
     public AppUserDTO() {

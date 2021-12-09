@@ -3,6 +3,7 @@ package com.example.PollApp.dto;
 import com.example.PollApp.model.Answer;
 
 public class VoteResultsDTO {
+    
     private String answer;
     private Integer voteCount;
 

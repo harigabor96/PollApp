@@ -1,12 +1,12 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 @Entity
 @IdClass(VoteId.class)
 @Table(name = "Vote")
 public class Vote {
+
     @Id
     private Integer userId;
 

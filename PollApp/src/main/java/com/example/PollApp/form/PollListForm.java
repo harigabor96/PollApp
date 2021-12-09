@@ -1,14 +1,11 @@
 package com.example.PollApp.form;
 
 import com.example.PollApp.dto.QuestionDTO;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 
 public class PollListForm {
 
     private ArrayList<QuestionDTO> questionDTOList;
-
     private Integer selectedQuestionId;
 
     public PollListForm(ArrayList<QuestionDTO> questionDTOList) {

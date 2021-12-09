@@ -3,7 +3,6 @@ package com.example.PollApp.service;
 import com.example.PollApp.model.UserRole;
 import com.example.PollApp.repository.UserRoleRepository;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

@@ -3,7 +3,6 @@ package com.example.PollApp.service;
 import com.example.PollApp.model.AppUser;
 import com.example.PollApp.repository.AppUserRepository;
 import org.springframework.stereotype.Service;
-
 import javax.validation.ConstraintViolation;
 import java.util.Set;
 
@@ -50,5 +49,7 @@ public class AppUserService {
         return appUserRepository.save(user);
     }
 
-    public String getValidationErrors() { return validationErrors; }
+    public String getValidationErrors() {
+        return validationErrors;
+    }
 }
