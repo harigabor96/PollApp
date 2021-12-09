@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Login</title>
 </head>
-<tbody>
+<body>
 <!-- We didn't include a separate registration form -->
 <h1>Please, sign in (or register)</h1>
 <form th:object="${appUserDTO}" method="post">
@@ -51,5 +51,5 @@
     </table>
 </form>
 <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
-</tbody>
+</body>
 </html>

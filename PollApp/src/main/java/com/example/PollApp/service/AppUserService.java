@@ -45,8 +45,8 @@ public class AppUserService {
         return appUserRepository.findAppUserByUsername(user.getUsername());
     }
 
-    public AppUser saveUser (AppUser user) {
-        return appUserRepository.save(user);
+    public void saveUser (AppUser user) {
+        appUserRepository.save(user);
     }
 
     public String getValidationErrors() {
