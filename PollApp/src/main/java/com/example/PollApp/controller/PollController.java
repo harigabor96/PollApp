@@ -51,14 +51,12 @@ public class PollController {
         Integer answerId = pollForm.getSelectedAnswerId();
         voteService.saveVote(userId, answerId);
 
-        redirectAttributes.addFlashAttribute("selectedQuestionId", selectedQuestionId);
+        redirectAttributes.addAttribute("selectedQuestionId", selectedQuestionId);
         return "redirect:/poll/results";
     }
 
     @GetMapping("/results")
-    public String results (ModelMap model){
-        Integer selectedQuestionId = (Integer)model.getAttribute("selectedQuestionId");
-
+    public String results (ModelMap model, @ModelAttribute("selectedQuestionId") Integer selectedQuestionId) {
         QuestionDTO questionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
 
         ArrayList<VoteResultsDTO> voteResultsDTOList = new ArrayList<>();
