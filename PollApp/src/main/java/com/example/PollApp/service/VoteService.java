@@ -4,8 +4,6 @@ import com.example.PollApp.model.Vote;
 import com.example.PollApp.repository.VoteRepository;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 @Service
 public class VoteService {
 

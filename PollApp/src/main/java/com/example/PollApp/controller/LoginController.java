@@ -48,9 +48,7 @@ public class LoginController {
         }
 
         if (appUserService.matchPassword(currentUser, existingUser)) {
-            redirectAttributes.addFlashAttribute("errorMsg",
-                    "Sign in successful!");
-            return "redirect:/login";
+            return "redirect:/poll-list";
         }
 
         redirectAttributes.addFlashAttribute("errorMsg",
@@ -78,8 +76,6 @@ public class LoginController {
         appUserService.hashPassword(currentUser);
 
         appUserService.saveUser(currentUser);
-        redirectAttributes.addFlashAttribute("errorMsg",
-                    "Registration successful!");
-        return "redirect:/login";
+        return "redirect:/poll-list";
     }
 }
