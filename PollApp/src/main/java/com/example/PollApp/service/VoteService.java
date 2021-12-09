@@ -4,6 +4,8 @@ import com.example.PollApp.model.Vote;
 import com.example.PollApp.repository.VoteRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Service
 public class VoteService {
 
@@ -23,5 +25,9 @@ public class VoteService {
 
     public Integer countVotesByAnswerId(Integer answerId) {
         return voteRepository.countVoteByAnswerId(answerId);
+    }
+
+    public void deleteVotesByQuestionId (Integer questionId) {
+        voteRepository.deleteAllByQuestionId(questionId);
     }
 }

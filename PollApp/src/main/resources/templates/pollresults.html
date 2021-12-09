@@ -6,7 +6,7 @@
 </head>
 <body>
 <a href="/poll-list">View Polls</a>
-<a href="/poll-creation">Create a Poll</a>
+<a href="/poll-management/creation">Create a Poll</a>
 <a href="/logout" style="float: right">Sign Out</a>
 <hr>
 <h1>Poll Results</h1>
@@ -21,6 +21,10 @@
             <td th:text="${result.voteCount}" style="text-align: center" />
         </tr>
     </table>
+    <form>
+        <button name="questionId" th:value="${questionDTO.questionId}" formaction="/poll-management/delete"
+                formmethod="post">Delete</button>
+    </form>
     <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
 </body>
 </html>

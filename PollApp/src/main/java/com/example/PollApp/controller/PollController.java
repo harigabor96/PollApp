@@ -60,13 +60,13 @@ public class PollController {
         QuestionDTO questionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
 
         ArrayList<VoteResultsDTO> voteResultsDTOList = new ArrayList<>();
-        answerService.findAnswersByQuestionId(selectedQuestionId).forEach((ans) -> {
+        answerService.findAnswersByQuestionId(selectedQuestionId).forEach((ans) ->
             voteResultsDTOList.add(new VoteResultsDTO(ans,
-                    voteService.countVotesByAnswerId(ans.getAnswerId())));
-        });
+                    voteService.countVotesByAnswerId(ans.getAnswerId())))
+        );
 
         model.addAttribute("questionDTO", questionDTO);
         model.addAttribute("voteResultsDTOList", voteResultsDTOList);
-        return "results";
+        return "pollresults";
     }
 }
