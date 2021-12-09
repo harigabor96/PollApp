@@ -22,7 +22,7 @@ public class PollListController {
 
     @GetMapping()
     public String pollList(ModelMap model, HttpSession session) {
-        if (session.getAttribute("user") == null) return "redirect:/login";
+        if (session.getAttribute("userId") == null) return "redirect:/login";
 
         ArrayList<QuestionDTO> questionDTOList = new ArrayList<>();
         questionService.findAllQuestions().forEach((questionEntity) ->

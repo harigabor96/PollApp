@@ -50,10 +50,10 @@ public class PollController {
     @PostMapping("/submit-vote")
     public String submitVote(@ModelAttribute("pollForm") PollForm pollForm, RedirectAttributes redirectAttributes,
                              HttpSession session) {
-        if (session.getAttribute("user") == null) return "redirect:/login";
+        if (session.getAttribute("userId") == null) return "redirect:/login";
 
         Integer selectedQuestionId = pollForm.getSelectedQuestionId();
-        Integer userId = 2; //Ezt majd a sessionnél
+        Integer userId = (Integer)session.getAttribute("userId");
         Integer answerId = pollForm.getSelectedAnswerId();
         voteService.saveVote(userId, selectedQuestionId, answerId);
 
@@ -64,7 +64,7 @@ public class PollController {
     @GetMapping("/results")
     public String results (ModelMap model, @ModelAttribute("selectedQuestionId") Integer selectedQuestionId,
                            HttpSession session) {
-        if (session.getAttribute("user") == null) return "redirect:/login";
+        if (session.getAttribute("userId") == null) return "redirect:/login";
 
         QuestionDTO questionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
 

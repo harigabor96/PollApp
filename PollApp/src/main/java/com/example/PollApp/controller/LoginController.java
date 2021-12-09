@@ -27,7 +27,7 @@ public class LoginController {
 
     @GetMapping()
     public String login(ModelMap model, HttpSession session) {
-        if (session.getAttribute("user") != null) return "redirect:/poll-list";
+        if (session.getAttribute("userId") != null) return "redirect:/poll-list";
 
         ArrayList<UserRoleDTO> userRoleDTOList = new ArrayList<>();
         userRoleService.findAllUserRoles().forEach((userRoleEntity) ->
@@ -52,8 +52,9 @@ public class LoginController {
         }
 
         if (appUserService.matchPassword(currentUser, existingUser)) {
-            session.setAttribute("user", currentUser.getUsername());
-            session.setAttribute("role",currentUser.getRoleId());
+            session.setAttribute("userId", existingUser.getUserId());
+            session.setAttribute("user", existingUser.getUsername());
+            session.setAttribute("role",existingUser.getRoleId());
             return "redirect:/poll-list";
         }
 
@@ -82,7 +83,7 @@ public class LoginController {
         appUserService.hashPassword(currentUser);
 
         appUserService.saveUser(currentUser);
-
+        session.setAttribute("userId", currentUser.getUserId());
         session.setAttribute("user", currentUser.getUsername());
         session.setAttribute("role",currentUser.getRoleId());
         return "redirect:/poll-list";
