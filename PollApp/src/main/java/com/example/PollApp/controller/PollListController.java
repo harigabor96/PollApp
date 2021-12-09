@@ -29,6 +29,7 @@ public class PollListController {
                 questionDTOList.add(new QuestionDTO(questionEntity))
         );
 
+        model.addAttribute("userRole", session.getAttribute("role"));
         model.addAttribute("pollListForm", new PollListForm(questionDTOList));
         return "polllist";
     }

@@ -33,12 +33,15 @@ public class PollManagementController {
     @GetMapping()
     public String pollManagement(HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
+        if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
+
         return "redirect:/poll-management/creation";
     }
 
     @GetMapping("/creation")
     public String pollCreation(ModelMap model, HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
+        if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 
         ArrayList<AnswerDTO> answerDTOList = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
@@ -54,6 +57,7 @@ public class PollManagementController {
     public String create(@ModelAttribute("pollCreationForm") PollCreationForm pollCreationForm,
                          RedirectAttributes redirectAttributes, HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
+        if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 
         Question currentQuestion = pollCreationForm.getQuestionDTO().getEntity();
         ArrayList<Answer> currentAnswers = new ArrayList<>();
@@ -76,6 +80,7 @@ public class PollManagementController {
     @PostMapping("/delete")
     public String delete(@RequestParam(name="questionId") Integer selectedQuestionId, HttpSession session ) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
+        if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 
         voteService.deleteVotesByQuestionId(selectedQuestionId);
         answerService.deleteVotesByQuestionId(selectedQuestionId);

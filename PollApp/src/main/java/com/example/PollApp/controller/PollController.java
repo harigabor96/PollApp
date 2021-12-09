@@ -30,8 +30,13 @@ public class PollController {
     }
 
     @GetMapping()
-    public String poll(ModelMap model, @ModelAttribute("pollListForm") PollListForm pollListForm, HttpSession session){
+    public String poll(ModelMap model, @ModelAttribute("pollListForm") PollListForm pollListForm,
+                       RedirectAttributes redirectAttributes ,HttpSession session){
         if (session.getAttribute("user") == null) return "redirect:/login";
+        if((Integer)session.getAttribute("role") == 1) {
+            redirectAttributes.addAttribute("selectedQuestionId", pollListForm.getSelectedQuestionId());
+            return "redirect:/poll/results";
+        }
 
         Integer selectedQuestionId = pollListForm.getSelectedQuestionId();
 
@@ -43,6 +48,7 @@ public class PollController {
                 answerDTOList.add(new AnswerDTO(answerEntity))
         );
 
+        model.addAttribute("userRole", session.getAttribute("role"));
         model.addAttribute("pollForm", new PollForm(selectedQuestionDTO, answerDTOList));
         return "poll";
     }
@@ -51,8 +57,10 @@ public class PollController {
     public String submitVote(@ModelAttribute("pollForm") PollForm pollForm, RedirectAttributes redirectAttributes,
                              HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
+        if((Integer)session.getAttribute("role") == 1) return "redirect:/poll-list";
 
         Integer selectedQuestionId = pollForm.getSelectedQuestionId();
+
         Integer userId = (Integer)session.getAttribute("userId");
         Integer answerId = pollForm.getSelectedAnswerId();
         voteService.saveVote(userId, selectedQuestionId, answerId);
@@ -74,6 +82,7 @@ public class PollController {
                     voteService.countVotesByAnswerId(ans.getAnswerId())))
         );
 
+        model.addAttribute("userRole", session.getAttribute("role"));
         model.addAttribute("questionDTO", questionDTO);
         model.addAttribute("voteResultsDTOList", voteResultsDTOList);
         return "pollresults";

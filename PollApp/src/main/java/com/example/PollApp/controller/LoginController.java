@@ -27,8 +27,6 @@ public class LoginController {
 
     @GetMapping()
     public String login(ModelMap model, HttpSession session) {
-        if (session.getAttribute("userId") != null) return "redirect:/poll-list";
-
         ArrayList<UserRoleDTO> userRoleDTOList = new ArrayList<>();
         userRoleService.findAllUserRoles().forEach((userRoleEntity) ->
             userRoleDTOList.add(new UserRoleDTO(userRoleEntity))

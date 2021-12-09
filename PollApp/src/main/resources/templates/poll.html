@@ -6,12 +6,12 @@
 </head>
 <body>
     <a href="/poll-list">View Polls</a>
-    <a href="/poll-management/creation">Create a Poll</a>
+    <a th:if="${userRole == 1}" href="/poll-management/creation">Create a Poll</a>
     <a href="/logout" style="float: right">Sign Out</a>
     <hr>
     <h1>Time to vote!</h1>
     <form th:object="${pollForm}" th:action="@{/poll/submit-vote}" method="post">
-        <b><span th:text = *{questionDTO.question} /></b><br>
+        <b><span th:text ="*{questionDTO.question}" /></b><br>
         <input type="hidden" name="selectedQuestionId" id="selectedQuestionId" th:value="*{questionDTO.questionId}" />
         <span th:each="answerDTO, stat : *{answerDTOList}">
             <input type="radio" th:field="*{selectedAnswerId}"
