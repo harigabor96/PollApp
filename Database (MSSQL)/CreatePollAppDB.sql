@@ -59,7 +59,7 @@ CREATE TABLE dbo.Vote
    AnswerID int NOT NULL,
    QuestionID int NOT NULL,
 
-   Primary Key (UserID, AnswerID, QuestionID),
+   Primary Key (UserID, QuestionID),
    Foreign Key (UserID) REFERENCES AppUser(UserID),
    Foreign Key (AnswerID) REFERENCES Answer(AnswerID),
    Foreign Key (QuestionID) REFERENCES Question(QuestionID),
