@@ -25,14 +25,10 @@ public class TestController {
 
     @GetMapping("/testAppUser")
     public @ResponseBody
-    Iterable<AppUser> listAllUsers() {
-        return appUserRepository.findAll();
-    }
+    Iterable<AppUser> listAllUsers() { return appUserRepository.findAll(); }
 
     @GetMapping("/testUserRole")
-    public @ResponseBody Iterable<UserRole> listAllRoles() {
-        return userRoleService.findAll();
-    }
+    public @ResponseBody Iterable<UserRole> listAllRoles() { return userRoleService.findAll(); }
 
     @GetMapping("/testQuestion")
     public @ResponseBody Iterable<Question> listAllQuestions() {
