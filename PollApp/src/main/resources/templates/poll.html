@@ -16,7 +16,7 @@
         <span th:each="answerDTO, stat : *{answerDTOList}">
             <input type="radio" th:field="*{selectedAnswerId}"
                 th:value="*{answerDTOList[__${stat.index}__].answerId}"
-                th:text="*{answerDTOList[__${stat.index}__].answer}" /><br>
+                th:text="*{answerDTOList[__${stat.index}__].answer}" required/><br>
         </span>
         <button type="submit">Vote</button>
     </form>
