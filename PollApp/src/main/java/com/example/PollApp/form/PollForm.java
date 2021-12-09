@@ -10,7 +10,6 @@ public class PollForm {
 
     private QuestionDTO questionDTO;
     private ArrayList<AnswerDTO> answerDTOList;
-    private Integer selectedQuestionId;
     private Integer selectedAnswerId;
 
     public PollForm(QuestionDTO questionDTO, ArrayList<AnswerDTO> answerDTOList) {
@@ -25,10 +24,6 @@ public class PollForm {
     public ArrayList<AnswerDTO> getAnswerDTOList() { return answerDTOList; }
 
     public void setAnswerDTOList(ArrayList<AnswerDTO> answerDTOList) { this.answerDTOList = answerDTOList; }
-
-    public Integer getSelectedQuestionId() { return selectedQuestionId; }
-
-    public void setSelectedQuestionId(Integer selectedQuestionId) { this.selectedQuestionId = selectedQuestionId; }
 
     public Integer getSelectedAnswerId() { return selectedAnswerId; }
 

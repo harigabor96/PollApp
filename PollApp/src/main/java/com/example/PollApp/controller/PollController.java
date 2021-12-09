@@ -44,7 +44,6 @@ public class PollController {
     @PostMapping("/submit-vote")
     public String submitVote(@ModelAttribute("pollForm") PollForm pollForm) {
         System.out.println(pollForm.getSelectedAnswerId().toString());
-        System.out.println(pollForm.getSelectedQuestionId().toString());
 
         return "pollresult";
     }
