@@ -7,11 +7,12 @@ import com.example.PollApp.form.PollListForm;
 import com.example.PollApp.model.Question;
 import com.example.PollApp.service.AnswerService;
 import com.example.PollApp.service.QuestionService;
+import com.example.PollApp.service.VoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 
 @Controller
@@ -19,10 +20,12 @@ import java.util.ArrayList;
 public class PollController {
     private final QuestionService questionService;
     private final AnswerService answerService;
+    private final VoteService voteService;
 
-    public PollController(QuestionService questionService, AnswerService answerService) {
+    public PollController(QuestionService questionService, AnswerService answerService, VoteService voteService) {
         this.questionService = questionService;
         this.answerService = answerService;
+        this.voteService = voteService;
     }
 
     @GetMapping()
@@ -42,9 +45,19 @@ public class PollController {
     }
 
     @PostMapping("/submit-vote")
-    public String submitVote(@ModelAttribute("pollForm") PollForm pollForm) {
-        System.out.println(pollForm.getSelectedAnswerId().toString());
+    public String submitVote(@ModelAttribute("pollForm") PollForm pollForm, RedirectAttributes redirectAttributes) {
+        Integer questionId = pollForm.getSelectedQuestionId();
+        Integer userId = 1; //Ezt majd a sessionnél
+        Integer answerId = pollForm.getSelectedAnswerId();
+        voteService.saveVote(userId, answerId);
 
-        return "pollresult";
+        redirectAttributes.addFlashAttribute("questionId", questionId);
+        return "redirect:/poll/results";
+    }
+
+    @GetMapping("/results")
+    public String results (ModelMap model){
+
+        return "results";
     }
 }

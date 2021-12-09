@@ -11,6 +11,7 @@ public class PollForm {
     private QuestionDTO questionDTO;
     private ArrayList<AnswerDTO> answerDTOList;
     private Integer selectedAnswerId;
+    private Integer selectedQuestionId;
 
     public PollForm(QuestionDTO questionDTO, ArrayList<AnswerDTO> answerDTOList) {
         this.questionDTO = questionDTO;
@@ -28,4 +29,8 @@ public class PollForm {
     public Integer getSelectedAnswerId() { return selectedAnswerId; }
 
     public void setSelectedAnswerId(Integer selectedAnswerId) { this.selectedAnswerId = selectedAnswerId; }
+
+    public Integer getSelectedQuestionId() { return selectedQuestionId; }
+
+    public void setSelectedQuestionId(Integer selectedQuestionId) { this.selectedQuestionId = selectedQuestionId; }
 }
