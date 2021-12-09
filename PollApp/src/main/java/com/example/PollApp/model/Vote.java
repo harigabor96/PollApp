@@ -11,6 +11,8 @@ public class Vote {
     private Integer userId;
 
     @Id
+    private Integer questionId;
+
     private Integer answerId;
 
     public Vote() {
@@ -19,6 +21,10 @@ public class Vote {
     public Integer getUserId() { return userId; }
 
     public void setUserId(Integer userId) { this.userId = userId; }
+
+    public Integer getQuestionId() { return questionId; }
+
+    public void setQuestionId(Integer questionId) { this.questionId = questionId; }
 
     public Integer getAnswerId() { return answerId; }
 

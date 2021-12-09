@@ -1,28 +1,27 @@
 package com.example.PollApp.model;
 
-import javax.persistence.Embeddable;
 import java.io.Serializable;
 import java.util.Objects;
 
 public class VoteId implements Serializable {
     private Integer userId;
-    private Integer answerId;
+    private Integer questionId;
 
     public VoteId() {
     }
 
-    public VoteId(Integer userId, Integer answerId) {
+    public VoteId(Integer userId, Integer questionId) {
         this.userId = userId;
-        this.answerId = answerId;
+        this.questionId = questionId;
     }
 
     public Integer getUserId() { return userId; }
 
     public void setUserId(Integer userId) { this.userId = userId; }
 
-    public Integer getAnswerId() { return answerId; }
+    public Integer getQuestionId() { return questionId; }
 
-    public void setAnswerId(Integer answerId) { this.answerId = answerId; }
+    public void setQuestionId(Integer questionId) { this.questionId = questionId; }
 
     @Override
     public boolean equals(Object o) {
@@ -35,11 +34,11 @@ public class VoteId implements Serializable {
         // typecast o to VoteID so that we can compare data members
         VoteId vId = (VoteId) o;
 
-        return Objects.equals(this.userId, vId.userId) && Objects.equals(this.answerId, vId.answerId);
+        return Objects.equals(this.userId, vId.userId) && Objects.equals(this.questionId, vId.questionId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.userId, this.answerId);
+        return Objects.hash(this.userId, this.questionId);
     }
 }

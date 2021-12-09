@@ -4,6 +4,8 @@ import com.example.PollApp.model.Vote;
 import com.example.PollApp.repository.VoteRepository;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 @Service
 public class VoteService {
 
@@ -13,8 +15,9 @@ public class VoteService {
         this.voteRepository = voteRepository;
     }
 
-    public void saveVote(Integer userId, Integer answerId) {
+    public void saveVote(Integer userId, Integer questionId ,Integer answerId) {
         Vote vote = new Vote();
+        vote.setQuestionId(questionId);
         vote.setUserId(userId);
         vote.setAnswerId(answerId);
         voteRepository.save(vote);

@@ -47,9 +47,9 @@ public class PollController {
     @PostMapping("/submit-vote")
     public String submitVote(@ModelAttribute("pollForm") PollForm pollForm, RedirectAttributes redirectAttributes) {
         Integer selectedQuestionId = pollForm.getSelectedQuestionId();
-        Integer userId = 1; //Ezt majd a sessionnél
+        Integer userId = 2; //Ezt majd a sessionnél
         Integer answerId = pollForm.getSelectedAnswerId();
-        voteService.saveVote(userId, answerId);
+        voteService.saveVote(userId, selectedQuestionId, answerId);
 
         redirectAttributes.addAttribute("selectedQuestionId", selectedQuestionId);
         return "redirect:/poll/results";
