@@ -26,7 +26,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- EZ a session kezeléshez kell BEGIN-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
@@ -37,15 +36,14 @@
 			<artifactId>spring-session-data-redis</artifactId>
 			<version>1.3.5.RELEASE</version>
 		</dependency>
-		<!-- EZ a session kezeléshez kell END-->
-		<!-- EZ a Thymeleaf BEGIN-->
+		<!-- Thymeleaf BEGIN-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<version>2.6.1</version>
 		</dependency>
-		<!-- EZ a Thymeleaf END -->
-		<!-- Ez pedig a Spring Data JPA-s adatbáziskezeléshez BEGIN-->
+		<!-- Thymeleaf END -->
+		<!-- Database BEGIN-->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
@@ -56,20 +54,20 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>2.6.1</version>
 		</dependency>
-		<!-- Ez pedig a Spring Data JPA az adatbáziskezeléshez END-->
-		<!-- Ez a validáció BEGIN-->
+		<!-- Database END-->
+		<!-- Validation BEGIN-->
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
-		<!-- Ez a validáció END-->
-		<!-- Ez a hashelés BEGIN-->
+		<!-- Validation END-->
+		<!-- Hashing BEGIN-->
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
 			<version>1.11</version>
 		</dependency>
-		<!-- Ez a hashelés END-->
+		<!-- Hashing END-->
 	</dependencies>
 
 	<build>
@@ -77,6 +75,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.5.6</version>
 			</plugin>
 		</plugins>
 	</build>
