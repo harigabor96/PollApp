@@ -6,10 +6,11 @@
 </head>
 <body>
     <h1>Time to vote!</h1>
-    <form th:object="${pollForm}">
+    <form th:object="${pollForm}" th:action="@{/poll/submit-vote}" method="post">
         <b><span th:text = *{questionDTO.question} /></b><br>
+        <input type="hidden" name="selectedQuestionId" id="selectedQuestionId" th:value="*{questionDTO.questionId}" />
         <span th:each="answerDTO, stat : *{answerDTOList}">
-            <input type="radio" name="selectedAnswerId"
+            <input type="radio" th:field="*{selectedAnswerId}"
                 th:value="*{answerDTOList[__${stat.index}__].answerId}"
                 th:text="*{answerDTOList[__${stat.index}__].answer}" /><br>
         </span>

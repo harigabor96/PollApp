@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 
 @Controller
@@ -25,7 +26,9 @@ public class PollController {
     }
 
     @GetMapping()
-    public String poll(ModelMap model, @RequestParam(name = "selectedQuestionId") Integer selectedQuestionId) {
+    public String poll(ModelMap model, @ModelAttribute(name="pollForm") PollForm pollForm){
+        Integer selectedQuestionId = pollForm.getSelectedQuestionId();
+
         QuestionDTO selectedQuestionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
 
         ArrayList<AnswerDTO> answerDTOList = new ArrayList<>();
@@ -36,5 +39,13 @@ public class PollController {
 
         model.addAttribute("pollForm", new PollForm(selectedQuestionDTO, answerDTOList));
         return "poll";
+    }
+
+    @PostMapping("/submit-vote")
+    public String submitVote(@ModelAttribute("pollForm") PollForm pollForm) {
+        System.out.println(pollForm.getSelectedAnswerId().toString());
+        System.out.println(pollForm.getSelectedQuestionId().toString());
+
+        return "pollresult";
     }
 }
