@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -34,7 +36,9 @@ public class PollManagementController {
     }
 
     @GetMapping("/creation")
-    public String pollCreation(ModelMap model) {
+    public String pollCreation(ModelMap model, HttpSession session) {
+        if (session.getAttribute("user") == null) return "redirect:/login";
+
         ArrayList<AnswerDTO> answerDTOList = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
             answerDTOList.add(new AnswerDTO());
@@ -47,7 +51,9 @@ public class PollManagementController {
 
     @PostMapping("/create")
     public String create(@ModelAttribute("pollCreationForm") PollCreationForm pollCreationForm,
-                         RedirectAttributes redirectAttributes) {
+                         RedirectAttributes redirectAttributes, HttpSession session) {
+        if (session.getAttribute("user") == null) return "redirect:/login";
+
         Question currentQuestion = pollCreationForm.getQuestionDTO().getEntity();
         ArrayList<Answer> currentAnswers = new ArrayList<>();
         pollCreationForm.getAnswerDTOList().forEach((ansDTO) -> {
@@ -67,7 +73,9 @@ public class PollManagementController {
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam(name="questionId") Integer selectedQuestionId ) {
+    public String delete(@RequestParam(name="questionId") Integer selectedQuestionId, HttpSession session ) {
+        if (session.getAttribute("user") == null) return "redirect:/login";
+
         voteService.deleteVotesByQuestionId(selectedQuestionId);
         answerService.deleteVotesByQuestionId(selectedQuestionId);
         questionService.deleteQuestionById(selectedQuestionId);

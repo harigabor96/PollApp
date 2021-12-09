@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -28,7 +30,9 @@ public class PollController {
     }
 
     @GetMapping()
-    public String poll(ModelMap model, @ModelAttribute("pollListForm") PollListForm pollListForm){
+    public String poll(ModelMap model, @ModelAttribute("pollListForm") PollListForm pollListForm, HttpSession session){
+        if (session.getAttribute("user") == null) return "redirect:/login";
+
         Integer selectedQuestionId = pollListForm.getSelectedQuestionId();
 
         QuestionDTO selectedQuestionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
@@ -44,7 +48,10 @@ public class PollController {
     }
 
     @PostMapping("/submit-vote")
-    public String submitVote(@ModelAttribute("pollForm") PollForm pollForm, RedirectAttributes redirectAttributes) {
+    public String submitVote(@ModelAttribute("pollForm") PollForm pollForm, RedirectAttributes redirectAttributes,
+                             HttpSession session) {
+        if (session.getAttribute("user") == null) return "redirect:/login";
+
         Integer selectedQuestionId = pollForm.getSelectedQuestionId();
         Integer userId = 2; //Ezt majd a sessionnél
         Integer answerId = pollForm.getSelectedAnswerId();
@@ -55,7 +62,10 @@ public class PollController {
     }
 
     @GetMapping("/results")
-    public String results (ModelMap model, @ModelAttribute("selectedQuestionId") Integer selectedQuestionId) {
+    public String results (ModelMap model, @ModelAttribute("selectedQuestionId") Integer selectedQuestionId,
+                           HttpSession session) {
+        if (session.getAttribute("user") == null) return "redirect:/login";
+
         QuestionDTO questionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
 
         ArrayList<VoteResultsDTO> voteResultsDTOList = new ArrayList<>();

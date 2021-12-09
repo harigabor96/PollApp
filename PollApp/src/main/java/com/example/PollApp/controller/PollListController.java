@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -19,7 +21,9 @@ public class PollListController {
     }
 
     @GetMapping()
-    public String pollList(ModelMap model) {
+    public String pollList(ModelMap model, HttpSession session) {
+        if (session.getAttribute("user") == null) return "redirect:/login";
+
         ArrayList<QuestionDTO> questionDTOList = new ArrayList<>();
         questionService.findAllQuestions().forEach((questionEntity) ->
                 questionDTOList.add(new QuestionDTO(questionEntity))

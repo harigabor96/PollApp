@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
@@ -24,7 +26,9 @@ public class LoginController {
     }
 
     @GetMapping()
-    public String login(ModelMap model) {
+    public String login(ModelMap model, HttpSession session) {
+        if (session.getAttribute("user") != null) return "redirect:/poll-list";
+
         ArrayList<UserRoleDTO> userRoleDTOList = new ArrayList<>();
         userRoleService.findAllUserRoles().forEach((userRoleEntity) ->
             userRoleDTOList.add(new UserRoleDTO(userRoleEntity))
@@ -36,8 +40,8 @@ public class LoginController {
     }
 
     @PostMapping("/sign-in")
-    public String signIn(@ModelAttribute("appUserDTO") AppUserDTO appUserDTO,
-                         RedirectAttributes redirectAttributes) {
+    public String signIn(@ModelAttribute("appUserDTO") AppUserDTO appUserDTO, RedirectAttributes redirectAttributes,
+                         HttpSession session) {
         AppUser currentUser = appUserDTO.getEntity();
         AppUser existingUser = appUserService.findUser(currentUser);
 
@@ -48,6 +52,8 @@ public class LoginController {
         }
 
         if (appUserService.matchPassword(currentUser, existingUser)) {
+            session.setAttribute("user", currentUser.getUsername());
+            session.setAttribute("role",currentUser.getRoleId());
             return "redirect:/poll-list";
         }
 
@@ -57,8 +63,8 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") AppUserDTO appUserDTO,
-                           RedirectAttributes redirectAttributes) {
+    public String register(@ModelAttribute("user") AppUserDTO appUserDTO, RedirectAttributes redirectAttributes,
+                           HttpSession session) {
         AppUser currentUser = appUserDTO.getEntity();
 
         if (appUserService.checkIfUserExists(currentUser)) {
@@ -76,6 +82,9 @@ public class LoginController {
         appUserService.hashPassword(currentUser);
 
         appUserService.saveUser(currentUser);
+
+        session.setAttribute("user", currentUser.getUsername());
+        session.setAttribute("role",currentUser.getRoleId());
         return "redirect:/poll-list";
     }
 }
