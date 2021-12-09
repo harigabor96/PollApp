@@ -10,21 +10,22 @@
 <a href="/logout" style="float: right">Sign Out</a>
 <hr>
 <h1>Poll Results</h1>
-    <b><span th:text="${questionDTO.question}"></span></b>
-    <table>
-        <tr>
-            <td><b><label>Question</label></b></td>
-            <td><b><label>Votes</label></b></td>
-        </tr>
-        <tr th:each="result : ${voteResultsDTOList}">
-            <td th:text="${result.answer}"/>
-            <td th:text="${result.voteCount}" style="text-align: center" />
-        </tr>
-    </table>
-    <form th:if="${userRole == 1}">
-        <button  name="questionId" th:value="${questionDTO.questionId}"
-                formaction="/poll-management/delete" formmethod="post">Delete</button>
-    </form>
-    <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+<b><span th:text="${questionDTO.question}"></span></b>
+<table>
+    <tr>
+        <td><b><label>Question</label></b></td>
+        <td><b><label>Votes</label></b></td>
+    </tr>
+    <tr th:each="result : ${voteResultsDTOList}">
+        <td th:text="${result.answer}"/>
+        <td th:text="${result.voteCount}" style="text-align: center"/>
+    </tr>
+</table>
+<form th:if="${userRole == 1}">
+    <button name="questionId" th:value="${questionDTO.questionId}"
+            formaction="/poll-management/delete" formmethod="post">Delete
+    </button>
+</form>
+<h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
 </body>
 </html>

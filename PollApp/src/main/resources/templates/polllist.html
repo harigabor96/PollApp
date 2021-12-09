@@ -5,22 +5,23 @@
     <title>Poll List</title>
 </head>
 <body>
-    <a href="/poll-list">View Polls</a>
-    <a th:if="${userRole == 1}" href="/poll-management/creation">Create a Poll</a>
-    <a href="/logout" style="float: right">Sign Out</a>
-    <hr>
-    <h1>Select a poll</h1>
-    <form th:action="@{/poll}" th:object="${pollListForm}" method="get">
-        <table>
-            <tr th:each="questionDTO, stat : *{questionDTOList}">
-                <td>
-                    <button type="submit" name="selectedQuestionId" id="selectedQuestionId"
-                            th:value = "*{questionDTOList[__${stat.index}__].questionId}"
-                            th:text="*{questionDTOList[__${stat.index}__].question}" /><br>
-                </td>
-            </tr>
-        </table>
-    </form>
-    <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+<a href="/poll-list">View Polls</a>
+<a th:if="${userRole == 1}" href="/poll-management/creation">Create a Poll</a>
+<a href="/logout" style="float: right">Sign Out</a>
+<hr>
+<h1>Select a poll</h1>
+<form th:action="@{/poll}" th:object="${pollListForm}" method="get">
+    <table>
+        <tr th:each="questionDTO, stat : *{questionDTOList}">
+            <td>
+                <button type="submit" name="selectedQuestionId" id="selectedQuestionId"
+                        th:value="*{questionDTOList[__${stat.index}__].questionId}"
+                        th:text="*{questionDTOList[__${stat.index}__].question}"/>
+                <br>
+            </td>
+        </tr>
+    </table>
+</form>
+<h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
 </body>
 </html>
