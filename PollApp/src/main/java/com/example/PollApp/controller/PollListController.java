@@ -7,13 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/poll-list")
 public class PollListController {
+
     private final QuestionService questionService;
 
     public PollListController(QuestionService questionService) {

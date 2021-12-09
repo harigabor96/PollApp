@@ -12,13 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/poll")
 public class PollController {
+
     private final QuestionService questionService;
     private final AnswerService answerService;
     private final VoteService voteService;
