@@ -57,10 +57,12 @@ CREATE TABLE dbo.Vote
  (  
    UserID int NOT NULL,
    AnswerID int NOT NULL,
+   QuestionID int NOT NULL,
 
-   Primary Key (UserID, AnswerID),
+   Primary Key (UserID, AnswerID, QuestionID),
    Foreign Key (UserID) REFERENCES AppUser(UserID),
-   Foreign Key (AnswerID) REFERENCES Answer(AnswerID)
+   Foreign Key (AnswerID) REFERENCES Answer(AnswerID),
+   Foreign Key (QuestionID) REFERENCES Question(QuestionID),
 );
 GO
 
