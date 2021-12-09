@@ -26,8 +26,8 @@ public class PollController {
     }
 
     @GetMapping()
-    public String poll(ModelMap model, @ModelAttribute(name="pollForm") PollForm pollForm){
-        Integer selectedQuestionId = pollForm.getSelectedQuestionId();
+    public String poll(ModelMap model, @ModelAttribute("pollListForm") PollListForm pollListForm){
+        Integer selectedQuestionId = pollListForm.getSelectedQuestionId();
 
         QuestionDTO selectedQuestionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
 
