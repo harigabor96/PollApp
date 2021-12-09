@@ -30,13 +30,13 @@ public class LoginController {
             userRoleDTOList.add(new UserRoleDTO(userRoleEntity))
         );
 
-        model.addAttribute("user", new AppUserDTO());
-        model.addAttribute("userRoles", userRoleDTOList);
+        model.addAttribute("appUserDTO", new AppUserDTO());
+        model.addAttribute("userRoleDTOList", userRoleDTOList);
         return "login";
     }
 
     @PostMapping("/sign-in")
-    public String signIn(@ModelAttribute(name="user") AppUserDTO appUserDTO,
+    public String signIn(@ModelAttribute(name="appUserDTO") AppUserDTO appUserDTO,
                          RedirectAttributes redirectAttributes) {
         AppUser currentUser = appUserDTO.getEntity();
         AppUser existingUser = appUserService.findUser(currentUser);

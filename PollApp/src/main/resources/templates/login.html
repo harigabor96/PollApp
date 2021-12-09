@@ -7,7 +7,7 @@
 <tbody>
     <!-- We didn't include a separate registration form -->
     <h1>Please, sign in (or register)</h1>
-    <form th:object="${user}" method="post">
+    <form th:object="${appUserDTO}" method="post">
         <table>
             <tr>
                 <td>
@@ -42,7 +42,7 @@
                 <td>
                     <label>As</label>
                     <select th:field="*{roleId}">
-                        <option th:each="userRole : ${userRoles}" th:value="${userRole.roleId}"
+                        <option th:each="userRole : ${userRoleDTOList}" th:value="${userRole.roleId}"
                                 th:text="${userRole.roleDescription}">
                         </option>
                     </select>
