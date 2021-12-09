@@ -2,15 +2,19 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Poll Results</title>
 </head>
 <body>
-<h1>Results</h1>
+<h1>Poll Results</h1>
     <b><span th:text="${questionDTO.question}"></span></b>
     <table>
+        <tr>
+            <td><b><label>Question</label></b></td>
+            <td><b><label>Votes</label></b></td>
+        </tr>
         <tr th:each="result : ${voteResultsDTOList}">
-            <td th:text="${result.answer}" />
-            <td th:text="${result.voteCount}" />
+            <td th:text="${result.answer}"/>
+            <td th:text="${result.voteCount}" style="text-align: center" />
         </tr>
     </table>
     <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
