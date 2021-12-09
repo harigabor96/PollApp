@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-    <h1>Eredmények</h1>
+<h1>Results</h1>
+    <b><span th:text="${questionDTO.question}"></span></b>
+    <table>
+        <tr th:each="result : ${voteResultsDTOList}">
+            <td th:text="${result.answer}" />
+            <td th:text="${result.voteCount}" />
+        </tr>
+    </table>
+    <h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
 </body>
 </html>

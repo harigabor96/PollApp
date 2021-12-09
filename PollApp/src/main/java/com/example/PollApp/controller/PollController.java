@@ -2,9 +2,9 @@ package com.example.PollApp.controller;
 
 import com.example.PollApp.dto.AnswerDTO;
 import com.example.PollApp.dto.QuestionDTO;
+import com.example.PollApp.dto.VoteResultsDTO;
 import com.example.PollApp.form.PollForm;
 import com.example.PollApp.form.PollListForm;
-import com.example.PollApp.model.Question;
 import com.example.PollApp.service.AnswerService;
 import com.example.PollApp.service.QuestionService;
 import com.example.PollApp.service.VoteService;
@@ -46,18 +46,29 @@ public class PollController {
 
     @PostMapping("/submit-vote")
     public String submitVote(@ModelAttribute("pollForm") PollForm pollForm, RedirectAttributes redirectAttributes) {
-        Integer questionId = pollForm.getSelectedQuestionId();
+        Integer selectedQuestionId = pollForm.getSelectedQuestionId();
         Integer userId = 1; //Ezt majd a sessionnél
         Integer answerId = pollForm.getSelectedAnswerId();
         voteService.saveVote(userId, answerId);
 
-        redirectAttributes.addFlashAttribute("questionId", questionId);
+        redirectAttributes.addFlashAttribute("selectedQuestionId", selectedQuestionId);
         return "redirect:/poll/results";
     }
 
     @GetMapping("/results")
     public String results (ModelMap model){
+        Integer selectedQuestionId = (Integer)model.getAttribute("selectedQuestionId");
 
+        QuestionDTO questionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
+
+        ArrayList<VoteResultsDTO> voteResultsDTOList = new ArrayList<>();
+        answerService.findAnswersByQuestionId(selectedQuestionId).forEach((ans) -> {
+            voteResultsDTOList.add(new VoteResultsDTO(ans,
+                    voteService.countVotesByAnswerId(ans.getAnswerId())));
+        });
+
+        model.addAttribute("questionDTO", questionDTO);
+        model.addAttribute("voteResultsDTOList", voteResultsDTOList);
         return "results";
     }
 }

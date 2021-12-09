@@ -19,4 +19,8 @@ public class VoteService {
         vote.setAnswerId(answerId);
         voteRepository.save(vote);
     }
+
+    public Integer countVotesByAnswerId(Integer answerId) {
+        return voteRepository.countVoteByAnswerId(answerId);
+    }
 }
