@@ -34,6 +34,7 @@ public class PollCreationController {
         for (int i = 1; i <= 30; i++) {
             answerDTOList.add(new AnswerDTO());
         }
+
         model.addAttribute("pollCreationForm",
                 new PollCreationForm(new QuestionDTO(), answerDTOList));
         return "pollcreation";

@@ -10,7 +10,7 @@
         <table>
             <tr th:each="questionDTO, stat : *{questionDTOList}">
                 <td>
-                    <button type="submit" name="selectedPollId"
+                    <button type="submit" name="selectedQuestionId"
                             th:value = "*{questionDTOList[__${stat.index}__].questionId}"
                             th:text="*{questionDTOList[__${stat.index}__].question}" /><br>
                 </td>
