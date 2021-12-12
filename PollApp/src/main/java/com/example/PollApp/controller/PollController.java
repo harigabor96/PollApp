@@ -30,8 +30,8 @@ public class PollController {
     }
 
     @GetMapping()
-    public String poll(ModelMap model, @ModelAttribute("pollListForm") PollListForm pollListForm,
-                       RedirectAttributes redirectAttributes ,HttpSession session){
+    public String poll(ModelMap model, PollListForm pollListForm, RedirectAttributes redirectAttributes
+            ,HttpSession session){
         if (session.getAttribute("user") == null) return "redirect:/login";
         if((Integer)session.getAttribute("role") == 1) {
             redirectAttributes.addAttribute("selectedQuestionId", pollListForm.getSelectedQuestionId());
@@ -54,8 +54,7 @@ public class PollController {
     }
 
     @PostMapping("/submit-vote")
-    public String submitVote(@ModelAttribute("pollForm") PollForm pollForm, RedirectAttributes redirectAttributes,
-                             HttpSession session) {
+    public String submitVote(PollForm pollForm, RedirectAttributes redirectAttributes, HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
         if((Integer)session.getAttribute("role") == 1) return "redirect:/poll-list";
 
@@ -70,8 +69,7 @@ public class PollController {
     }
 
     @GetMapping("/results")
-    public String results (ModelMap model, @ModelAttribute("selectedQuestionId") Integer selectedQuestionId,
-                           HttpSession session) {
+    public String results (ModelMap model, Integer selectedQuestionId, HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
 
         QuestionDTO questionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));

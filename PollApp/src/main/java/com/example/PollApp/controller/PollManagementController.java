@@ -53,8 +53,8 @@ public class PollManagementController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute("pollCreationForm") PollCreationForm pollCreationForm,
-                         RedirectAttributes redirectAttributes, HttpSession session) {
+    public String create(PollCreationForm pollCreationForm, RedirectAttributes redirectAttributes,
+                         HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
         if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 
@@ -77,7 +77,7 @@ public class PollManagementController {
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam(name="questionId") Integer selectedQuestionId, HttpSession session ) {
+    public String delete(@RequestParam("questionId") Integer selectedQuestionId, HttpSession session ) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
         if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 

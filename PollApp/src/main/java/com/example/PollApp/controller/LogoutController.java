@@ -12,8 +12,7 @@ public class LogoutController {
     @GetMapping()
     public String logout(HttpSession session)
     {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
-        session.invalidate();
+        if (session.getAttribute("userId") == null) session.invalidate();
         return "redirect:/login";
     }
 }
