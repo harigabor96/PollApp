@@ -32,13 +32,15 @@ public class PollController {
     @GetMapping()
     public String poll(ModelMap model, PollListForm pollListForm, RedirectAttributes redirectAttributes
             ,HttpSession session){
-        if (session.getAttribute("user") == null) return "redirect:/login";
-        if((Integer)session.getAttribute("role") == 1) {
-            redirectAttributes.addAttribute("selectedQuestionId", pollListForm.getSelectedQuestionId());
+        Integer userId = (Integer)session.getAttribute("userId");
+        Integer selectedQuestionId = pollListForm.getSelectedQuestionId();
+
+        if (userId == null) return "redirect:/login";
+
+        if((Integer)session.getAttribute("role") == 1 || voteService.checkIfUserVoted(selectedQuestionId, userId) ) {
+            redirectAttributes.addAttribute("selectedQuestionId", selectedQuestionId);
             return "redirect:/poll/results";
         }
-
-        Integer selectedQuestionId = pollListForm.getSelectedQuestionId();
 
         QuestionDTO selectedQuestionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
 
@@ -70,7 +72,11 @@ public class PollController {
 
     @GetMapping("/results")
     public String results (ModelMap model, Integer selectedQuestionId, HttpSession session) {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
+        Integer userId = (Integer)session.getAttribute("userId");
+        Integer userRole = (Integer)session.getAttribute("role");
+
+        if (userId == null) return "redirect:/login";
+        if ((userRole != 1) && !voteService.checkIfUserVoted(selectedQuestionId, userId)) return "redirect:/poll-list";
 
         QuestionDTO questionDTO = new QuestionDTO(questionService.findQuestion(selectedQuestionId));
 

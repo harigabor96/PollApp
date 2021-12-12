@@ -28,4 +28,8 @@ public class VoteService {
     public void deleteVotesByQuestionId (Integer questionId) {
         voteRepository.deleteAllByQuestionId(questionId);
     }
+
+    public boolean checkIfUserVoted (Integer questionId, Integer userId){
+        return voteRepository.findByQuestionIdAndUserId(questionId, userId) != null;
+    }
 }
