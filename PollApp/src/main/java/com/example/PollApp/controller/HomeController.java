@@ -12,6 +12,6 @@ public class HomeController {
     @GetMapping()
     public String redirectToPollList(HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
-        return"redirect:/poll-list";
+        return "redirect:/poll-list";
     }
 }

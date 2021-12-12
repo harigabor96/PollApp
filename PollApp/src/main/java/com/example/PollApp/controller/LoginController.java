@@ -25,7 +25,7 @@ public class LoginController {
     }
 
     @GetMapping()
-    public String login(ModelMap model, HttpSession session) {
+    public String login(ModelMap model) {
         ArrayList<UserRoleDTO> userRoleDTOList = new ArrayList<>();
         userRoleService.findAllUserRoles().forEach((userRoleEntity) ->
             userRoleDTOList.add(new UserRoleDTO(userRoleEntity))
@@ -61,7 +61,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(@ModelAttribute("user") AppUserDTO appUserDTO, RedirectAttributes redirectAttributes,
+    public String register(@ModelAttribute("appUserDTO") AppUserDTO appUserDTO, RedirectAttributes redirectAttributes,
                            HttpSession session) {
         AppUser currentUser = appUserDTO.getEntity();
 
