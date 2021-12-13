@@ -49,7 +49,7 @@ public class PollManagementController {
 
         model.addAttribute("pollCreationForm",
                 new PollCreationForm(new QuestionDTO(), answerDTOList));
-        return "pollcreation";
+        return "creation";
     }
 
     @PostMapping("/create")

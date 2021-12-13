@@ -31,6 +31,6 @@ public class PollListController {
 
         model.addAttribute("userRole", session.getAttribute("role"));
         model.addAttribute("pollListForm", new PollListForm(questionDTOList));
-        return "polllist";
+        return "poll-list";
     }
 }

@@ -89,6 +89,6 @@ public class PollController {
         model.addAttribute("userRole", session.getAttribute("role"));
         model.addAttribute("questionDTO", questionDTO);
         model.addAttribute("voteResultsDTOList", voteResultsDTOList);
-        return "pollresults";
+        return "results";
     }
 }
