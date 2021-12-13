@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GenericExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public String handleGenericException(ModelMap model) {
+    public String handleGenericException() {
     return "error";
     }
 }
