@@ -38,7 +38,7 @@ public class PollManagementController {
     }
 
     @GetMapping("/creation")
-    public String pollCreation(ModelMap model, HttpSession session) {
+    public String creation(ModelMap model, HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
         if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 

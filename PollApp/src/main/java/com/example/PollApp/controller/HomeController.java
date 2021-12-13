@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
     @GetMapping()
-    public String redirectToPollList(HttpSession session) {
+    public String home(HttpSession session) {
         if (session.getAttribute("userId") == null) return "redirect:/login";
         return "redirect:/poll-list";
     }
