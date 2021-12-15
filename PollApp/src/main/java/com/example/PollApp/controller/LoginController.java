@@ -1,7 +1,5 @@
 package com.example.PollApp.controller;
 
-import com.example.PollApp.dto.AppUserDTO;
-import com.example.PollApp.dto.UserRoleDTO;
 import com.example.PollApp.model.*;
 import com.example.PollApp.service.AppUserService;
 import com.example.PollApp.service.UserRoleService;
@@ -10,7 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/login")
@@ -26,19 +23,13 @@ public class LoginController {
 
     @GetMapping()
     public String login(ModelMap model) {
-        ArrayList<UserRoleDTO> userRoleDTOList = new ArrayList<>();
-        userRoleService.findAllUserRoles().forEach((userRoleEntity) ->
-            userRoleDTOList.add(new UserRoleDTO(userRoleEntity))
-        );
-
-        model.addAttribute("appUserDTO", new AppUserDTO());
-        model.addAttribute("userRoleDTOList", userRoleDTOList);
+        model.addAttribute("currentUser", new AppUser());
+        model.addAttribute("userRoleList", userRoleService.findAllUserRoles());
         return "login";
     }
 
     @PostMapping("/sign-in")
-    public String signIn(AppUserDTO appUserDTO, RedirectAttributes redirectAttributes, HttpSession session) {
-        AppUser currentUser = appUserDTO.getEntity();
+    public String signIn(AppUser currentUser, RedirectAttributes redirectAttributes, HttpSession session) {
         AppUser existingUser = appUserService.findUser(currentUser);
 
         if (existingUser == null) {
@@ -60,8 +51,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(AppUserDTO appUserDTO, RedirectAttributes redirectAttributes, HttpSession session) {
-        AppUser currentUser = appUserDTO.getEntity();
+    public String register(AppUser currentUser, RedirectAttributes redirectAttributes, HttpSession session) {
 
         if (appUserService.checkIfUserExists(currentUser)) {
             redirectAttributes.addFlashAttribute("errorMsg",

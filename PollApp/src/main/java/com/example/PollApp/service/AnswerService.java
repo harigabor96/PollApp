@@ -4,7 +4,6 @@ import com.example.PollApp.model.Answer;
 import com.example.PollApp.repository.AnswerRepository;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class AnswerService {
@@ -15,8 +14,8 @@ public class AnswerService {
         this.answerRepository = answerRepository;
     }
 
-    public List<Answer> findAnswersByQuestionId(Integer questionId) {
-        return answerRepository.findAllByQuestionId(questionId);
+    public ArrayList<Answer> findAnswersByQuestionId(Integer questionId) {
+        return (ArrayList<Answer>) answerRepository.findAllByQuestionId(questionId);
     }
 
     public void saveAnswers(ArrayList<Answer> answers) {

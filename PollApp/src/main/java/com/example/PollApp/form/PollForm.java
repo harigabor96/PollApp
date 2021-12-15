@@ -1,28 +1,28 @@
 package com.example.PollApp.form;
 
-import com.example.PollApp.dto.AnswerDTO;
-import com.example.PollApp.dto.QuestionDTO;
+import com.example.PollApp.model.Answer;
+import com.example.PollApp.model.Question;
 import java.util.ArrayList;
 
 public class PollForm {
 
-    private QuestionDTO questionDTO;
-    private ArrayList<AnswerDTO> answerDTOList;
+    private Question question;
+    private ArrayList<Answer> answerList;
     private Integer selectedAnswerId;
     private Integer selectedQuestionId;
 
-    public PollForm(QuestionDTO questionDTO, ArrayList<AnswerDTO> answerDTOList) {
-        this.questionDTO = questionDTO;
-        this.answerDTOList = answerDTOList;
+    public PollForm(Question question, ArrayList<Answer> answerList) {
+        this.question = question;
+        this.answerList = answerList;
     }
 
-    public QuestionDTO getQuestionDTO() { return questionDTO; }
+    public Question getQuestion() { return question; }
 
-    public void setQuestionDTO(QuestionDTO questionDTO) { this.questionDTO = questionDTO; }
+    public void setQuestion(Question question) { this.question = question; }
 
-    public ArrayList<AnswerDTO> getAnswerDTOList() { return answerDTOList; }
+    public ArrayList<Answer> getAnswerList() { return answerList; }
 
-    public void setAnswerDTOList(ArrayList<AnswerDTO> answerDTOList) { this.answerDTOList = answerDTOList; }
+    public void setAnswerList(ArrayList<Answer> answerList) { this.answerList = answerList; }
 
     public Integer getSelectedAnswerId() { return selectedAnswerId; }
 

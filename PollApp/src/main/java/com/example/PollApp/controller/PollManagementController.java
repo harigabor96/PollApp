@@ -1,8 +1,6 @@
 package com.example.PollApp.controller;
 
-import com.example.PollApp.dto.AnswerDTO;
 import com.example.PollApp.form.PollCreationForm;
-import com.example.PollApp.dto.QuestionDTO;
 import com.example.PollApp.model.*;
 import com.example.PollApp.service.AnswerService;
 import com.example.PollApp.service.QuestionService;
@@ -42,13 +40,13 @@ public class PollManagementController {
         if (session.getAttribute("userId") == null) return "redirect:/login";
         if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 
-        ArrayList<AnswerDTO> answerDTOList = new ArrayList<>();
+        ArrayList<Answer> answerList = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
-            answerDTOList.add(new AnswerDTO());
+            answerList.add(new Answer());
         }
 
         model.addAttribute("pollCreationForm",
-                new PollCreationForm(new QuestionDTO(), answerDTOList));
+                new PollCreationForm(new Question(), answerList));
         return "creation";
     }
 
@@ -58,10 +56,11 @@ public class PollManagementController {
         if (session.getAttribute("userId") == null) return "redirect:/login";
         if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 
-        Question currentQuestion = pollCreationForm.getQuestionDTO().getEntity();
+        Question currentQuestion = pollCreationForm.getQuestion();
         ArrayList<Answer> currentAnswers = new ArrayList<>();
-        pollCreationForm.getAnswerDTOList().forEach((ansDTO) -> {
-           if (!ansDTO.getAnswer().trim().equals("")) currentAnswers.add(ansDTO.getEntity());
+
+        pollCreationForm.getAnswerList().forEach((ans) -> {
+           if (!ans.getAnswer().trim().equals("")) currentAnswers.add(ans);
         });
 
         if(currentAnswers.size() == 0) {

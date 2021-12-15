@@ -6,22 +6,23 @@
 </head>
 <body>
 <a href="/poll-list">View Polls</a>
-<a th:if="${userRole == 1}" href="/poll-management/creation">Create a Poll</a>
+<a href="/poll-management/creation" th:if="${userRole == 1}">Create a Poll</a>
 <a href="/logout" style="float: right">Sign Out</a>
 <hr>
 <h1>Select a poll</h1>
-<form th:action="@{/poll}" th:object="${pollListForm}" method="get">
+<form method="get" th:action="@{/poll}" th:object="${pollListForm}">
     <table>
-        <tr th:each="questionDTO, stat : *{questionDTOList}">
+        <tr th:each="question, stat : *{questionList}">
             <td>
-                <button type="submit" name="selectedQuestionId" id="selectedQuestionId"
-                        th:value="*{questionDTOList[__${stat.index}__].questionId}"
-                        th:text="*{questionDTOList[__${stat.index}__].question}"/>
+                <button id="selectedQuestionId" name="selectedQuestionId"
+                        th:text="*{questionList[__${stat.index}__].question}"
+                        th:value="*{questionList[__${stat.index}__].questionId}"
+                        type="submit"/>
                 <br>
             </td>
         </tr>
     </table>
 </form>
-<h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

@@ -7,14 +7,14 @@
 <body>
 <!-- We didn't include a separate registration form -->
 <h1>Please, sign in (or register)</h1>
-<form th:object="${appUserDTO}" method="post">
+<form method="post" th:object="${currentUser}">
     <table>
         <tr>
             <td>
                 <label>Username</label>
             </td>
             <td>
-                <input type="text" th:field="*{username}" required/>
+                <input required th:field="*{username}" type="text"/>
             </td>
         </tr>
         <tr>
@@ -22,12 +22,12 @@
                 <label>Password</label>
             </td>
             <td>
-                <input type="password" th:field="*{password}" required/>
+                <input required th:field="*{password}" type="password"/>
             </td>
         </tr>
         <tr>
             <td>
-                <button type="submit" formaction="/login/sign-in">Sign In</button>
+                <button formaction="/login/sign-in" type="submit">Sign In</button>
             </td>
         </tr>
         <tr>
@@ -37,19 +37,19 @@
         </tr>
         <tr>
             <td>
-                <button type="submit" formaction="/login/register">Register</button>
+                <button formaction="/login/register" type="submit">Register</button>
             </td>
             <td>
                 <label>As</label>
                 <select th:field="*{roleId}">
-                    <option th:each="userRole : ${userRoleDTOList}" th:value="${userRole.roleId}"
-                            th:text="${userRole.roleDescription}">
+                    <option th:each="userRole : ${userRoleList}" th:text="${userRole.roleDescription}"
+                            th:value="${userRole.roleId}">
                     </option>
                 </select>
             </td>
         </tr>
     </table>
 </form>
-<h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

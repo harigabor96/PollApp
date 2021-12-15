@@ -6,26 +6,26 @@
 </head>
 <body>
 <a href="/poll-list">View Polls</a>
-<a th:if="${userRole == 1}" href="/poll-management/creation">Create a Poll</a>
+<a href="/poll-management/creation" th:if="${userRole == 1}">Create a Poll</a>
 <a href="/logout" style="float: right">Sign Out</a>
 <hr>
 <h1>Poll Results</h1>
-<b><span th:text="${questionDTO.question}"></span></b>
+<b><span th:text="${question.question}"></span></b>
 <table>
     <tr>
         <td><b><label>Question</label></b></td>
         <td><b><label>Votes</label></b></td>
     </tr>
-    <tr th:each="result : ${voteResultsDTOList}">
-        <td th:text="${result.answer}"/>
-        <td th:text="${result.voteCount}" style="text-align: center"/>
+    <tr th:each="result : ${voteResultsMap}">
+        <td th:text="${result.key.answer}"/>
+        <td style="text-align: center" th:text="${result.value}"/>
     </tr>
 </table>
 <form th:if="${userRole == 1}">
-    <button name="questionId" th:value="${questionDTO.questionId}"
-            formaction="/poll-management/delete" formmethod="post">Delete
+    <button formaction="/poll-management/delete" formmethod="post"
+            name="questionId" th:value="${question.questionId}">Delete
     </button>
 </form>
-<h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

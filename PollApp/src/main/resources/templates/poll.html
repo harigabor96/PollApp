@@ -6,20 +6,20 @@
 </head>
 <body>
 <a href="/poll-list">View Polls</a>
-<a th:if="${userRole == 1}" href="/poll-management/creation">Create a Poll</a>
+<a href="/poll-management/creation" th:if="${userRole == 1}">Create a Poll</a>
 <a href="/logout" style="float: right">Sign Out</a>
 <hr>
 <h1>Time to vote!</h1>
-<form th:object="${pollForm}" th:action="@{/poll/submit-vote}" method="post">
-    <b><span th:text="*{questionDTO.question}"/></b><br>
-    <input type="hidden" name="selectedQuestionId" id="selectedQuestionId" th:value="*{questionDTO.questionId}"/>
-    <span th:each="answerDTO, stat : *{answerDTOList}">
-            <input type="radio" th:field="*{selectedAnswerId}"
-                   th:value="*{answerDTOList[__${stat.index}__].answerId}"
-                   th:text="*{answerDTOList[__${stat.index}__].answer}" required/><br>
+<form method="post" th:action="@{/poll/submit-vote}" th:object="${pollForm}">
+    <b><span th:text="*{question.question}"/></b><br>
+    <input id="selectedQuestionId" name="selectedQuestionId" th:value="*{question.questionId}" type="hidden"/>
+    <span th:each="answer, stat : *{answerList}">
+            <input required th:field="*{selectedAnswerId}"
+                   th:text="*{answerList[__${stat.index}__].answer}"
+                   th:value="*{answerList[__${stat.index}__].answerId}" type="radio"/><br>
         </span>
     <button type="submit">Vote</button>
 </form>
-<h3 th:if="${errorMsg != null}" th:text="${errorMsg}" style="color:red"/>
+<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

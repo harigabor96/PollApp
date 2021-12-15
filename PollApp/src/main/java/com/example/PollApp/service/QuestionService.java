@@ -3,7 +3,7 @@ package com.example.PollApp.service;
 import com.example.PollApp.model.Question;
 import com.example.PollApp.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
-import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class QuestionService {
@@ -18,8 +18,8 @@ public class QuestionService {
        return questionRepository.findQuestionByQuestionId(questionId);
     }
 
-    public List<Question> findAllQuestions() {
-        return questionRepository.findAll();
+    public ArrayList<Question> findAllQuestions() {
+        return (ArrayList<Question>) questionRepository.findAll();
     }
 
     public Integer saveQuestion(Question question) {
