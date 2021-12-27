@@ -13,6 +13,9 @@ public interface VoteRepository extends JpaRepository<Vote, VoteId> {
     @Query("SELECT COUNT(v) FROM Vote v WHERE v.answerId=:answerId")
     Integer countVoteByAnswerId(@Param("answerId")Integer answerId);
 
+    @Query("SELECT COUNT(v) FROM Vote v WHERE v.questionId=:questionId")
+    Integer countVoteByQuestionId(@Param("question")Integer questionId);
+
     @Transactional
     void deleteAllByQuestionId(Integer questionId);
 

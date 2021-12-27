@@ -25,6 +25,10 @@ public class VoteService {
         return voteRepository.countVoteByAnswerId(answerId);
     }
 
+    public Integer countVotesByQuestionId(Integer questionId) {
+        return voteRepository.countVoteByQuestionId(questionId);
+    }
+
     public void deleteVotesByQuestionId (Integer questionId) {
         voteRepository.deleteAllByQuestionId(questionId);
     }

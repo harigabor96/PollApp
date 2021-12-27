@@ -15,14 +15,16 @@
         <tr>
             <td><b>Question</b></td>
             <td><b>Creator</b></td>
+            <td><b>Total Votes</b></td>
         </tr>
-        <tr th:each="question, stat : *{questionList}">
-            <td th:text="*{questionList[__${stat.index}__].question}"/>
-            <td th:text="*{questionList[__${stat.index}__].appUser.username}"/>
+        <tr th:each="question : *{questionMap}">
+            <td th:text="${question.key.question}"/>
+            <td th:text="${question.key.appUser.username}"/>
+            <td th:text="${question.value}"/>
             <td>
                 <button id="viewButton" name="selectedQuestionId"
                         th:text="View"
-                        th:value="*{questionList[__${stat.index}__].questionId}"
+                        th:value="${question.key.questionId}"
                         type="submit"/>
             </td>
         </tr>
