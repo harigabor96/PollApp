@@ -12,8 +12,10 @@ public class Question {
 
     private String question;
 
+    private Integer creatorId;
+
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="creatorId", referencedColumnName = "userId")
+    @JoinColumn(name ="creatorId", referencedColumnName = "userId", insertable = false, updatable = false)
     private AppUser appUser;
 
     public Question() {
@@ -26,6 +28,10 @@ public class Question {
     public String getQuestion() { return question; }
 
     public void setQuestion(String question) { this.question = question; }
+
+    public Integer getCreatorId() { return creatorId; }
+
+    public void setCreatorId(Integer creatorId) { this.creatorId = creatorId; }
 
     public AppUser getAppUser() { return appUser; }
 

@@ -30,7 +30,7 @@ CREATE TABLE dbo.Question
  (  
    QuestionID int identity(1,1) NOT NULL,
    Question nvarchar(MAX) NOT NULL CHECK (Len(RTrim([Question])) > 0),
-   CreatorID int,
+   CreatorID int NOT NULL,
 
    Primary Key (QuestionID),
    Foreign Key (CreatorID) REFERENCES AppUser(UserID)
@@ -74,12 +74,12 @@ VALUES
 GO
 
 /* Sample questions and answers */
-INSERT INTO dbo.Question(Question)
+INSERT INTO dbo.Question(Question, CreatorID)
 VALUES
-	('What is your name?'),
-	('What is your favorite colour?'),
-	('What is the capital of Assyria?'),
-	('What is the airspeed velocity of an unladen swallow?');
+	('What is your name?', 1),
+	('What is your favorite colour?', 1),
+	('What is the capital of Assyria?', 1),
+	('What is the airspeed velocity of an unladen swallow?', 1);
 GO
 
 INSERT INTO dbo.Answer(QuestionID, Answer)
