@@ -2,7 +2,6 @@ package com.example.PollApp.controller;
 
 import com.example.PollApp.model.*;
 import com.example.PollApp.service.AppUserService;
-import com.example.PollApp.service.UserRoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -14,17 +13,14 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     private final AppUserService appUserService;
-    private final UserRoleService userRoleService;
 
-    public LoginController(AppUserService appUserService, UserRoleService userRoleService) {
+    public LoginController(AppUserService appUserService) {
         this.appUserService = appUserService;
-        this.userRoleService = userRoleService;
     }
 
     @GetMapping()
     public String login(ModelMap model) {
         model.addAttribute("currentUser", new AppUser());
-        model.addAttribute("userRoleList", userRoleService.findAllUserRoles());
         return "login";
     }
 
@@ -66,6 +62,7 @@ public class LoginController {
         }
 
         appUserService.hashPassword(currentUser);
+        currentUser.setRoleId(2);
 
         appUserService.saveUser(currentUser);
         session.setAttribute("userId", currentUser.getUserId());

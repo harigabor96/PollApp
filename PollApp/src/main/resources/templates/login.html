@@ -39,14 +39,6 @@
             <td>
                 <button formaction="/login/register" type="submit">Register</button>
             </td>
-            <td>
-                <label>As</label>
-                <select th:field="*{roleId}">
-                    <option th:each="userRole : ${userRoleList}" th:text="${userRole.roleDescription}"
-                            th:value="${userRole.roleId}">
-                    </option>
-                </select>
-            </td>
         </tr>
     </table>
 </form>
