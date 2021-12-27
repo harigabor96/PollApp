@@ -9,15 +9,8 @@ CREATE TABLE dbo.UserRole
    RoleID int identity(1,1) NOT NULL,
    RoleDescription varchar(20) NOT NULL CHECK (Len(RTrim([RoleDescription])) > 0),
 
-   Primary Key (RoleID),
+   Primary Key (RoleID)
 );
-GO
-
-/*Define basic roles */
-INSERT INTO dbo.UserRole(RoleDescription)
-VALUES
-	('Administrator'),
-	('User');
 GO
 
 CREATE TABLE dbo.AppUser
@@ -37,8 +30,10 @@ CREATE TABLE dbo.Question
  (  
    QuestionID int identity(1,1) NOT NULL,
    Question nvarchar(MAX) NOT NULL CHECK (Len(RTrim([Question])) > 0),
+   CreatorID int,
 
-   Primary Key (QuestionID)
+   Primary Key (QuestionID),
+   Foreign Key (CreatorID) REFERENCES AppUser(UserID)
 );
 GO
 
@@ -62,8 +57,20 @@ CREATE TABLE dbo.Vote
    Primary Key (UserID, QuestionID),
    Foreign Key (UserID) REFERENCES AppUser(UserID),
    Foreign Key (AnswerID) REFERENCES Answer(AnswerID),
-   Foreign Key (QuestionID) REFERENCES Question(QuestionID),
+   Foreign Key (QuestionID) REFERENCES Question(QuestionID)
 );
+GO
+
+/*Define basic roles */
+INSERT INTO dbo.UserRole(RoleDescription)
+VALUES
+	('Administrator'),
+	('User');
+GO
+
+INSERT INTO dbo.AppUser(Username, Password, RoleID)
+VALUES
+	('admin', '092c55afc2ea47b2301ea8ffcd047d32b08c4b82774401854e6e5ecc5dfad195', 1);
 GO
 
 /* Sample questions and answers */
