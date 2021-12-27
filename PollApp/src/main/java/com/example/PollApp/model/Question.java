@@ -12,7 +12,9 @@ public class Question {
 
     private String question;
 
-    private Integer creatorId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="creatorId", referencedColumnName = "userId")
+    private AppUser appUser;
 
     public Question() {
     }
@@ -25,7 +27,7 @@ public class Question {
 
     public void setQuestion(String question) { this.question = question; }
 
-    public Integer getCreatorId() { return creatorId; }
+    public AppUser getAppUser() { return appUser; }
 
-    public void setCreatorId(Integer creatorId) { this.creatorId = creatorId; }
+    public void setAppUser(AppUser appUser) { this.appUser = appUser; }
 }

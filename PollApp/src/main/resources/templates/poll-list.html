@@ -12,13 +12,18 @@
 <h1>Select a poll</h1>
 <form method="get" th:action="@{/poll}" th:object="${pollListForm}">
     <table>
+        <tr>
+            <td><b>Question</b></td>
+            <td><b>Creator</b></td>
+        </tr>
         <tr th:each="question, stat : *{questionList}">
+            <td th:text="*{questionList[__${stat.index}__].question}" />
+            <td th:text="*{questionList[__${stat.index}__].appUser.username}" />
             <td>
-                <button id="selectedQuestionId" name="selectedQuestionId"
-                        th:text="*{questionList[__${stat.index}__].question}"
+                <button id="viewButton" name="selectedQuestionId"
+                        th:text="View"
                         th:value="*{questionList[__${stat.index}__].questionId}"
                         type="submit"/>
-                <br>
             </td>
         </tr>
     </table>

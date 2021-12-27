@@ -59,7 +59,7 @@ public class PollManagementController {
         if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 
         Question currentQuestion = pollCreationForm.getQuestion();
-        currentQuestion.setCreatorId(userId);
+        currentQuestion.getAppUser().setUserId(userId);
 
         ArrayList<Answer> currentAnswers = new ArrayList<>();
 
