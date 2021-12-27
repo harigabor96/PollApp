@@ -20,9 +20,12 @@ public class PollListController {
 
     @GetMapping()
     public String pollList(ModelMap model, HttpSession session) {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
+        Integer userId = (Integer) session.getAttribute("userId");
+        Integer roleId = (Integer) session.getAttribute("role");
 
-        model.addAttribute("userRole", session.getAttribute("role"));
+        if (userId == null) return "redirect:/login";
+
+        model.addAttribute("userRole", roleId);
         model.addAttribute("pollListForm", new PollListForm(questionService.findAllQuestions()));
         return "poll-list";
     }

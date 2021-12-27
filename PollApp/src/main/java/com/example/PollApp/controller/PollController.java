@@ -30,17 +30,18 @@ public class PollController {
     @GetMapping()
     public String poll(ModelMap model, PollListForm pollListForm, RedirectAttributes redirectAttributes
             ,HttpSession session){
-        Integer userId = (Integer)session.getAttribute("userId");
+        Integer userId = (Integer) session.getAttribute("userId");
+        Integer roleId = (Integer) session.getAttribute("role");
         Integer selectedQuestionId = pollListForm.getSelectedQuestionId();
 
         if (userId == null) return "redirect:/login";
-
-        if((Integer)session.getAttribute("role") == 1 || voteService.checkIfUserVoted(selectedQuestionId, userId) ) {
+        if(roleId == 1 || voteService.checkIfUserVoted(selectedQuestionId, userId) ) {
             redirectAttributes.addAttribute("selectedQuestionId", selectedQuestionId);
             return "redirect:/poll/results";
         }
 
-        model.addAttribute("userRole", session.getAttribute("role"));
+        model.addAttribute("userId", userId);
+        model.addAttribute("userRole", roleId);
         model.addAttribute("pollForm", new PollForm(
                 questionService.findQuestion(selectedQuestionId),
                 answerService.findAnswersByQuestionId(selectedQuestionId)));
@@ -49,12 +50,13 @@ public class PollController {
 
     @PostMapping("/submit-vote")
     public String submitVote(PollForm pollForm, RedirectAttributes redirectAttributes, HttpSession session) {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
-        if((Integer)session.getAttribute("role") == 1) return "redirect:/poll-list";
-
+        Integer userId = (Integer) session.getAttribute("userId");
+        Integer roleId = (Integer) session.getAttribute("role");
         Integer selectedQuestionId = pollForm.getSelectedQuestionId();
-        Integer userId = (Integer)session.getAttribute("userId");
         Integer answerId = pollForm.getSelectedAnswerId();
+
+        if (userId == null) return "redirect:/login";
+        if (roleId == 1) return "redirect:/poll-list";
 
         if(voteService.checkIfUserVoted(selectedQuestionId, userId)) {
             redirectAttributes.addAttribute("selectedQuestionId", selectedQuestionId);
@@ -74,14 +76,16 @@ public class PollController {
         Integer userRole = (Integer)session.getAttribute("role");
 
         if (userId == null) return "redirect:/login";
-        if ((userRole != 1) && !voteService.checkIfUserVoted(selectedQuestionId, userId)) return "redirect:/poll-list";
+        if ((userRole != 1) && !voteService.checkIfUserVoted(selectedQuestionId, userId))
+            return "redirect:/poll-list";
 
         LinkedHashMap<Answer, Integer> voteResultsMap = new LinkedHashMap<>();
         answerService.findAnswersByQuestionId(selectedQuestionId).forEach((ans) ->
             voteResultsMap.put(ans, voteService.countVotesByAnswerId(ans.getAnswerId()))
         );
 
-        model.addAttribute("userRole", session.getAttribute("role"));
+        model.addAttribute("userId", userId);
+        model.addAttribute("userRole", userRole);
         model.addAttribute("question", questionService.findQuestion(selectedQuestionId));
         model.addAttribute("voteResultsMap", voteResultsMap);
         return "results";

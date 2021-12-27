@@ -6,7 +6,7 @@
 </head>
 <body>
 <a href="/poll-list">View Polls</a>
-<a href="/poll-management/creation" th:if="${userRole == 1}">Create a Poll</a>
+<a href="/poll-management/creation">Create a Poll</a>
 <a href="/logout" style="float: right">Sign Out</a>
 <hr>
 <h1>Poll Results</h1>
@@ -21,7 +21,7 @@
         <td style="text-align: center" th:text="${result.value}"/>
     </tr>
 </table>
-<form th:if="${userRole == 1}">
+<form th:if="${userRole == 1 || userId == question.creatorId}">
     <button formaction="/poll-management/delete" formmethod="post"
             name="questionId" th:value="${question.questionId}">Delete
     </button>

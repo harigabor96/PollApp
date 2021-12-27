@@ -6,7 +6,7 @@
 </head>
 <body>
 <a href="/poll-list">View Polls</a>
-<a href="/poll-management/creation" th:if="${userRole == 1}">Create a Poll</a>
+<a href="/poll-management/creation">Create a Poll</a>
 <a href="/logout" style="float: right">Sign Out</a>
 <hr>
 <h1>Time to vote!</h1>
@@ -19,6 +19,11 @@
                    th:value="*{answerList[__${stat.index}__].answerId}" type="radio"/><br>
         </span>
     <button type="submit">Vote</button>
+</form>
+<form th:if="${userId == pollForm.question.creatorId}">
+    <button formaction="/poll-management/delete" formmethod="post"
+            name="questionId" th:value="${pollForm.question.questionId}">Delete
+    </button>
 </form>
 <h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>

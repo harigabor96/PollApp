@@ -11,7 +11,8 @@ public class HomeController {
 
     @GetMapping()
     public String home(HttpSession session) {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) return "redirect:/login";
         return "redirect:/poll-list";
     }
 }

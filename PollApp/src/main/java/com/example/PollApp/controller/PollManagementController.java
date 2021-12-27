@@ -29,16 +29,20 @@ public class PollManagementController {
 
     @GetMapping()
     public String pollManagement(HttpSession session) {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
-        if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
+        Integer userId = (Integer) session.getAttribute("userId");
+        Integer roleId = (Integer) session.getAttribute("role");
+
+        if (userId == null) return "redirect:/login";
+        if (roleId != 1) return "redirect:/poll-list";
 
         return "redirect:/poll-management/creation";
     }
 
     @GetMapping("/creation")
     public String creation(ModelMap model, HttpSession session) {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
-        if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if (userId == null) return "redirect:/login";
 
         ArrayList<Answer> answerList = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
@@ -55,8 +59,7 @@ public class PollManagementController {
                          HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId");
 
-        if ( userId == null) return "redirect:/login";
-        if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
+        if (userId == null) return "redirect:/login";
 
         Question currentQuestion = pollCreationForm.getQuestion();
         currentQuestion.setCreatorId(userId);
@@ -81,8 +84,12 @@ public class PollManagementController {
 
     @PostMapping("/delete")
     public String delete(@RequestParam("questionId") Integer selectedQuestionId, HttpSession session ) {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
-        if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
+        Integer userId = (Integer) session.getAttribute("userId");
+        Integer roleId = (Integer) session.getAttribute("role");
+        Question currentQuestion = questionService.findQuestion(selectedQuestionId);
+
+        if (userId == null) return "redirect:/login";
+        if (roleId != 1 && currentQuestion.getCreatorId() != (userId)) return "redirect:/poll-list";
 
         voteService.deleteVotesByQuestionId(selectedQuestionId);
         answerService.deleteVotesByQuestionId(selectedQuestionId);
