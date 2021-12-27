@@ -12,6 +12,8 @@ public class Question {
 
     private String question;
 
+    private Integer creatorId;
+
     public Question() {
     }
 
@@ -22,4 +24,8 @@ public class Question {
     public String getQuestion() { return question; }
 
     public void setQuestion(String question) { this.question = question; }
+
+    public Integer getCreatorId() { return creatorId; }
+
+    public void setCreatorId(Integer creatorId) { this.creatorId = creatorId; }
 }

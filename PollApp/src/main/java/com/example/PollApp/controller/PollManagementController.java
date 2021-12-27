@@ -53,10 +53,14 @@ public class PollManagementController {
     @PostMapping("/create")
     public String create(PollCreationForm pollCreationForm, RedirectAttributes redirectAttributes,
                          HttpSession session) {
-        if (session.getAttribute("userId") == null) return "redirect:/login";
+        Integer userId = (Integer) session.getAttribute("userId");
+
+        if ( userId == null) return "redirect:/login";
         if ((Integer)session.getAttribute("role") != 1) return "redirect:/poll-list";
 
         Question currentQuestion = pollCreationForm.getQuestion();
+        currentQuestion.setCreatorId(userId);
+
         ArrayList<Answer> currentAnswers = new ArrayList<>();
 
         pollCreationForm.getAnswerList().forEach((ans) -> {
