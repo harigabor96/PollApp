@@ -31,15 +31,8 @@ public class PollListController {
 
         if (userId == null) return "redirect:/login";
 
-        ArrayList<Question> allQuestions = questionService.findAllQuestions();
-
-        LinkedHashMap<Question, Integer> questionMap = new LinkedHashMap<>();
-        allQuestions.forEach((que) ->
-                questionMap.put(que, voteService.countVotesByQuestionId(que.getQuestionId()))
-        );
-
         model.addAttribute("userRole", roleId);
-        model.addAttribute("pollListForm", new PollListForm(questionMap));
+        model.addAttribute("pollListForm", new PollListForm(questionService.getPollList()));
         return "poll-list";
     }
 }

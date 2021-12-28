@@ -1,21 +1,22 @@
 package com.example.PollApp.form;
 
+import com.example.PollApp.DTO.PollListDTO;
 import com.example.PollApp.model.Question;
-
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
 public class PollListForm {
 
-    private LinkedHashMap<Question, Integer> questionMap;
+    private ArrayList<PollListDTO> pollList;
     private Integer selectedQuestionId;
 
-    public PollListForm(LinkedHashMap<Question, Integer> questionMap) {
-        this.questionMap = questionMap;
+    public PollListForm(ArrayList<PollListDTO> pollListDTO) {
+        this.pollList = pollListDTO;
     }
 
-    public LinkedHashMap<Question, Integer> getQuestionMap() { return questionMap; }
+    public ArrayList<PollListDTO> getPollList() { return pollList; }
 
-    public void setQuestionMap(LinkedHashMap<Question, Integer> questionMap) { this.questionMap = questionMap; }
+    public void setPollList(ArrayList<PollListDTO> pollList) { this.pollList = pollList; }
 
     public Integer getSelectedQuestionId() { return selectedQuestionId; }
 

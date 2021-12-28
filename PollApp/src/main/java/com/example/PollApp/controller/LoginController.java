@@ -62,6 +62,7 @@ public class LoginController {
         }
 
         appUserService.hashPassword(currentUser);
+
         currentUser.setRoleId(2);
 
         appUserService.saveUser(currentUser);

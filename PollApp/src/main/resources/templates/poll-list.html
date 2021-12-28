@@ -17,14 +17,14 @@
             <td><b>Creator</b></td>
             <td><b>Total Votes</b></td>
         </tr>
-        <tr th:each="question : *{questionMap}">
-            <td th:text="${question.key.question}"/>
-            <td th:text="${question.key.appUser.username}"/>
-            <td th:text="${question.value}"/>
+        <tr th:each="poll: *{pollList}">
+            <td th:text="${poll.question}"/>
+            <td th:text="${poll.creator}"/>
+            <td th:text="${poll.voteCount}"/>
             <td>
                 <button id="viewButton" name="selectedQuestionId"
                         th:text="View"
-                        th:value="${question.key.questionId}"
+                        th:value="${poll.questionId}"
                         type="submit"/>
             </td>
         </tr>

@@ -1,6 +1,7 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Question")
@@ -13,10 +14,6 @@ public class Question {
     private String question;
 
     private Integer creatorId;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="creatorId", referencedColumnName = "userId", insertable = false, updatable = false)
-    private AppUser appUser;
 
     public Question() {
     }
@@ -32,8 +29,4 @@ public class Question {
     public Integer getCreatorId() { return creatorId; }
 
     public void setCreatorId(Integer creatorId) { this.creatorId = creatorId; }
-
-    public AppUser getAppUser() { return appUser; }
-
-    public void setAppUser(AppUser appUser) { this.appUser = appUser; }
 }

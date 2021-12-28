@@ -1,5 +1,6 @@
 package com.example.PollApp.service;
 
+import com.example.PollApp.DTO.PollListDTO;
 import com.example.PollApp.model.Question;
 import com.example.PollApp.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class QuestionService {
        return questionRepository.findQuestionByQuestionId(questionId);
     }
 
-    public ArrayList<Question> findAllQuestions() {
-        return (ArrayList<Question>) questionRepository.findAll();
+    public ArrayList<PollListDTO> getPollList() {
+        return (ArrayList<PollListDTO>) questionRepository.getPollList();
     }
 
     public Integer saveQuestion(Question question) {
