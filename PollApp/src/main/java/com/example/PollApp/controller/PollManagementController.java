@@ -86,6 +86,7 @@ public class PollManagementController {
     public String delete(@RequestParam("questionId") Integer selectedQuestionId, HttpSession session ) {
         Integer userId = (Integer) session.getAttribute("userId");
         Integer roleId = (Integer) session.getAttribute("role");
+
         Question currentQuestion = questionService.findQuestion(selectedQuestionId);
 
         if (userId == null) return "redirect:/login";

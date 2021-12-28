@@ -1,9 +1,7 @@
 package com.example.PollApp.form;
 
 import com.example.PollApp.DTO.PollListDTO;
-import com.example.PollApp.model.Question;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 public class PollListForm {
 

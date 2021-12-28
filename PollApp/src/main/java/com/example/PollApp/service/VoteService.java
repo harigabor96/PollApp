@@ -21,14 +21,6 @@ public class VoteService {
         voteRepository.save(vote);
     }
 
-    public Integer countVotesByAnswerId(Integer answerId) {
-        return voteRepository.countVoteByAnswerId(answerId);
-    }
-
-    public Integer countVotesByQuestionId(Integer questionId) {
-        return voteRepository.countVoteByQuestionId(questionId);
-    }
-
     public void deleteVotesByQuestionId (Integer questionId) {
         voteRepository.deleteAllByQuestionId(questionId);
     }

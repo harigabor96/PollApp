@@ -5,7 +5,6 @@ import com.example.PollApp.DTO.ResultsDTO;
 import com.example.PollApp.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
 import javax.transaction.Transactional;
 import java.util.List;
 

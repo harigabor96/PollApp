@@ -33,7 +33,7 @@ public class PollController {
         Integer selectedQuestionId = pollListForm.getSelectedQuestionId();
 
         if (userId == null) return "redirect:/login";
-        if(roleId == 1 || voteService.checkIfUserVoted(selectedQuestionId, userId) ) {
+        if (roleId == 1 || voteService.checkIfUserVoted(selectedQuestionId, userId) ) {
             redirectAttributes.addAttribute("selectedQuestionId", selectedQuestionId);
             return "redirect:/poll/results";
         }

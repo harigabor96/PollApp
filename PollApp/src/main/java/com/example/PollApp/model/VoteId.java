@@ -18,10 +18,10 @@ public class VoteId implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        // If the object is compared with itself then return true (geekforgeeks.org)
+        // If the object is compared with itself then return true
         if (o == this) return true;
 
-        // Check if o is an instance of VoteID or "not null instanceof [type]" also returns false (geekforgeeks.org)
+        // Check if o is an instance of VoteID or "not null instanceof [type]" also returns false
         if (!(o instanceof VoteId)) return false;
 
         // typecast o to VoteID so that we can compare data members

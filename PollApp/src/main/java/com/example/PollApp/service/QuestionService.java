@@ -5,8 +5,6 @@ import com.example.PollApp.DTO.ResultsDTO;
 import com.example.PollApp.model.Question;
 import com.example.PollApp.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 
 @Service

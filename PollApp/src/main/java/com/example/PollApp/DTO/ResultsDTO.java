@@ -1,7 +1,6 @@
 package com.example.PollApp.DTO;
 
 import org.springframework.beans.factory.annotation.Value;
-
 import java.util.List;
 
 public interface ResultsDTO {
