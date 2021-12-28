@@ -1,6 +1,7 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Answer")
@@ -13,6 +14,10 @@ public class Answer {
     private Integer questionId;
 
     private String answer;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "answerId")
+    private List<Vote> votes;
 
     public Answer() {
     }
@@ -28,4 +33,8 @@ public class Answer {
     public String getAnswer() { return answer; }
 
     public void setAnswer(String answer) { this.answer = answer; }
+
+    public List<Vote> getVotes() { return votes; }
+
+    public void setVotes(List<Vote> votes) { this.votes = votes; }
 }

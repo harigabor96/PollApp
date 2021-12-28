@@ -10,20 +10,20 @@
 <a href="/logout" style="float: right">Sign Out</a>
 <hr>
 <h1>Poll Results</h1>
-<b><span th:text="${question.question}"></span></b>
+<b><span th:text="${results.question}"></span></b>
 <table>
     <tr>
         <td><b><label>Question</label></b></td>
         <td><b><label>Votes</label></b></td>
     </tr>
-    <tr th:each="result : ${voteResultsMap}">
-        <td th:text="${result.key.answer}"/>
-        <td style="text-align: center" th:text="${result.value}"/>
+    <tr th:each="result : ${results.answers}">
+        <td th:text="${result.answer}"/>
+        <td style="text-align: center" th:text="${result.voteCount}"/>
     </tr>
 </table>
-<form th:if="${userRole == 1 || userId == question.creatorId}">
+<form th:if="${userRole == 1 || userId == results.creatorId}">
     <button formaction="/poll-management/delete" formmethod="post"
-            name="questionId" th:value="${question.questionId}">Delete
+            name="questionId" th:value="${results.questionId}">Delete
     </button>
 </form>
 <h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>

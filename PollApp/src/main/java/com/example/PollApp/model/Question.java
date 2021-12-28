@@ -15,6 +15,10 @@ public class Question {
 
     private Integer creatorId;
 
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name= "questionId")
+    private List<Answer> answers;
+
     public Question() {
     }
 
@@ -29,4 +33,8 @@ public class Question {
     public Integer getCreatorId() { return creatorId; }
 
     public void setCreatorId(Integer creatorId) { this.creatorId = creatorId; }
+
+    public List<Answer> getAnswers() { return answers; }
+
+    public void setAnswers(List<Answer> answers) { this.answers = answers; }
 }

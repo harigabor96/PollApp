@@ -1,9 +1,12 @@
 package com.example.PollApp.service;
 
 import com.example.PollApp.DTO.PollListDTO;
+import com.example.PollApp.DTO.ResultsDTO;
 import com.example.PollApp.model.Question;
 import com.example.PollApp.repository.QuestionRepository;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 
 @Service
@@ -17,6 +20,10 @@ public class QuestionService {
 
     public Question findQuestion(Integer questionId) {
        return questionRepository.findQuestionByQuestionId(questionId);
+    }
+
+    public ResultsDTO getResults(Integer questionId) {
+        return questionRepository.getResults(questionId);
     }
 
     public ArrayList<PollListDTO> getPollList() {

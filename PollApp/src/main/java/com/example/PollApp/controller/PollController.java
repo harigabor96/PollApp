@@ -2,7 +2,6 @@ package com.example.PollApp.controller;
 
 import com.example.PollApp.form.PollForm;
 import com.example.PollApp.form.PollListForm;
-import com.example.PollApp.model.Answer;
 import com.example.PollApp.service.AnswerService;
 import com.example.PollApp.service.QuestionService;
 import com.example.PollApp.service.VoteService;
@@ -11,7 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
-import java.util.*;
 
 @Controller
 @RequestMapping("/poll")
@@ -79,15 +77,9 @@ public class PollController {
         if ((userRole != 1) && !voteService.checkIfUserVoted(selectedQuestionId, userId))
             return "redirect:/poll-list";
 
-        LinkedHashMap<Answer, Integer> voteResultsMap = new LinkedHashMap<>();
-        answerService.findAnswersByQuestionId(selectedQuestionId).forEach((ans) ->
-            voteResultsMap.put(ans, voteService.countVotesByAnswerId(ans.getAnswerId()))
-        );
-
         model.addAttribute("userId", userId);
         model.addAttribute("userRole", userRole);
-        model.addAttribute("question", questionService.findQuestion(selectedQuestionId));
-        model.addAttribute("voteResultsMap", voteResultsMap);
+        model.addAttribute("results", questionService.getResults(selectedQuestionId));
         return "results";
     }
 }
