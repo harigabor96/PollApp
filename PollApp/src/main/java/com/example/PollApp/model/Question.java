@@ -15,8 +15,7 @@ public class Question {
 
     private Integer creatorId;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name= "questionId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "questionId", orphanRemoval = true)
     private List<Answer> answers;
 
     public Question() {

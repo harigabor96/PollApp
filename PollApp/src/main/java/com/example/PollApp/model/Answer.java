@@ -15,9 +15,12 @@ public class Answer {
 
     private String answer;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "answerId")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "answerId", orphanRemoval = true)
     private List<Vote> votes;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="questionId", insertable = false, updatable = false)
+    private Question question;
 
     public Answer() {
     }

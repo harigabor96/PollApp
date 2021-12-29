@@ -5,15 +5,11 @@ import com.example.PollApp.DTO.ResultsDTO;
 import com.example.PollApp.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import javax.transaction.Transactional;
 import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     Question findQuestionByQuestionId(Integer questionId);
-
-    @Transactional
-    void deleteByQuestionId(Integer questionId);
 
     @Query("SELECT q.questionId AS questionId , q.question AS question, u.username AS creator, COUNT(v) AS voteCount " +
            "FROM Question q " +

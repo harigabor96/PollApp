@@ -7,8 +7,5 @@ import javax.transaction.Transactional;
 
 public interface VoteRepository extends JpaRepository<Vote, VoteId> {
 
-    @Transactional
-    void deleteAllByQuestionId(Integer questionId);
-
     Vote findByQuestionIdAndUserId(Integer questionId, Integer userId);
 }

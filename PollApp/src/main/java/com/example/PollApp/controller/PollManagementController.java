@@ -92,9 +92,7 @@ public class PollManagementController {
         if (userId == null) return "redirect:/login";
         if (roleId != 1 && !currentQuestion.getCreatorId().equals(userId)) return "redirect:/poll-list";
 
-        voteService.deleteVotesByQuestionId(selectedQuestionId);
-        answerService.deleteVotesByQuestionId(selectedQuestionId);
-        questionService.deleteQuestionById(selectedQuestionId);
+        questionService.deleteQuestion(currentQuestion);
         return "redirect:/poll-list";
     }
 }

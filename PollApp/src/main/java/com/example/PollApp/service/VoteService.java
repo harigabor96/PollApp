@@ -13,16 +13,8 @@ public class VoteService {
         this.voteRepository = voteRepository;
     }
 
-    public void saveVote(Integer userId, Integer questionId ,Integer answerId) {
-        Vote vote = new Vote();
-        vote.setQuestionId(questionId);
-        vote.setUserId(userId);
-        vote.setAnswerId(answerId);
+    public void saveVote(Vote vote) {
         voteRepository.save(vote);
-    }
-
-    public void deleteVotesByQuestionId (Integer questionId) {
-        voteRepository.deleteAllByQuestionId(questionId);
     }
 
     public boolean checkIfUserVoted (Integer questionId, Integer userId){

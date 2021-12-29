@@ -21,8 +21,4 @@ public class AnswerService {
     public void saveAnswers(ArrayList<Answer> answers) {
         answerRepository.saveAll(answers);
     }
-
-    public void deleteVotesByQuestionId (Integer questionId) {
-        answerRepository.deleteAllByQuestionId(questionId);
-    }
 }

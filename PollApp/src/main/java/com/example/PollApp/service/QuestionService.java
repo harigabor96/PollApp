@@ -32,7 +32,7 @@ public class QuestionService {
         return questionRepository.save(question).getQuestionId();
     }
 
-    public void deleteQuestionById(Integer questionId) {
-        questionRepository.deleteByQuestionId(questionId);
+    public void deleteQuestion(Question question) {
+        questionRepository.delete(question);
     }
 }

@@ -49,7 +49,7 @@ public class LoginController {
     @PostMapping("/register")
     public String register(AppUser currentUser, RedirectAttributes redirectAttributes, HttpSession session) {
 
-        if (appUserService.checkIfUserExists(currentUser)) {
+        if (appUserService.checkIfUserNameExists(currentUser)) {
             redirectAttributes.addFlashAttribute("errorMsg",
                     "User already exists!");
             return "redirect:/login";

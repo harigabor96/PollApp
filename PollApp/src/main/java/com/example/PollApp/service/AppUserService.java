@@ -37,12 +37,14 @@ public class AppUserService {
         return false;
     }
 
-    public boolean checkIfUserExists (AppUser user) {
-        return (appUserRepository.findAppUserByUsername(user.getUsername()) != null);
+    public boolean checkIfUserNameExists (AppUser originalUser) {
+        return (appUserRepository.findAppUserByUsername(originalUser.getUsername()) != null);
     }
 
-    public AppUser findUser(AppUser user) {
-        return appUserRepository.findAppUserByUsername(user.getUsername());
+    public AppUser findUser(AppUser originalUser) {
+        AppUser queriedUser = appUserRepository.findAppUserByUsername(originalUser.getUsername());
+        if (!originalUser.getUsername().equals(queriedUser.getUsername())) return null;
+        return queriedUser;
     }
 
     public void saveUser (AppUser user) {

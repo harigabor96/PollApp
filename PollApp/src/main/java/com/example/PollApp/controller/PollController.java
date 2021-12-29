@@ -2,6 +2,7 @@ package com.example.PollApp.controller;
 
 import com.example.PollApp.form.PollForm;
 import com.example.PollApp.form.PollListForm;
+import com.example.PollApp.model.Vote;
 import com.example.PollApp.service.AnswerService;
 import com.example.PollApp.service.QuestionService;
 import com.example.PollApp.service.VoteService;
@@ -62,7 +63,7 @@ public class PollController {
             return "redirect:/poll/results";
         }
 
-        voteService.saveVote(userId, selectedQuestionId, answerId);
+        voteService.saveVote(new Vote(userId, selectedQuestionId, answerId));
 
         redirectAttributes.addAttribute("selectedQuestionId", selectedQuestionId);
         return "redirect:/poll/results";
