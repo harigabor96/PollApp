@@ -4,7 +4,6 @@ import com.example.PollApp.form.PollCreationForm;
 import com.example.PollApp.model.*;
 import com.example.PollApp.service.AnswerService;
 import com.example.PollApp.service.QuestionService;
-import com.example.PollApp.service.VoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -18,13 +17,10 @@ public class PollManagementController {
 
     private final QuestionService questionService;
     private final AnswerService answerService;
-    private final VoteService voteService;
 
-    public PollManagementController(QuestionService questionService, AnswerService answerService,
-                                    VoteService voteService) {
+    public PollManagementController(QuestionService questionService, AnswerService answerService) {
         this.questionService = questionService;
         this.answerService = answerService;
-        this.voteService = voteService;
     }
 
     @GetMapping()
