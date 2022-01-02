@@ -7,6 +7,7 @@ html {
     background-color: rgb(18, 35, 51);
     color: rgb(213, 225, 239);
     font-family: main;
+    letter-spacing: 1px;
 }
 
 body {
@@ -16,6 +17,11 @@ body {
 header {
     text-align: center;
     font-size: xx-large;
+    /* 48, 171, 106 */
+    color: rgb(40, 143, 88);
+}
+
+.title {
     color: rgb(48, 171, 106);
 }
 
@@ -24,15 +30,15 @@ header {
     font-size: large;
     border-style: none;
     width: 120px;
-    color: rgb(213, 225, 239);
-    background-color: rgb(48, 171, 106);
+    color: rgb(255, 255, 255);
+    background-color: rgb(40, 143, 88);
     margin: 15px 0px 15px 0px;
     padding: 15px;
 }
 
 .button:hover {
-    background-color: rgb(213, 225, 239);
-    color: rgb(48, 171, 106);
+    background-color: rgb(255, 255, 255);
+    color: rgb(40, 143, 88);
 }
 
 .text-input {
