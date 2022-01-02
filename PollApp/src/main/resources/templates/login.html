@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link href="../static/css/main.css" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 <body>
 <header>
     <h1>PollApp</h1>
 </header>
 <section class="sign-in" id="sign-in">
-    <div class="sign-in-area">
-        <h1>Sign in</h1>
-        <form method="post" th:object="${currentUser}">
-            Username<br>
-            <input class="text-input" required th:field="*{username}" type="text"/><br>
-            Password<br>
-            <input class="text-input" required th:field="*{password}" type="password"/><br>
-            <button class="button" formaction="/login/sign-in" type="submit">Sign In</button>
-            <br>
-            OR <br>
-            <button class="button" formaction="/login/register" type="submit">Register</button>
-        </form>
+    <div class="sign-in-grid-container">
+        <div class="grid-item-sign-in">
+            <form method="post" th:object="${currentUser}">
+                Username<br>
+                <input class="text-input" required th:field="*{username}" type="text"/><br>
+                Password<br>
+                <input class="text-input" required th:field="*{password}" type="password"/><br>
+                <button class="button" formaction="/login/sign-in" type="submit">Sign In</button>
+                <br>
+                OR <br>
+                <button class="button" formaction="/login/register" type="submit">Register</button>
+            </form>
+        </div>
     </div>
 </section>
 <h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
