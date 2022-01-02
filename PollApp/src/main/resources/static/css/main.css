@@ -1,3 +1,4 @@
+/* Global Scope BEGIN */
 @font-face {
     font-family: main;
     src: url(../fonts/VarelaRound-Regular.ttf);
@@ -24,19 +25,6 @@ nav {
     background-color: rgb(40, 143, 88);
     width: 100%;
     padding: 10px 0px 10px 0px;
-}
-
-.title {
-    color: rgb(48, 171, 106);
-    letter-spacing: 16px;
-    font-size: 70px;
-    margin: 30px 0px 30px 0px;
-}
-
-@media only screen and (min-width: 1000px) {
-    .title {
-        font-size: 100px;
-    }
 }
 
 .nav-grid-container {
@@ -106,6 +94,15 @@ nav {
     background-color: rgb(48, 66, 87);
     margin: 10px 0px 25px 0px;
 }
+/* Global Scope End */
+
+/* Login Page specific BEGIN */
+.title {
+    color: rgb(48, 171, 106);
+    letter-spacing: 16px;
+    font-size: 70px;
+    margin: 30px 0px 30px 0px;
+}
 
 .sign-in-grid-container {
     display: grid;
@@ -133,11 +130,15 @@ nav {
     margin: auto;
 }
 
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1140px) {
     .sign-in-grid-container {
         display: grid;
-        grid-template-columns: 10% 350px auto;
+        grid-template-columns: auto 350px auto;
         grid-template-areas: "a b c";
+    }
+
+    .title {
+        font-size: 100px;
     }
 
     .grid-item-sign-in {
@@ -149,4 +150,4 @@ nav {
         display: grid;
     }
 }
-
+/* Login specific END */
