@@ -125,16 +125,11 @@ nav {
     justify-self: center;
 }
 
-.grid-item-logo img {
-    max-width: 75%;
-    margin: auto;
-}
-
-@media only screen and (min-width: 1140px) {
+@media only screen and (min-width: 1000px) {
     .sign-in-grid-container {
         display: grid;
-        grid-template-columns: auto 350px auto;
-        grid-template-areas: "a b c";
+        grid-template-columns: auto 350px auto 500px auto;
+        grid-template-areas: "f1 input f2 logo f3";
     }
 
     .title {
@@ -142,12 +137,16 @@ nav {
     }
 
     .grid-item-sign-in {
-        grid-area: b;
+        grid-area: input;
     }
 
     .grid-item-logo {
-        grid-area: c;
+        grid-area: logo;
         display: grid;
+    }
+
+    .grid-item-logo img {
+        width: 500px;
     }
 }
 /* Login specific END */
