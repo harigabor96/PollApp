@@ -17,12 +17,66 @@ body {
 header {
     text-align: center;
     font-size: xx-large;
-    /* 48, 171, 106 */
     color: rgb(40, 143, 88);
+}
+
+nav {
+    background-color: rgb(40, 143, 88);
+    width: 100%;
+    padding: 10px 0px 10px 0px;
 }
 
 .title {
     color: rgb(48, 171, 106);
+    letter-spacing: 16px;
+    font-size: 70px;
+    margin: 30px 0px 30px 0px;
+}
+
+@media only screen and (min-width: 1000px) {
+    .title {
+        font-size: 100px;
+    }
+}
+
+.nav-grid-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    margin: auto;
+    grid-gap: 15px;
+}
+
+.grid-item-nav-title {
+    font-size: xx-large;
+    font-weight: bold;
+    color: rgb(18, 35, 51);
+}
+
+.grid-item-nav-link {
+    color: rgb(255, 255, 255);
+    font-size: x-large;
+    text-decoration: none;
+}
+
+.grid-item-sign-out-link {
+    color: rgb(255, 255, 255);
+    margin-top: 20px ;
+    font-size: large;
+    text-decoration: none;
+}
+
+@media only screen and (min-width: 1000px) {
+    .nav-grid-container {
+        display: grid;
+        grid-template-columns: 250px 200px 250px 1fr 200px;
+        grid-template-areas: "a b c d e";
+    }
+
+    .grid-item-sign-out-link {
+        margin-top: 0px;
+        grid-area: e;
+    }
 }
 
 .button {
@@ -55,8 +109,6 @@ header {
 
 .sign-in-grid-container {
     display: grid;
-    width: 75%;
-    margin: auto;
 }
 
 .grid-item-sign-in {
@@ -70,9 +122,31 @@ header {
     text-align: center;
 }
 
+.grid-item-logo {
+    display: none;
+    align-self: center;
+    justify-self: center;
+}
+
+.grid-item-logo img {
+    max-width: 75%;
+    margin: auto;
+}
+
 @media only screen and (min-width: 1000px) {
+    .sign-in-grid-container {
+        display: grid;
+        grid-template-columns: 10% 350px auto;
+        grid-template-areas: "a b c";
+    }
+
     .grid-item-sign-in {
-        justify-self: start;
+        grid-area: b;
+    }
+
+    .grid-item-logo {
+        grid-area: c;
+        display: grid;
     }
 }
 

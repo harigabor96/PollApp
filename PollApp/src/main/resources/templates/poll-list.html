@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Poll List</title>
+    <link href="../static/css/main.css" rel="stylesheet">
 </head>
 <body>
-<a href="/poll-list">View Polls</a>
-<a href="/poll-management/creation">Create a Poll</a>
-<a href="/logout" style="float: right">Sign Out</a>
-<hr>
+<nav>
+    <div class="nav-grid-container">
+        <span class="grid-item-nav-title">PollApp</span>
+        <a class="grid-item-nav-link" href="/poll-list">View Polls</a>
+        <a class="grid-item-nav-link" href="/poll-management/creation">Create a Poll</a>
+        <a class="grid-item-sign-out-link" href="/logout" style="float: right">Sign Out</a>
+    </div>
+</nav>
 <h1>Select a poll</h1>
 <form method="get" th:action="@{/poll}" th:object="${pollListForm}">
     <table>
