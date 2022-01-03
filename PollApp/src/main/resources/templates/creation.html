@@ -19,12 +19,14 @@
     <div class="poll-creation-container">
         <form method="post" th:action="@{/poll-management/create}" th:object="${pollCreationForm}">
             Question<br>
-            <input class="question-text-input" required th:field="*{question.question}" type="text"/><br>
+            <input class="question-text-input" required th:field="*{question.question}" type="text"
+                   autocomplete="off"/><br>
             Answers<br>
             <button class="answer-button" onclick="showAnswerInput()" type="button">+</button>
             <button class="answer-button" onclick="hideClearAnswerInput()" type="button">-</button><br>
             <span hidden th:each="answer, stat : *{answerList}" th:id="${'answerSpan' + stat.index}">
-                <input class="answer-text-input" th:field="*{answerList[__${stat.index}__].answer}"/><br>
+                <input class="answer-text-input" th:field="*{answerList[__${stat.index}__].answer}"
+                       autocomplete="off"/><br>
             </span>
             <br>
 

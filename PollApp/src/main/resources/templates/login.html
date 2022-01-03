@@ -14,7 +14,7 @@
         <div class="grid-item-sign-in">
             <form method="post" th:object="${currentUser}">
                 Username<br>
-                <input class="login-text-input" required th:field="*{username}" type="text"/><br>
+                <input class="login-text-input" required th:field="*{username}" type="text" autocomplete="off"/><br>
                 Password<br>
                 <input class="login-text-input" required th:field="*{password}" type="password"/><br>
                 <button class="login-button" formaction="/login/sign-in" type="submit">Sign In</button>
