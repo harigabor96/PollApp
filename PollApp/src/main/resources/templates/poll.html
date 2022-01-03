@@ -21,16 +21,19 @@
             <span th:text="*{question.question}"/><br>
             <hr class="poll-hr">
             <input id="selectedQuestionId" name="selectedQuestionId" th:value="*{question.questionId}" type="hidden"/>
-            <span th:each="answer, stat : *{answerList}">
-                    <input class="poll-radio" required th:field="*{selectedAnswerId}"
-                           th:text="*{answerList[__${stat.index}__].answer}"
-                           th:value="*{answerList[__${stat.index}__].answerId}" type="radio"/><br>
-                </span>
+            <div th:each="answer, stat : *{answerList}">
+                <input class="poll-radio" required th:field="*{selectedAnswerId}"
+                       th:value="*{answerList[__${stat.index}__].answerId}" type="radio"/>
+                <label class="poll-radio-label" th:for="${#ids.prev('selectedAnswerId')}">
+                    <div class="poll-radio-display" th:text="*{answerList[__${stat.index}__].answer}"/>
+                </label>
+            </div>
             <button class="vote-button" type="submit">Vote</button>
         </form>
         <form th:if="${userId == pollForm.question.creatorId}">
             <button class="poll-delete-button" formaction="/poll-management/delete" formmethod="post"
-                    name="questionId" th:value="${pollForm.question.questionId}">Delete
+                    name="questionId" th:value="${pollForm.question.questionId}">
+                Delete Poll
             </button>
         </form>
     </div>
