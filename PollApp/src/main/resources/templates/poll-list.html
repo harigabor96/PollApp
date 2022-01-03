@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Poll List</title>
-    <link href="../static/css/main.css" rel="stylesheet">
+    <link th:href="@{./css/main.css}" rel="stylesheet">
 </head>
 <body>
 <nav>
@@ -14,27 +14,29 @@
         <a class="grid-item-sign-out-link" href="/logout" style="float: right">Sign Out</a>
     </div>
 </nav>
-<h1>Select a poll</h1>
-<form method="get" th:action="@{/poll}" th:object="${pollListForm}">
-    <table>
-        <tr>
-            <td><b>Question</b></td>
-            <td><b>Creator</b></td>
-            <td><b>Total Votes</b></td>
-        </tr>
-        <tr th:each="poll: *{pollList}">
-            <td th:text="${poll.question}"/>
-            <td th:text="${poll.creator}"/>
-            <td th:text="${poll.voteCount}"/>
-            <td>
-                <button id="viewButton" name="selectedQuestionId"
-                        th:text="View"
-                        th:value="${poll.questionId}"
-                        type="submit"/>
-            </td>
-        </tr>
-    </table>
-</form>
+<section class="poll-list">
+    <h1 class="poll-list-title">Available Polls</h1>
+    <form method="get" th:action="@{/poll}" th:object="${pollListForm}">
+        <table class="poll-list-table">
+            <tr class="poll-list-header">
+                <td><b>Question</b></td>
+                <td><b>Creator</b></td>
+                <td><b>Votes</b></td>
+            </tr>
+            <tr th:each="poll: *{pollList}">
+                <td class="td-question" th:text="${poll.question}"/>
+                <td class="td-creator" th:text="${poll.creator}"/>
+                <td class="td-votes" th:text="${poll.voteCount}"/>
+                <td>
+                    <button class="view-button" id="viewButton" name="selectedQuestionId"
+                            th:text="View"
+                            th:value="${poll.questionId}"
+                            type="submit"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+</section>
 <h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

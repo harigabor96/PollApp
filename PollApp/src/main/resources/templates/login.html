@@ -14,13 +14,13 @@
         <div class="grid-item-sign-in">
             <form method="post" th:object="${currentUser}">
                 Username<br>
-                <input class="text-input" required th:field="*{username}" type="text"/><br>
+                <input class="login-text-input" required th:field="*{username}" type="text"/><br>
                 Password<br>
-                <input class="text-input" required th:field="*{password}" type="password"/><br>
-                <button class="button" formaction="/login/sign-in" type="submit">Sign In</button>
+                <input class="login-text-input" required th:field="*{password}" type="password"/><br>
+                <button class="login-button" formaction="/login/sign-in" type="submit">Sign In</button>
                 <br>
                 OR <br>
-                <button class="button" formaction="/login/register" type="submit">Register</button>
+                <button class="login-button" formaction="/login/register" type="submit">Register</button>
             </form>
         </div>
         <div class="grid-item-logo">
