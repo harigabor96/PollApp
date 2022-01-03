@@ -200,13 +200,13 @@ nav {
 }
 
 .view-button {
-    border-radius: 7px;
+    border-radius: 10px;
     font-size: large;
     border-style: none;
     color: rgb(255, 255, 255);
     background-color: rgb(40, 143, 88);
     padding: 10px 25px 10px 25px;
-    margin-bottom: 10px;
+    margin: 0 5px 10px 5px;
 }
 
 .view-button:hover {
