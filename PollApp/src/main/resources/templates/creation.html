@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Poll Creation</title>
+    <link th:href="@{../css/main.css}" rel="stylesheet">
 </head>
 <body>
-<a href="/poll-list">View Polls</a>
-<a href="/poll-management/creation">Create a Poll</a>
-<a href="/logout" style="float: right">Sign Out</a>
-<hr>
-<h1>Create a Poll</h1>
-<form method="post" th:action="@{/poll-management/create}" th:object="${pollCreationForm}">
-    <p>
-        <label>Question</label><br>
-        <input required th:field="*{question.question}" type="text"/>
-    </p>
-    <p>
-        <label>Answers</label><br>
-        <span hidden th:each="answer, stat : *{answerList}" th:id="${'answerSpan' + stat.index}">
-                 <input th:field="*{answerList[__${stat.index}__].answer}"/><br>
-            </span>
-        <br>
-        <button onclick="showAnswerInput()" type="button"> Add answer</button>
-        <button onclick="hideClearAnswerInput()" type="button"> Remove answer</button>
-    </p>
-    <p>
-        <button type="submit">Create Poll</button>
-    </p>
-</form>
+<nav>
+    <div class="nav-grid-container">
+        <span class="grid-item-nav-title">PollApp</span>
+        <a class="grid-item-nav-link" href="/poll-list">View Polls</a>
+        <a class="grid-item-nav-link" href="/poll-management/creation">Create a Poll</a>
+        <a class="grid-item-sign-out-link" href="/logout" style="float: right">Sign Out</a>
+    </div>
+</nav>
+<section class="poll-creation">
+    <h1 class="poll-creation-title">Create a Poll</h1>
+    <div class="poll-creation-container">
+        <form method="post" th:action="@{/poll-management/create}" th:object="${pollCreationForm}">
+            Question<br>
+            <input class="question-text-input" required th:field="*{question.question}" type="text"/><br>
+            Answers<br>
+            <button class="answer-button" onclick="showAnswerInput()" type="button">+</button>
+            <button class="answer-button" onclick="hideClearAnswerInput()" type="button">-</button><br>
+            <span hidden th:each="answer, stat : *{answerList}" th:id="${'answerSpan' + stat.index}">
+                         <input class="answer-text-input" th:field="*{answerList[__${stat.index}__].answer}"/><br>
+                    </span>
+            <br>
+
+            <button class="create-button" type="submit">Create Poll</button>
+        </form>
+    </div>
+</section>
 <h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 <script>
     let lastShownAnswerNo = -1;

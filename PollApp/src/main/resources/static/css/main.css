@@ -214,3 +214,75 @@ nav {
     color: rgb(40, 143, 88);
 }
 /* Poll-list specific END */
+
+/* Creation specific BEGIN */
+ .poll-creation-title {
+     text-align: center;
+     font-size: xx-large;
+ }
+
+ .poll-creation-container {
+     text-align: center;
+     width: 450px;
+     margin: auto;
+     background-color: rgb(24, 42, 62);
+     padding: 10px 20px 10px 20px;
+     border-radius: 15px;
+     font-size: x-large;
+ }
+
+ .question-text-input {
+     font-size: large;
+     padding: 0px 10px 0px 10px;
+     border-radius: 7px;
+     color: rgb(213, 225, 239);
+     border-style: none;
+     height: 35px;
+     width: 90%;
+     background-color: rgb(48, 66, 87);
+     margin: 10px 0px 15px 0px;
+ }
+
+.answer-text-input {
+    font-size: large;
+    padding: 0px 10px 0px 10px;
+    border-radius: 7px;
+    color: rgb(213, 225, 239);
+    border-style: none;
+    height: 35px;
+    width: 90%;
+    background-color: rgb(48, 66, 87);
+    margin: 0px 0px 5px 0px;
+}
+
+.answer-button {
+    border-radius: 10px;
+    font-size: large;
+    border-style: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(40, 143, 88);
+    width: 30px;
+    height: 30px;
+    margin: 5px 5px 10px 5px;
+}
+
+.answer-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(40, 143, 88);
+}
+
+.create-button {
+    padding: 10px 25px 10px 25px;
+    border-radius: 10px;
+    font-size: large;
+    border-style: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(40, 143, 88);
+    margin: 0 5px 10px 5px;
+}
+
+.create-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(40, 143, 88);
+}
+/* Creation specific END */
