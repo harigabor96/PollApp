@@ -43,7 +43,7 @@ public class AppUserService {
 
     public AppUser findUser(AppUser originalUser) {
         AppUser queriedUser = appUserRepository.findAppUserByUsername(originalUser.getUsername());
-        if (!originalUser.getUsername().equals(queriedUser.getUsername())) return null;
+        if (queriedUser == null || !originalUser.getUsername().equals(queriedUser.getUsername())) return null;
         return queriedUser;
     }
 
