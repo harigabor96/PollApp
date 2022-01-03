@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <title>PollApp</title>
     <link th:href="@{../css/main.css}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" th:href="@{favicon.png}"/>
 </head>
 <body>
 <nav>
     <div class="nav-grid-container">
-        <span class="grid-item-nav-title">PollApp</span>
-        <a class="grid-item-nav-link" href="/poll-list">View Polls</a>
-        <a class="grid-item-nav-link" href="/poll-management/creation">Create a Poll</a>
-        <a class="grid-item-sign-out-link" href="/logout" style="float: right">Sign Out</a>
+        <div class="grid-item-nav-title">
+            PollApp
+        </div>
+        <img class="grid-item-nav-img" th:src="@{./images/logo_inverted_small.png}">
+        <a class="grid-item-nav-polls" href="/poll-list">View Polls</a>
+        <a class="grid-item-nav-create" href="/poll-management/creation">Create a Poll</a>
+        <a class="grid-item-sign-out-link" href="/logout">Sign Out</a>
     </div>
 </nav>
 <section class="poll">

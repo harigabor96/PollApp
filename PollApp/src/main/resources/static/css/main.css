@@ -35,8 +35,10 @@ nav {
     display: grid;
     justify-items: center;
     align-items: center;
-    margin: auto;
-    grid-gap: 15px;
+}
+
+.grid-item-nav-img {
+    margin-bottom: 20px;
 }
 
 .grid-item-nav-title {
@@ -45,13 +47,25 @@ nav {
     color: rgb(18, 35, 51);
 }
 
-.grid-item-nav-link {
+.grid-item-nav-polls {
+    color: rgb(255, 255, 255);
+    font-size: x-large;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.grid-item-nav-polls:hover {
+    transform: scale(1.2);
+    transition: 1s;
+}
+
+.grid-item-nav-create {
     color: rgb(255, 255, 255);
     font-size: x-large;
     text-decoration: none;
 }
 
-.grid-item-nav-link:hover {
+.grid-item-nav-create:hover {
     transform: scale(1.2);
     transition: 1s;
 }
@@ -71,13 +85,31 @@ nav {
 @media only screen and (min-width: 1000px) {
     .nav-grid-container {
         display: grid;
-        grid-template-columns: 250px 200px 250px 1fr 200px;
-        grid-template-areas: "a b c d e";
+        grid-template-columns: 15px 150px 60px auto 250px 250px auto 225px;
+        grid-template-areas: "f1 title img f2 polls creation f3 logout";
+    }
+
+    .grid-item-nav-title {
+        grid-area: title;
+    }
+
+    .grid-item-nav-img {
+        grid-area: img;
+        margin-bottom: 0;
+    }
+
+    .grid-item-nav-polls {
+        margin-bottom: 0;
+        grid-area: polls;
+    }
+
+    .grid-item-nav-create {
+        grid-area: creation;
     }
 
     .grid-item-sign-out-link {
         margin-top: 0px;
-        grid-area: e;
+        grid-area: logout;
     }
 }
 /* Global Scope End */
