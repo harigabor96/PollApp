@@ -286,3 +286,55 @@ nav {
     color: rgb(40, 143, 88);
 }
 /* Creation specific END */
+
+/*Poll specific BEGIN */
+.poll-title {
+    font-size: xx-large;
+    text-align: center;
+}
+
+.poll-container {
+    text-align: center;
+    width: 450px;
+    margin: auto;
+    background-color: rgb(24, 42, 62);
+    padding: 15px 20px 10px 20px;
+    border-radius: 15px;
+    font-size: x-large;
+}
+
+.vote-button {
+    border-radius: 10px;
+    font-size: large;
+    border-style: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(40, 143, 88);
+    padding: 10px 25px 10px 25px;
+    margin: 10px 5px 10px 5px;
+}
+
+.vote-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(40, 143, 88);
+}
+
+.poll-delete-button {
+    border-radius: 10px;
+    border-style: none;
+    color: rgb(255, 255, 255);
+    background-color: rgb(204, 122, 106);
+    padding: 10px;
+    margin: 20px 5px 10px 5px;
+}
+
+.poll-delete-button:hover {
+    background-color: rgb(255, 255, 255);
+    color: rgb(204, 122, 106);
+}
+
+.poll-hr {
+    border-style: none;
+    border-top: 2px solid rgb(48, 66, 87);
+    width: 90%;
+}
+/*Poll specific END */

@@ -24,8 +24,8 @@
             <button class="answer-button" onclick="showAnswerInput()" type="button">+</button>
             <button class="answer-button" onclick="hideClearAnswerInput()" type="button">-</button><br>
             <span hidden th:each="answer, stat : *{answerList}" th:id="${'answerSpan' + stat.index}">
-                         <input class="answer-text-input" th:field="*{answerList[__${stat.index}__].answer}"/><br>
-                    </span>
+                <input class="answer-text-input" th:field="*{answerList[__${stat.index}__].answer}"/><br>
+            </span>
             <br>
 
             <button class="create-button" type="submit">Create Poll</button>

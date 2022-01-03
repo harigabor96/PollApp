@@ -3,28 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <title>PollApp</title>
+    <link th:href="@{../css/main.css}" rel="stylesheet">
 </head>
 <body>
-<a href="/poll-list">View Polls</a>
-<a href="/poll-management/creation">Create a Poll</a>
-<a href="/logout" style="float: right">Sign Out</a>
-<hr>
-<h1>Time to vote!</h1>
-<form method="post" th:action="@{/poll/submit-vote}" th:object="${pollForm}">
-    <b><span th:text="*{question.question}"/></b><br>
-    <input id="selectedQuestionId" name="selectedQuestionId" th:value="*{question.questionId}" type="hidden"/>
-    <span th:each="answer, stat : *{answerList}">
-            <input required th:field="*{selectedAnswerId}"
-                   th:text="*{answerList[__${stat.index}__].answer}"
-                   th:value="*{answerList[__${stat.index}__].answerId}" type="radio"/><br>
-        </span>
-    <button type="submit">Vote</button>
-</form>
-<form th:if="${userId == pollForm.question.creatorId}">
-    <button formaction="/poll-management/delete" formmethod="post"
-            name="questionId" th:value="${pollForm.question.questionId}">Delete
-    </button>
-</form>
+<nav>
+    <div class="nav-grid-container">
+        <span class="grid-item-nav-title">PollApp</span>
+        <a class="grid-item-nav-link" href="/poll-list">View Polls</a>
+        <a class="grid-item-nav-link" href="/poll-management/creation">Create a Poll</a>
+        <a class="grid-item-sign-out-link" href="/logout" style="float: right">Sign Out</a>
+    </div>
+</nav>
+<section class="poll">
+    <h1 class="poll-title">Time to vote!</h1>
+    <div class="poll-container">
+        <form method="post" th:action="@{/poll/submit-vote}" th:object="${pollForm}">
+            <span th:text="*{question.question}"/><br>
+            <hr class="poll-hr">
+            <input id="selectedQuestionId" name="selectedQuestionId" th:value="*{question.questionId}" type="hidden"/>
+            <span th:each="answer, stat : *{answerList}">
+                    <input class="poll-radio" required th:field="*{selectedAnswerId}"
+                           th:text="*{answerList[__${stat.index}__].answer}"
+                           th:value="*{answerList[__${stat.index}__].answerId}" type="radio"/><br>
+                </span>
+            <button class="vote-button" type="submit">Vote</button>
+        </form>
+        <form th:if="${userId == pollForm.question.creatorId}">
+            <button class="poll-delete-button" formaction="/poll-management/delete" formmethod="post"
+                    name="questionId" th:value="${pollForm.question.questionId}">Delete
+            </button>
+        </form>
+    </div>
+</section>
 <h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>
