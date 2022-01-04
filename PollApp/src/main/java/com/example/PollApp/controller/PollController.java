@@ -1,5 +1,6 @@
 package com.example.PollApp.controller;
 
+import com.example.PollApp.DTO.ResultsDTO;
 import com.example.PollApp.form.PollForm;
 import com.example.PollApp.form.PollListForm;
 import com.example.PollApp.model.Vote;
@@ -11,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/poll")
@@ -78,9 +80,13 @@ public class PollController {
         if ((userRole != 1) && !voteService.checkIfUserVoted(selectedQuestionId, userId))
             return "redirect:/poll-list";
 
+        ResultsDTO results = questionService.getResults(selectedQuestionId);
+        ArrayList<ArrayList<Object>> chartData = answerService.answersAsChartData((ArrayList) results.getAnswers());
+
         model.addAttribute("userId", userId);
         model.addAttribute("userRole", userRole);
-        model.addAttribute("results", questionService.getResults(selectedQuestionId));
+        model.addAttribute("results", results);
+        model.addAttribute("chartData", chartData);
         return "results";
     }
 }

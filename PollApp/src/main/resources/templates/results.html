@@ -4,6 +4,35 @@
     <meta charset="UTF-8">
     <title>PollApp</title>
     <link rel="shortcut icon" type="image/png" th:href="@{../favicon.png}"/>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+            let data = new google.visualization.DataTable();
+            data.addColumn('string', 'Answer');
+            data.addColumn('number', 'Votes');
+            data.addRows([[${chartData}]]);
+
+            // Set chart options
+            let options = {'title':'Poll Results',
+                'width':400,
+                'height':300};
+
+            // Instantiate and draw our chart, passing in some options.
+            let chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
 </head>
 <body>
 <nav>
@@ -19,6 +48,7 @@
 </nav>
 <h1>Poll Results</h1>
 <b><span th:text="${results.question}"></span></b>
+<div id="chart_div"></div>
 <table>
     <tr>
         <td><b><label>Question</label></b></td>
