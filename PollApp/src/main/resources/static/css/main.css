@@ -466,6 +466,7 @@ input[type=radio]:checked + .poll-radio-label .poll-radio-display {
 
 .results-header-question td {
     padding: 15px;
+    word-break: break-word;
     text-align: center;
     font-size: x-large;
     border-bottom: 2px solid rgb(48, 66, 87);
@@ -486,6 +487,7 @@ input[type=radio]:checked + .poll-radio-label .poll-radio-display {
 }
 
 .results-answer-td {
+    word-break: break-word;
     text-align: left;
     padding: 5px 5px 5px 5px;
 }
