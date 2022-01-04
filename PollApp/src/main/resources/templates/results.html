@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>PollApp</title>
     <link rel="shortcut icon" type="image/png" th:href="@{../favicon.png}"/>
+    <link th:href="@{../css/main.css}" rel="stylesheet">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" th:inline="javascript">
         // Load the Visualization API and the corechart package.
@@ -34,7 +35,7 @@
                 height: 350,
                 legend:'none',
                 allowHtml: true,
-                backgroundColor: '#304257',
+                backgroundColor: '#182a3e',
                 chartArea: {
                     width: '80%',
                     height: '80%'
@@ -48,19 +49,19 @@
                     baselineColor: '#d5e1ef',
 
                     textStyle: {
-                        color: '#304257'
+                        color: '#182a3e'
                     },
                     gridlines: {
-                        color: '#304257'
+                        color: '#182a3e'
                     },
                     minorGridlines: {
-                        color: '#304257'
+                        color: '#182a3e'
                     }
                 }
             };
 
             // Instantiate and draw our chart, passing in some options.
-            let chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            let chart = new google.visualization.ColumnChart(document.getElementById('chart-div'));
             chart.draw(data, options);
         }
     </script>
@@ -71,30 +72,34 @@
         <div class="grid-item-nav-title">
             PollApp
         </div>
-        <img class="grid-item-nav-img" th:src="@{./images/logo_inverted_small.png}">
+        <img class="grid-item-nav-img" th:src="@{../images/logo_inverted_small.png}">
         <a class="grid-item-nav-polls" href="/poll-list">View Polls</a>
         <a class="grid-item-nav-create" href="/poll-management/creation">Create a Poll</a>
         <a class="grid-item-sign-out-link" href="/logout">Sign Out</a>
     </div>
 </nav>
-<h1>Poll Results</h1>
-<b><span th:text="${results.question}"></span></b>
-<div id="chart_div"></div>
-<table>
+<h1 class="results-title">Poll Results</h1>
+<div class="results-grid-container">
+<div class="chart-div" id="chart-div"></div>
+<table class="result-table">
+    <tr class="results-header-question">
+        <td colspan="2" th:text="${results.question}"></td>
+    </tr>
     <tr>
-        <td><b><label>Question</label></b></td>
-        <td><b><label>Votes</label></b></td>
+        <td class="results-header-answer">Answer</td>
+        <td class="results-header-vote">Votes</td>
     </tr>
     <tr th:each="result : ${results.answers}">
-        <td th:text="${result.answer}"/>
-        <td style="text-align: center" th:text="${result.voteCount}"/>
+        <td class="results-answer-td" th:text="${result.answer}"/>
+        <td class="results-vote-td" th:text="${result.voteCount}"/>
     </tr>
 </table>
 <form th:if="${userRole == 1 || userId == results.creatorId}">
-    <button formaction="/poll-management/delete" formmethod="post"
-            name="questionId" th:value="${results.questionId}">Delete
+    <button class="results-delete-button" formaction="/poll-management/delete" formmethod="post"
+            name="questionId" th:value="${results.questionId}">Delete Poll
     </button>
 </form>
+</div>
 <h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>
