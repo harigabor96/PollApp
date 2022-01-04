@@ -31,12 +31,13 @@
             // Set chart options
             let options = {
                 width: 450,
-                height: 250,
+                height: 350,
                 legend:'none',
                 allowHtml: true,
                 backgroundColor: '#304257',
                 chartArea: {
-                    width: '80%'
+                    width: '80%',
+                    height: '80%'
                 },
                 hAxis: {
                     textStyle: {
@@ -45,8 +46,15 @@
                 },
                 vAxis: {
                     baselineColor: '#d5e1ef',
+
                     textStyle: {
-                        color: '#d5e1ef'
+                        color: '#304257'
+                    },
+                    gridlines: {
+                        color: '#304257'
+                    },
+                    minorGridlines: {
+                        color: '#304257'
                     }
                 }
             };
