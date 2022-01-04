@@ -1,21 +1,23 @@
 package com.example.PollApp.controller;
 
 import com.example.PollApp.model.*;
+import com.example.PollApp.security.Login;
 import com.example.PollApp.service.AppUserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/login")
 public class LoginController {
 
     private final AppUserService appUserService;
+    private final Login login;
 
-    public LoginController(AppUserService appUserService) {
+    public LoginController(AppUserService appUserService, Login login) {
         this.appUserService = appUserService;
+        this.login = login;
     }
 
     @GetMapping()
@@ -25,7 +27,7 @@ public class LoginController {
     }
 
     @PostMapping("/sign-in")
-    public String signIn(AppUser currentUser, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String signIn(AppUser currentUser, RedirectAttributes redirectAttributes) {
         AppUser existingUser = appUserService.findUser(currentUser);
 
         if (existingUser == null) {
@@ -35,9 +37,9 @@ public class LoginController {
         }
 
         if (appUserService.matchPassword(currentUser, existingUser)) {
-            session.setAttribute("userId", existingUser.getUserId());
-            session.setAttribute("user", existingUser.getUsername());
-            session.setAttribute("role",existingUser.getRoleId());
+            login.setUserId(existingUser.getUserId());
+            login.setUsername(existingUser.getUsername());
+            login.setRole(existingUser.getRoleId());
             return "redirect:/poll-list";
         }
 
@@ -47,7 +49,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public String register(AppUser currentUser, RedirectAttributes redirectAttributes, HttpSession session) {
+    public String register(AppUser currentUser, RedirectAttributes redirectAttributes) {
 
         if (appUserService.checkIfUserNameExists(currentUser)) {
             redirectAttributes.addFlashAttribute("errorMsg",
@@ -66,9 +68,9 @@ public class LoginController {
         currentUser.setRoleId(2);
 
         appUserService.saveUser(currentUser);
-        session.setAttribute("userId", currentUser.getUserId());
-        session.setAttribute("user", currentUser.getUsername());
-        session.setAttribute("role",currentUser.getRoleId());
+        login.setUserId(currentUser.getUserId());
+        login.setUsername(currentUser.getUsername());
+        login.setRole(currentUser.getRoleId());
         return "redirect:/poll-list";
     }
 }
