@@ -19,6 +19,17 @@ input:focus, textarea:focus, select:focus{
     outline: none;
 }
 
+.error-box {
+    font-size: large;
+    border-radius: 10px;
+    width: max-content;
+    color: rgb(255, 255, 255);
+    background-color: rgb(204, 122, 106);
+    padding: 15px 30px 15px 30px;
+    margin: 30px auto 30px auto;
+    font-weight: bold;
+}
+
 header {
     text-align: center;
     font-size: xx-large;

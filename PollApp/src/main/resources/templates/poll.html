@@ -20,6 +20,7 @@
 </nav>
 <section class="poll">
     <h1 class="poll-title">Time to vote!</h1>
+    <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
     <div class="poll-container">
         <form method="post" th:action="@{/poll/submit-vote}" th:object="${pollForm}">
             <span th:text="*{question.question}"/><br>
@@ -42,6 +43,5 @@
         </form>
     </div>
 </section>
-<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

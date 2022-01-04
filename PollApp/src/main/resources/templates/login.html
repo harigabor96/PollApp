@@ -10,6 +10,7 @@
 <header>
     <h1 class="title">PollApp</h1>
 </header>
+<h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 <section class="sign-in" id="sign-in">
     <div class="sign-in-grid-container">
         <div class="grid-item-sign-in">
@@ -29,6 +30,5 @@
         </div>
     </div>
 </section>
-<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

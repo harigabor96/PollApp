@@ -20,6 +20,7 @@
 </nav>
 <section class="poll-creation">
     <h1 class="poll-creation-title">Create a Poll</h1>
+    <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
     <div class="poll-creation-container">
         <form method="post" th:action="@{/poll-management/create}" th:object="${pollCreationForm}">
             Question<br>
@@ -38,7 +39,6 @@
         </form>
     </div>
 </section>
-<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 <script>
     let lastShownAnswerNo = -1;
 

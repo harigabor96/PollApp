@@ -79,6 +79,7 @@
     </div>
 </nav>
 <h1 class="results-title">Poll Results</h1>
+<h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 <div class="results-grid-container">
 <div class="chart-div" id="chart-div"></div>
 <table class="result-table">
@@ -100,6 +101,5 @@
             name="questionId" th:value="${results.questionId}">Delete Poll
     </button>
 </form>
-<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

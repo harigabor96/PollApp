@@ -20,6 +20,7 @@
 </nav>
 <section class="poll-list">
     <h1 class="poll-list-title">Available Polls</h1>
+    <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
     <form method="get" th:action="@{/poll}" th:object="${pollListForm}">
         <table class="poll-list-table">
             <tr class="poll-list-header">
