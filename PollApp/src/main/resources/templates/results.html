@@ -28,12 +28,27 @@
                 /*[/]*/
            ]);
 
-
             // Set chart options
-            let options = {'title':'Poll Results',
-                'width':400,
-                'height':300,
-                'legend':'none'
+            let options = {
+                width: 450,
+                height: 250,
+                legend:'none',
+                allowHtml: true,
+                backgroundColor: '#304257',
+                chartArea: {
+                    width: '80%'
+                },
+                hAxis: {
+                    textStyle: {
+                        color: '#d5e1ef'
+                    }
+                },
+                vAxis: {
+                    baselineColor: '#d5e1ef',
+                    textStyle: {
+                        color: '#d5e1ef'
+                    }
+                }
             };
 
             // Instantiate and draw our chart, passing in some options.
