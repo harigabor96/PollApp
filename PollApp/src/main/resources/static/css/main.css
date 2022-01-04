@@ -224,6 +224,10 @@ nav {
     background-color: rgb(48, 66, 87);
     margin: 10px 0px 25px 0px;
 }
+
+.login-type-span {
+    display: block;
+}
 /* Login specific END */
 
 /* Poll-list specific BEGIN */
@@ -241,6 +245,7 @@ nav {
 
 .poll-list-header td {
     padding: 15px;
+    font-weight: bold;
     text-align: center;
     font-size: x-large;
 }
@@ -343,12 +348,17 @@ nav {
     border-style: none;
     color: rgb(255, 255, 255);
     background-color: rgb(40, 143, 88);
-    margin: 0 5px 10px 5px;
+    margin: 10px auto 10px auto;
+    display: block;
 }
 
 .create-button:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(40, 143, 88);
+}
+
+.answers-span {
+    display: block;
 }
 /* Creation specific END */
 
@@ -425,7 +435,6 @@ input[type=radio]:checked + .poll-radio-label .poll-radio-display {
 /*Poll specific END */
 
 /* Results BEGIN */
-
 .results-grid-container {
     display: grid;
     grid-gap: 15px;

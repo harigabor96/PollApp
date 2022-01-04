@@ -27,7 +27,7 @@
 <section id="poll">
     <div class="poll-container">
         <form method="post" th:action="@{/poll/submit-vote}" th:object="${pollForm}">
-            <span th:text="*{question.question}"/><br>
+            <span th:text="*{question.question}"/>
             <hr class="poll-hr">
             <input id="selectedQuestionId" name="selectedQuestionId" th:value="*{question.questionId}" type="hidden"/>
             <div th:each="answer, stat : *{answerList}">

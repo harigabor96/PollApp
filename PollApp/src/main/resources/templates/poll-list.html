@@ -28,9 +28,9 @@
     <form method="get" th:action="@{/poll}" th:object="${pollListForm}">
         <table class="poll-list-table">
             <tr class="poll-list-header">
-                <td><b>Question</b></td>
-                <td><b>Creator</b></td>
-                <td><b>Votes</b></td>
+                <td>Question</td>
+                <td>Creator</td>
+                <td>Votes</td>
             </tr>
             <tr th:each="poll: *{pollList}">
                 <td class="td-question" th:text="${poll.question}"/>

@@ -17,13 +17,14 @@
     <div class="sign-in-grid-container">
         <div class="grid-item-sign-in">
             <form method="post" th:object="${currentUser}">
-                Username<br>
-                <input class="login-text-input" required th:field="*{username}" type="text" autocomplete="off"/><br>
-                Password<br>
-                <input class="login-text-input" required th:field="*{password}" type="password"/><br>
+                <label>Username
+                    <input class="login-text-input" required th:field="*{username}" type="text" autocomplete="off"/>
+                </label>
+                <label>Password
+                    <input class="login-text-input" required th:field="*{password}" type="password"/>
+                </label>
                 <button class="login-button" formaction="/login/sign-in" type="submit">Sign In</button>
-                <br>
-                OR <br>
+                <span class="login-type-span">OR</span>
                 <button class="login-button" formaction="/login/register" type="submit">Register</button>
             </form>
         </div>
