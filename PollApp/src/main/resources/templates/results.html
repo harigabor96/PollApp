@@ -94,12 +94,12 @@
         <td class="results-vote-td" th:text="${result.voteCount}"/>
     </tr>
 </table>
-<form th:if="${userRole == 1 || userId == results.creatorId}">
+</div>
+<form class="results-delete-form" th:if="${userRole == 1 || userId == results.creatorId}">
     <button class="results-delete-button" formaction="/poll-management/delete" formmethod="post"
             name="questionId" th:value="${results.questionId}">Delete Poll
     </button>
 </form>
-</div>
 <h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

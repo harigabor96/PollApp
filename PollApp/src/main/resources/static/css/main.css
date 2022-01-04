@@ -404,17 +404,19 @@ input[type=radio]:checked + .poll-radio-label .poll-radio-display {
     align-items: center;
     justify-items: center;
     grid-template-areas: "chart"
-                         "results"
-                         "results-delete";
+                         "results";
+}
+
+@media only screen and (min-width: 1000px) {
+    .results-grid-container {
+        grid-template-areas: "f1 chart results f4";
+        grid-template-columns: auto auto auto auto;
+    }
 }
 
 .results-title {
     text-align: center;
     font-size: xx-large;
-}
-
-.results-delete-button {
-    grid-area: results-delete;
 }
 
 .chart-div {
@@ -465,13 +467,18 @@ input[type=radio]:checked + .poll-radio-label .poll-radio-display {
     width: 40px;
 }
 
+.results-delete-form {
+    margin-top: 50px;
+    text-align: center;
+}
+
 .results-delete-button {
     border-radius: 10px;
     border-style: none;
     color: rgb(255, 255, 255);
     background-color: rgb(204, 122, 106);
     padding: 10px;
-    margin: 0px 5px 15px 5px;
+    margin: 15px 5px 15px 5px;
 }
 
 .results-delete-button:hover {
