@@ -15,6 +15,10 @@ body {
     margin: 0;
 }
 
+input {
+    font-family: main;
+}
+
 input:focus, textarea:focus, select:focus{
     outline: none;
 }
@@ -210,6 +214,7 @@ nav {
 }
 
 .login-text-input {
+    color: rgb(213, 225, 239);
     font-size: large;
     padding: 0px 10px 0px 10px;
     border-radius: 7px;
@@ -292,6 +297,7 @@ nav {
  }
 
  .question-text-input {
+     color: rgb(213, 225, 239);
      font-size: large;
      padding: 0px 10px 0px 10px;
      border-radius: 7px;
@@ -303,6 +309,7 @@ nav {
  }
 
 .answer-text-input {
+    color: rgb(213, 225, 239);
     font-size: large;
     padding: 0px 10px 0px 10px;
     border-radius: 7px;
