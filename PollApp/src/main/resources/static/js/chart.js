@@ -13,7 +13,6 @@ function drawChart() {
     let data = new google.visualization.DataTable();
     data.addColumn('string', 'Answer');
     data.addColumn('number', 'Votes');
-    data.addColumn({type:'string', role:'style'});
     data.addRows(chartData);
 
     // Set chart options
@@ -23,6 +22,7 @@ function drawChart() {
         legend:'none',
         allowHtml: true,
         backgroundColor: '#182a3e',
+        colors: ['#288f58'],
         chartArea: {
             width: '80%',
             height: '80%'

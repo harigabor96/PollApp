@@ -81,8 +81,7 @@ public class PollController {
             return "redirect:/poll-list";
 
         ResultsDTO results = questionService.getResults(selectedQuestionId);
-        ArrayList<ArrayList<Object>> chartData = answerService.answersAsChartData((ArrayList) results.getAnswers(),
-                "#288f58");
+        ArrayList<ArrayList<Object>> chartData = answerService.answersAsChartData((ArrayList) results.getAnswers());
 
         model.addAttribute("userId", userId);
         model.addAttribute("userRole", userRole);
