@@ -18,9 +18,11 @@
         <a class="grid-item-sign-out-link" href="/logout">Sign Out</a>
     </div>
 </nav>
-<section class="poll-list">
+<header>
     <h1 class="poll-list-title">Available Polls</h1>
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
+</header>
+<section id="poll-list">
     <form method="get" th:action="@{/poll}" th:object="${pollListForm}">
         <table class="poll-list-table">
             <tr class="poll-list-header">
@@ -42,6 +44,5 @@
         </table>
     </form>
 </section>
-<h3 style="color:red" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </body>
 </html>

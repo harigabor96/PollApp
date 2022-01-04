@@ -18,9 +18,11 @@
         <a class="grid-item-sign-out-link" href="/logout">Sign Out</a>
     </div>
 </nav>
-<section class="poll-creation">
+<header>
     <h1 class="poll-creation-title">Create a Poll</h1>
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
+</header>
+<section id="poll-creation">
     <div class="poll-creation-container">
         <form method="post" th:action="@{/poll-management/create}" th:object="${pollCreationForm}">
             Question<br>
@@ -38,6 +40,6 @@
         </form>
     </div>
 </section>
-<script type="text/javascript" th:src="@{../js/creation.js}"></script></script>
+<script type="text/javascript" th:src="@{../js/creation.js}"></script>
 </body>
 </html>

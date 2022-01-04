@@ -18,9 +18,11 @@
         <a class="grid-item-sign-out-link" href="/logout">Sign Out</a>
     </div>
 </nav>
-<section class="poll">
+<header>
     <h1 class="poll-title">Time to vote!</h1>
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
+</header>
+<section id="poll">
     <div class="poll-container">
         <form method="post" th:action="@{/poll/submit-vote}" th:object="${pollForm}">
             <span th:text="*{question.question}"/><br>

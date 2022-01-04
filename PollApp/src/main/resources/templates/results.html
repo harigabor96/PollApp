@@ -21,28 +21,32 @@
         <a class="grid-item-sign-out-link" href="/logout">Sign Out</a>
     </div>
 </nav>
-<h1 class="results-title">Poll Results</h1>
-<h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
-<div class="results-grid-container">
-<div class="chart-div" id="chart-div"></div>
-<table class="result-table">
-    <tr class="results-header-question">
-        <td colspan="2" th:text="${results.question}"></td>
-    </tr>
-    <tr>
-        <td class="results-header-answer">Answer</td>
-        <td class="results-header-vote">Votes</td>
-    </tr>
-    <tr th:each="result : ${results.answers}">
-        <td class="results-answer-td" th:text="${result.answer}"/>
-        <td class="results-vote-td" th:text="${result.voteCount}"/>
-    </tr>
-</table>
-</div>
-<form class="results-delete-form" th:if="${userRole == 1 || userId == results.creatorId}">
-    <button class="results-delete-button" formaction="/poll-management/delete" formmethod="post"
-            name="questionId" th:value="${results.questionId}">Delete Poll
-    </button>
-</form>
+<header>
+    <h1 class="results-title">Poll Results</h1>
+    <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
+</header>
+<section id="results">
+    <div class="results-grid-container">
+    <div class="chart-div" id="chart-div"></div>
+    <table class="result-table">
+        <tr class="results-header-question">
+            <td colspan="2" th:text="${results.question}"></td>
+        </tr>
+        <tr>
+            <td class="results-header-answer">Answer</td>
+            <td class="results-header-vote">Votes</td>
+        </tr>
+        <tr th:each="result : ${results.answers}">
+            <td class="results-answer-td" th:text="${result.answer}"/>
+            <td class="results-vote-td" th:text="${result.voteCount}"/>
+        </tr>
+    </table>
+    </div>
+    <form class="results-delete-form" th:if="${userRole == 1 || userId == results.creatorId}">
+        <button class="results-delete-button" formaction="/poll-management/delete" formmethod="post"
+                name="questionId" th:value="${results.questionId}">Delete Poll
+        </button>
+    </form>
+</section>
 </body>
 </html>
