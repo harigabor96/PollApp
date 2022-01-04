@@ -23,12 +23,14 @@ public class AnswerService {
         answerRepository.saveAll(answers);
     }
 
-    public ArrayList<ArrayList<Object>> answersAsChartData (ArrayList<ResultsDTO.AnswerDTO> answerList) {
+    public ArrayList<ArrayList<Object>> answersAsChartData (ArrayList<ResultsDTO.AnswerDTO> answerList,
+                                                            String rowColor) {
         ArrayList<ArrayList<Object>> chartList = new ArrayList<>();
         answerList.forEach( dto -> {
             ArrayList<Object> row = new ArrayList<>();
             row.add(dto.getAnswer());
             row.add(dto.getVoteCount());
+            row.add("color: " + rowColor);
             chartList.add(row);
         });
         return chartList;
