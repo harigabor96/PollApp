@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Gábor Hári"/>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Gábor Hári" name="author"/>
     <title>PollApp</title>
-    <link th:href="@{./css/main.css}" rel="stylesheet">
-    <link rel="shortcut icon" type="image/png" th:href="@{favicon.png}"/>
+    <link rel="stylesheet" th:href="@{./css/main.css}">
+    <link rel="shortcut icon" th:href="@{favicon.png}" type="image/png"/>
 </head>
 <body>
 <header>
@@ -18,7 +18,7 @@
         <div class="grid-item-sign-in">
             <form method="post" th:object="${currentUser}">
                 <label>Username
-                    <input class="login-text-input" required th:field="*{username}" type="text" autocomplete="off"/>
+                    <input autocomplete="off" class="login-text-input" required th:field="*{username}" type="text"/>
                 </label>
                 <label>Password
                     <input class="login-text-input" required th:field="*{password}" type="password"/>
@@ -29,7 +29,7 @@
             </form>
         </div>
         <div class="grid-item-logo">
-            <img th:src="@{./images/logo.png}" alt="PollApp logo">
+            <img alt="PollApp logo" th:src="@{./images/logo.png}">
         </div>
     </div>
 </section>
