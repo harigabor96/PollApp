@@ -30,6 +30,25 @@ input:focus, textarea:focus, select:focus{
     font-weight: bold;
 }
 
+.unexpected-error {
+    border-radius: 15px;
+    font-size: x-large;
+    padding: 35px 10px 25px 10px;
+    background-color: rgb(24, 42, 62);
+    width: 450px;
+    text-align: center;
+    margin: 100px auto 0px auto ;
+}
+
+.unexpected-error img {
+    max-width: 70%;
+}
+
+.unexpected-error a {
+    text-decoration: none;
+    color: rgb(40, 143, 88);
+}
+
 header {
     text-align: center;
     font-size: xx-large;

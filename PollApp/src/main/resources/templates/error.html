@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>PollApp</title>
     <link rel="shortcut icon" type="image/png" th:href="@{favicon.png}"/>
+    <link th:href="@{./css/main.css}" rel="stylesheet">
 </head>
 <body>
-<h1 style="color:red">Ooops, something went wrong!</h1>
+<section class="error">
+    <div class="unexpected-error">
+        <img th:src="@{./images/logo.png}">
+        <h1>Ooops, something went wrong :(</h1>
+        <a href="/poll-list">- Take me back -</a>
+    </div>
+</section>
 </body>
 </html>
