@@ -23,10 +23,6 @@ function drawChart() {
         allowHtml: true,
         backgroundColor: '#182a3e',
         colors: ['#288f58'],
-        chartArea: {
-            width: '80%',
-            height: '80%'
-        },
         hAxis: {
             textStyle: {
                 color: '#d5e1ef'
@@ -34,10 +30,7 @@ function drawChart() {
         },
         vAxis: {
             baselineColor: '#d5e1ef',
-
-            textStyle: {
-                color: '#182a3e'
-            },
+            textPosition: 'none',
             gridlines: {
                 color: '#182a3e'
             },
