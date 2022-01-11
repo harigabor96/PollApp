@@ -59,7 +59,6 @@ public class PollController {
 
         if(voteService.checkIfUserVoted(selectedQuestionId, login.getUserId())) {
             redirectAttributes.addAttribute("selectedQuestionId", selectedQuestionId);
-            redirectAttributes.addFlashAttribute("errorMsg", "You've already voted!");
             return "redirect:/poll/results";
         }
 

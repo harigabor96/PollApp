@@ -3,10 +3,13 @@ package com.example.PollApp.controller;
 import com.example.PollApp.model.*;
 import com.example.PollApp.security.Login;
 import com.example.PollApp.service.AppUserService;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/login")
@@ -14,10 +17,12 @@ public class LoginController {
 
     private final AppUserService appUserService;
     private final Login login;
+    private final MessageSource messageSource;
 
-    public LoginController(AppUserService appUserService, Login login) {
+    public LoginController(AppUserService appUserService, Login login, MessageSource messageSource) {
         this.appUserService = appUserService;
         this.login = login;
+        this.messageSource = messageSource;
     }
 
     @GetMapping()
@@ -32,7 +37,7 @@ public class LoginController {
 
         if (existingUser == null) {
             redirectAttributes.addFlashAttribute("errorMsg",
-                    "Wrong username!");
+                    messageSource.getMessage("errLoginUsr",null, Locale.ENGLISH));
             return "redirect:/login";
         }
 
@@ -44,7 +49,7 @@ public class LoginController {
         }
 
         redirectAttributes.addFlashAttribute("errorMsg",
-                "Wrong password!");
+                messageSource.getMessage("errLoginPsw",null, Locale.ENGLISH));
         return "redirect:/login";
     }
 
@@ -53,13 +58,12 @@ public class LoginController {
 
         if (appUserService.checkIfUserNameExists(currentUser)) {
             redirectAttributes.addFlashAttribute("errorMsg",
-                    "User already exists!");
+                    messageSource.getMessage("errRegExistUsr",null, Locale.ENGLISH));
             return "redirect:/login";
         }
 
         if (!appUserService.validateUser(currentUser)) {
-            redirectAttributes.addFlashAttribute("errorMsg",
-                    appUserService.getValidationErrors());
+            redirectAttributes.addFlashAttribute("errorMsg", appUserService.getValidationErrors());
             return "redirect:/login";
         }
 
