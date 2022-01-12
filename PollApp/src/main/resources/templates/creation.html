@@ -10,13 +10,11 @@
 <body>
 <nav>
     <div class="nav-grid-container">
-        <div class="grid-item-nav-title">
-            PollApp
-        </div>
+        <div class="grid-item-nav-title">PollApp</div>
         <img alt="PollApp small logo" class="grid-item-nav-img" th:src="@{../images/logo_inverted_small.png}">
-        <a class="grid-item-nav-polls" href="/poll-list">View Polls</a>
-        <a class="grid-item-nav-create" href="/poll-management/creation">Create a Poll</a>
-        <a class="grid-item-sign-out-link" href="/logout">Sign Out</a>
+        <a class="grid-item-nav-polls" href="/poll-list" th:text="#{navbar.poll-list}"/>
+        <a class="grid-item-nav-create" href="/poll-management/creation" th:text="#{navbar.creation}"/>
+        <a class="grid-item-sign-out-link" href="/logout" th:text="#{navbar.sign-out}"/>
     </div>
 </nav>
 <header>
