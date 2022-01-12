@@ -3,7 +3,7 @@
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
     <meta content="Gábor Hári" name="author"/>
-    <title>PollApp</title>
+    <title th:text="#{appName}"/>
     <link rel="shortcut icon" th:href="@{favicon.png}" type="image/png"/>
     <link rel="stylesheet" th:href="@{./css/main.css}">
 </head>
@@ -11,8 +11,8 @@
 <section id="error">
     <div class="unexpected-error">
         <img alt="PollApp logo" th:src="@{./images/logo.png}">
-        <h1>Ooops, something went wrong :(</h1>
-        <a href="/poll-list">- Take me back -</a>
+        <h1 th:text="#{error.message}"/>
+        <a href="/poll-list" th:text="#{error.returnLink}"/>
     </div>
 </section>
 </body>
