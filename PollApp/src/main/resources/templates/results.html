@@ -28,7 +28,7 @@
     </div>
 </nav>
 <header>
-    <h1 class="results-title">Poll Results</h1>
+    <h1 class="results-title" th:text="#{results.title}"/>
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </header>
 <section id="results">
@@ -39,8 +39,8 @@
                 <td colspan="2" th:text="${results.question}"></td>
             </tr>
             <tr>
-                <td class="results-header-answer">Answer</td>
-                <td class="results-header-vote">Votes</td>
+                <td class="results-header-answer" th:text="#{results.headerAnswer}"/>
+                <td class="results-header-vote" th:text="#{results.headerVotes}"/>
             </tr>
             <tr th:each="result : ${results.answers}">
                 <td class="results-answer-td" th:text="${result.answer}"/>
@@ -50,8 +50,7 @@
     </div>
     <form class="results-delete-form" th:if="${userRole == 1 || userId == results.creatorId}">
         <button class="results-delete-button" formaction="/poll-management/delete" formmethod="post"
-                name="questionId" th:value="${results.questionId}">Delete Poll
-        </button>
+                name="questionId" th:value="${results.questionId}" th:text="#{results.delete}"/>
     </form>
 </section>
 </body>

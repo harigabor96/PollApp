@@ -20,24 +20,24 @@
     </div>
 </nav>
 <header>
-    <h1 class="poll-creation-title">Create a Poll</h1>
+    <h1 class="poll-creation-title" th:text="#{creation.title}"></h1>
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </header>
 <section id="poll-creation">
     <div class="poll-creation-container">
         <form method="post" th:action="@{/poll-management/create}" th:object="${pollCreationForm}">
-            <label>Question
+            <label><span th:text="#{creation.question}"/>
                 <input autocomplete="off" class="question-text-input" required th:field="*{question.question}"
                        type="text"/>
             </label>
-            <span class="answers-span">Answers</span>
+            <span class="answers-span" th:text="#{creation.answers}"/>
             <button class="answer-button" onclick="showAnswerInput()" type="button">+</button>
             <button class="answer-button" onclick="hideClearAnswerInput()" type="button">-</button>
             <span hidden th:each="answer, stat : *{answerList}" th:id="${'answerSpan' + stat.index}">
                 <input autocomplete="off" class="answer-text-input"
                        th:field="*{answerList[__${stat.index}__].answer}"/>
             </span>
-            <button class="create-button" type="submit">Create Poll</button>
+            <button class="create-button" type="submit" th:text="#{creation.submit}"/>
         </form>
     </div>
 </section>

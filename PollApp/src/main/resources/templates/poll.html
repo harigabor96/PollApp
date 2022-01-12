@@ -20,7 +20,7 @@
     </div>
 </nav>
 <header>
-    <h1 class="poll-title">Time to vote!</h1>
+    <h1 class="poll-title" th:text="#{poll.title}"/>
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </header>
 <section id="poll">
@@ -36,13 +36,11 @@
                     <div class="poll-radio-display" th:text="*{answerList[__${stat.index}__].answer}"/>
                 </label>
             </div>
-            <button class="vote-button" type="submit">Vote</button>
+            <button class="vote-button" type="submit" th:text="#{poll.submit}"/>
         </form>
         <form th:if="${userId == pollForm.question.creatorId}">
             <button class="poll-delete-button" formaction="/poll-management/delete" formmethod="post"
-                    name="questionId" th:value="${pollForm.question.questionId}">
-                Delete Poll
-            </button>
+                    name="questionId" th:value="${pollForm.question.questionId}" th:text="#{poll.delete}"/>
         </form>
     </div>
 </section>

@@ -20,16 +20,16 @@
     </div>
 </nav>
 <header>
-    <h1 class="poll-list-title">Available Polls</h1>
+    <h1 class="poll-list-title" th:text="#{poll-list.title}"/>
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </header>
 <section id="poll-list">
     <form method="get" th:action="@{/poll}" th:object="${pollListForm}">
         <table class="poll-list-table">
             <tr class="poll-list-header">
-                <td>Question</td>
-                <td>Creator</td>
-                <td>Votes</td>
+                <td th:text="#{poll-list.headerQuestion}"/>
+                <td th:text="#{poll-list.headerCreator}"/>
+                <td th:text="#{poll-list.headerVotes}"/>
             </tr>
             <tr th:each="poll: *{pollList}">
                 <td class="td-question" th:text="${poll.question}"/>
@@ -37,7 +37,7 @@
                 <td class="td-votes" th:text="${poll.voteCount}"/>
                 <td>
                     <button class="view-button" id="viewButton" name="selectedQuestionId"
-                            th:text="View"
+                            th:text="#{poll-list.viewButton}"
                             th:value="${poll.questionId}"
                             type="submit"/>
                 </td>
