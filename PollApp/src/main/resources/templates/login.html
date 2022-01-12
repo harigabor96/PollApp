@@ -17,15 +17,15 @@
     <div class="sign-in-grid-container">
         <div class="grid-item-sign-in">
             <form method="post" th:object="${currentUser}">
-                <label>Username
+                <label><span th:text="#{login.username}"/>
                     <input autocomplete="off" class="login-text-input" required th:field="*{username}" type="text"/>
                 </label>
-                <label>Password
+                <label><span th:text="#{login.password}"/>
                     <input class="login-text-input" required th:field="*{password}" type="password"/>
                 </label>
-                <button class="login-button" formaction="/login/sign-in" type="submit">Sign In</button>
-                <span class="login-type-span">OR</span>
-                <button class="login-button" formaction="/login/register" type="submit">Register</button>
+                <button class="login-button" formaction="/login/sign-in" type="submit" th:text="#{login.sign-in}"/>
+                <span class="login-type-span" th:text="#{login.or}"/>
+                <button class="login-button" formaction="/login/register" type="submit" th:text="#{login.register}"/>
             </form>
         </div>
         <div class="grid-item-logo">

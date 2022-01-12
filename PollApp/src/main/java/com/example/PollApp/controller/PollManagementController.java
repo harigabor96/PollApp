@@ -67,7 +67,7 @@ public class PollManagementController {
 
         if(currentAnswers.size() == 0) {
             redirectAttributes.addFlashAttribute("errorMsg",
-                    messageSource.getMessage("errMissingAns",null, Locale.ENGLISH));
+                    messageSource.getMessage("errMissingAns",null, Locale.getDefault()));
             return "redirect:/poll-management/creation";
         }
 

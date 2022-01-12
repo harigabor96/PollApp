@@ -36,7 +36,7 @@ public class LoginController {
 
         if (existingUser == null) {
             redirectAttributes.addFlashAttribute("errorMsg",
-                    messageSource.getMessage("errLoginUsr",null, Locale.ENGLISH));
+                    messageSource.getMessage("errLoginUsr",null, Locale.getDefault()));
             return "redirect:/login";
         }
 
@@ -48,7 +48,7 @@ public class LoginController {
         }
 
         redirectAttributes.addFlashAttribute("errorMsg",
-                messageSource.getMessage("errLoginPsw",null, Locale.ENGLISH));
+                messageSource.getMessage("errLoginPsw",null, Locale.getDefault()));
         return "redirect:/login";
     }
 
@@ -57,7 +57,7 @@ public class LoginController {
 
         if (appUserService.checkIfUserNameExists(currentUser)) {
             redirectAttributes.addFlashAttribute("errorMsg",
-                    messageSource.getMessage("errRegExistUsr",null, Locale.ENGLISH));
+                    messageSource.getMessage("errRegExistUsr",null, Locale.getDefault()));
             return "redirect:/login";
         }
 
