@@ -11,6 +11,9 @@
 <body>
 <header>
     <h1 class="title" th:text="#{appName}"/>
+    <!-- Thymeleaf + Spring Security Login error -->
+    <h3 class="error-box" th:if="${param.error}" th:text="#{errLogin}"/>
+    <!-- Generic errors -->
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </header>
 <section id="sign-in">

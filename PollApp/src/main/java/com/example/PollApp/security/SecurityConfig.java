@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -15,17 +16,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/poll-list").authenticated()
-                .mvcMatchers("/poll").authenticated()
-                .mvcMatchers("/poll-management").authenticated()
-                .and()
+                .mvcMatchers("/poll-list/**").authenticated()
+                .mvcMatchers("/poll/**").authenticated()
+                .mvcMatchers("/poll-management/**").authenticated()
+                .mvcMatchers("/registration/**").permitAll()
+            .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/sign-in")
                 .usernameParameter("username")
                 .passwordParameter("password")
-                .failureUrl("/login-error")
-                .defaultSuccessUrl("/poll-list");
+                .defaultSuccessUrl("/poll-list")
+            .and()
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login");
     }
 
     @Bean
