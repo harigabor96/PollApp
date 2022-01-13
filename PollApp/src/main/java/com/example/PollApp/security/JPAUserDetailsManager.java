@@ -1,0 +1,56 @@
+package com.example.PollApp.security;
+
+import com.example.PollApp.model.AppUser;
+import com.example.PollApp.repository.AppUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.provisioning.UserDetailsManager;
+import java.util.Locale;
+
+public class JPAUserDetailsManager implements UserDetailsManager {
+
+    @Autowired
+    private AppUserRepository appUserRepository;
+
+    @Autowired
+    private MessageSource messageSource;
+
+    public JPAUserDetailsManager() {
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        AppUser userEntity = appUserRepository.findAppUserByUsername(username);
+        if (userEntity != null && username.equals(userEntity.getUsername())) {
+            return new JPAUserDetails(userEntity);
+        }
+        throw new UsernameNotFoundException(
+                messageSource.getMessage("errUsrNotExist",null, Locale.getDefault()));
+    }
+
+    @Override
+    public void createUser(UserDetails user) {
+        AppUser userEntity = ((JPAUserDetails) user).getAsEntity();
+        appUserRepository.save(userEntity);
+    }
+
+    @Override
+    public boolean userExists(String username) {
+        AppUser userEntity = appUserRepository.findAppUserByUsername(username);
+        if (userEntity != null && username.equals(userEntity.getUsername())) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void updateUser(UserDetails user) { }
+
+    @Override
+    public void deleteUser(String username) { }
+
+    @Override
+    public void changePassword(String oldPassword, String newPassword) { }
+}

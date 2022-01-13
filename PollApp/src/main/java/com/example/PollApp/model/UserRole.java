@@ -1,6 +1,7 @@
 package com.example.PollApp.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "UserRole")
@@ -11,6 +12,9 @@ public class UserRole {
     private Integer roleId;
 
     private String roleDescription;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "roleId")
+    private List<AppUser> appUsers;
 
     public UserRole() {
     }
@@ -30,4 +34,8 @@ public class UserRole {
     public void setRoleDescription(String roleDescription) {
         this.roleDescription = roleDescription;
     }
+
+    public List<AppUser> getAppUsers() { return appUsers; }
+
+    public void setAppUsers(List<AppUser> appUsers) { this.appUsers = appUsers; }
 }
