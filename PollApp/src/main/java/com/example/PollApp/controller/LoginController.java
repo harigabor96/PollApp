@@ -3,6 +3,7 @@ package com.example.PollApp.controller;
 import com.example.PollApp.model.*;
 //import com.example.PollApp.security.Login;
 //import com.example.PollApp.service.AppUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,12 +12,25 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Locale;
 
 @Controller
-@RequestMapping()
+@RequestMapping("/login")
 public class LoginController {
 
-    @RequestMapping("/login.html")
+    private final MessageSource messageSource;
+
+    public LoginController(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    @GetMapping()
     public String login() {
-        return "login.html";
+        return "login";
+    }
+
+    @RequestMapping("/error")
+    public String loginError(ModelMap model) {
+        model.addAttribute("errorMsg",
+                messageSource.getMessage("errLogin",null, Locale.getDefault()));
+        return "login";
     }
 
     /*

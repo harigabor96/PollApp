@@ -16,14 +16,15 @@
 <section id="sign-in">
     <div class="sign-in-grid-container">
         <div class="grid-item-sign-in">
-            <form method="post" th:object="${currentUser}">
+            <form method="post" th:action="@{/sign-in}" >
                 <label><span th:text="#{login.username}"/>
-                    <input autocomplete="off" class="login-text-input" required th:field="*{username}" type="text"/>
+                    <input autocomplete="off" class="login-text-input" required id="username" name="username"
+                           type="text"/>
                 </label>
                 <label><span th:text="#{login.password}"/>
-                    <input class="login-text-input" required th:field="*{password}" type="password"/>
+                    <input class="login-text-input" required id="password" name="password" type="password"/>
                 </label>
-                <button class="login-button" formaction="/login/sign-in" type="submit" th:text="#{login.sign-in}"/>
+                <button class="login-button" type="submit" th:text="#{login.sign-in}"/>
                 <span class="login-type-span" th:text="#{login.or}"/>
                 <button class="login-button" formaction="/login/register" type="submit" th:text="#{login.register}"/>
             </form>
