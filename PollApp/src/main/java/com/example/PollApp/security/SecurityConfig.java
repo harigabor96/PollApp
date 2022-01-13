@@ -22,10 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/sign-in")
-                .successForwardUrl("/poll-list")
-                .failureUrl("/login")
                 .usernameParameter("username")
-                .passwordParameter("password");
+                .passwordParameter("password")
+                .failureUrl("/login-error")
+                .defaultSuccessUrl("/poll-list");
     }
 
     @Bean
