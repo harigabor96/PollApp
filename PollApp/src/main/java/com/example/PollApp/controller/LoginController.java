@@ -1,8 +1,8 @@
 package com.example.PollApp.controller;
 
 import com.example.PollApp.model.*;
-import com.example.PollApp.security.Login;
-import com.example.PollApp.service.AppUserService;
+//import com.example.PollApp.security.Login;
+//import com.example.PollApp.service.AppUserService;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,17 +13,18 @@ import java.util.Locale;
 @Controller
 @RequestMapping("/login")
 public class LoginController {
-
+    /*
     private final AppUserService appUserService;
-    private final Login login;
+    //private final Login login;
     private final MessageSource messageSource;
 
     public LoginController(AppUserService appUserService, Login login, MessageSource messageSource) {
         this.appUserService = appUserService;
-        this.login = login;
+        //this.login = login;
         this.messageSource = messageSource;
-    }
+    } */
 
+    /*
     @GetMapping()
     public String login(ModelMap model) {
         model.addAttribute("currentUser", new AppUser());
@@ -41,9 +42,9 @@ public class LoginController {
         }
 
         if (appUserService.matchPassword(currentUser, existingUser)) {
-            login.setUserId(existingUser.getUserId());
-            login.setUsername(existingUser.getUsername());
-            login.setRole(existingUser.getRoleId());
+            //login.setUserId(existingUser.getUserId());
+            //login.setUsername(existingUser.getUsername());
+            //login.setRole(existingUser.getRoleId());
             return "redirect:/poll-list";
         }
 
@@ -71,9 +72,10 @@ public class LoginController {
         currentUser.setRoleId(2);
 
         appUserService.saveUser(currentUser);
-        login.setUserId(currentUser.getUserId());
-        login.setUsername(currentUser.getUsername());
-        login.setRole(currentUser.getRoleId());
+        //login.setUserId(currentUser.getUserId());
+        //login.setUsername(currentUser.getUsername());
+        //login.setRole(currentUser.getRoleId());
         return "redirect:/poll-list";
     }
+    */
 }

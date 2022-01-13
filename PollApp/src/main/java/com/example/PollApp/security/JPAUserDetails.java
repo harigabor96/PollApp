@@ -1,44 +1,30 @@
 package com.example.PollApp.security;
 
 import com.example.PollApp.model.AppUser;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import javax.validation.Validator;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class JPAUserDetails implements UserDetails {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private Validator validator;
-
     private final AppUser appUser;
 
-    public JPAUserDetails() {
+    public JPAUserDetails(String username, String password, Integer roleId) {
         this.appUser = new AppUser();
+        this.appUser.setUsername(username);
+        this.appUser.setPassword(password);
+        this.appUser.setRoleId(roleId);
     }
 
     public JPAUserDetails(AppUser appUser) {
         this.appUser = appUser;
     }
 
-    public void setUsername(String username) {
-        appUser.setUsername(username);
-    }
-
     @Override
     public String getUsername() {
         return appUser.getUsername();
-    }
-
-    public void setPassword(String password) {
-        appUser.setPassword(password);
     }
 
     @Override
