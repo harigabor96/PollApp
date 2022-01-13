@@ -20,11 +20,7 @@ public class AppUser {
     @Size(min = 6, max = 50)
     private String password;
 
-    private Integer roleId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="roleId", insertable = false, updatable = false)
-    private UserRole userRole;
+    private String role;
 
     public AppUser() {
     }
@@ -41,11 +37,7 @@ public class AppUser {
 
     public void setPassword(String password) { this.password = password; }
 
-    public Integer getRoleId() { return roleId; }
+    public String getRole() { return role; }
 
-    public void setRoleId(Integer roleId) { this.roleId = roleId; }
-
-    public UserRole getUserRole() { return userRole;}
-
-    public void setUserRole(UserRole userRole) { this.userRole = userRole; }
+    public void setRole(String role) { this.role = role; }
 }

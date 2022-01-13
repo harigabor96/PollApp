@@ -4,12 +4,11 @@ GO
 USE PollApp;
 GO
 
-CREATE TABLE dbo.UserRole
+CREATE TABLE dbo.Role
 (
-   RoleID int identity(1,1) NOT NULL,
-   RoleDescription varchar(20) NOT NULL CHECK (Len(RTrim([RoleDescription])) > 0),
+   Role varchar(20) NOT NULL CHECK (Len(RTrim([Role])) > 0),
 
-   Primary Key (RoleID)
+   Primary Key (Role)
 );
 GO
 
@@ -17,11 +16,11 @@ CREATE TABLE dbo.AppUser
  (  
    UserID int identity(1,1) NOT NULL,   
    Username nvarchar(50) NOT NULL UNIQUE CHECK (Len(RTrim([Username])) > 0),
-   Password char(64) NOT NULL,
-   RoleID int NOT NULL,
+   Password char(60) NOT NULL,
+   Role varchar(20) NOT NULL,
     
    Primary Key (UserID),
-   Foreign Key (RoleID) REFERENCES UserRole(RoleID)
+   Foreign Key (Role) REFERENCES Role(Role)
 );  
 
 GO
@@ -62,15 +61,15 @@ CREATE TABLE dbo.Vote
 GO
 
 /*Define basic roles */
-INSERT INTO dbo.UserRole(RoleDescription)
+INSERT INTO dbo.Role(Role)
 VALUES
-	('Administrator'),
-	('User');
+	('ROLE_ADMIN'),
+	('ROLE_USER');
 GO
 
-INSERT INTO dbo.AppUser(Username, Password, RoleID)
+INSERT INTO dbo.AppUser(Username, Password, Role)
 VALUES
-	('admin', '092c55afc2ea47b2301ea8ffcd047d32b08c4b82774401854e6e5ecc5dfad195', 1);
+	('admin', '$2a$10$/86Pemn5lXrPzO94j9CP8.iYQvlcPykuPXKAF307QvcO6Upc6/Myq', 'ROLE_ADMIN');
 GO
 
 /* Sample questions and answers */

@@ -11,11 +11,11 @@ public class JPAUserDetails implements UserDetails {
 
     private final AppUser appUser;
 
-    public JPAUserDetails(String username, String password, Integer roleId) {
+    public JPAUserDetails(String username, String password, String role) {
         this.appUser = new AppUser();
         this.appUser.setUsername(username);
         this.appUser.setPassword(password);
-        this.appUser.setRoleId(roleId);
+        this.appUser.setRole(role);
     }
 
     public JPAUserDetails(AppUser appUser) {
@@ -39,7 +39,7 @@ public class JPAUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         ArrayList<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_" + appUser.getUserRole().getRoleDescription()));
+        authorities.add(new SimpleGrantedAuthority(appUser.getRole()));
         return authorities;
     }
 
