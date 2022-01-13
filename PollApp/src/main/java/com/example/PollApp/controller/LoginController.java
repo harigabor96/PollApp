@@ -11,8 +11,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Locale;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping()
 public class LoginController {
+
+    @RequestMapping("/login.html")
+    public String login() {
+        return "login.html";
+    }
+
     /*
     private final AppUserService appUserService;
     //private final Login login;
