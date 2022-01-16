@@ -22,7 +22,7 @@
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </header>
 <section id="poll-list">
-    <form method="get" th:action="@{/poll}" th:object="${pollListForm}">
+    <form method="get" th:object="${pollListForm}">
         <table class="poll-list-table">
             <tr class="poll-list-header">
                 <td th:text="#{poll-list.headerQuestion}"/>
@@ -34,7 +34,15 @@
                 <td class="td-creator" th:text="${poll.creator}"/>
                 <td class="td-votes" th:text="${poll.voteCount}"/>
                 <td>
-                    <button class="view-button" id="viewButton" name="selectedQuestionId"
+                    <button sec:authorize="hasRole('USER')"
+                            formaction="/poll"
+                            class="view-button" id="userViewButton" name="questionId"
+                            th:text="#{poll-list.viewButton}"
+                            th:value="${poll.questionId}"
+                            type="submit"/>
+                    <button sec:authorize="hasRole('ADMIN')"
+                            formaction="/poll/results"
+                            class="view-button" id="adminViewButton" name="questionId"
                             th:text="#{poll-list.viewButton}"
                             th:value="${poll.questionId}"
                             type="submit"/>

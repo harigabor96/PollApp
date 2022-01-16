@@ -15,10 +15,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .mvcMatchers("/poll-list/**").authenticated()
-                .mvcMatchers("/poll/**").authenticated()
+                .mvcMatchers("/poll-list").authenticated()
+                .mvcMatchers("/poll/results").authenticated()
+                .mvcMatchers("/poll").hasRole("USER")
+                .mvcMatchers("/poll/submit-vote").hasRole("USER")
                 .mvcMatchers("/poll-management/**").authenticated()
-                .mvcMatchers("/registration/**").permitAll()
+                .mvcMatchers("/registration").permitAll()
             .and()
                 .formLogin()
                 .loginPage("/login")

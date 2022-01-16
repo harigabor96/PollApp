@@ -2,10 +2,12 @@ package com.example.PollApp.controller;
 
 import com.example.PollApp.form.PollCreationForm;
 import com.example.PollApp.model.*;
-//import com.example.PollApp.security.Login;
+import com.example.PollApp.security.JPAUserDetails;
 import com.example.PollApp.service.AnswerService;
 import com.example.PollApp.service.QuestionService;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -19,28 +21,22 @@ public class PollManagementController {
 
     private final QuestionService questionService;
     private final AnswerService answerService;
-    //private final Login login;
     private final MessageSource messageSource;
 
-    public PollManagementController(QuestionService questionService, AnswerService answerService, /* Login login, */
+    public PollManagementController(QuestionService questionService, AnswerService answerService,
                                     MessageSource messageSource) {
         this.questionService = questionService;
         this.answerService = answerService;
-        //this.login = login;
         this.messageSource = messageSource;
     }
 
     @GetMapping()
     public String pollManagement() {
-        /* if (login.getUserId() == null) return "redirect:/login";
-        if (login.getRole() != 1) return "redirect:/poll-list"; */
-
         return "redirect:/poll-management/creation";
     }
 
     @GetMapping("/creation")
     public String creation(ModelMap model) {
-       // if (login.getUserId() == null) return "redirect:/login";
 
         ArrayList<Answer> answerList = new ArrayList<>();
         for (int i = 1; i <= 30; i++) {
@@ -53,11 +49,13 @@ public class PollManagementController {
     }
 
     @PostMapping("/create")
-    public String create(PollCreationForm pollCreationForm, RedirectAttributes redirectAttributes) {
-        //if (login.getUserId() == null) return "redirect:/login";
+    public String create(PollCreationForm pollCreationForm, Authentication authentication,
+                         RedirectAttributes redirectAttributes) {
 
+        JPAUserDetails user = (JPAUserDetails) authentication.getPrincipal();
         Question currentQuestion = pollCreationForm.getQuestion();
-        //currentQuestion.setCreatorId(login.getUserId());
+
+        currentQuestion.setCreatorId(user.getUserId());
 
         ArrayList<Answer> currentAnswers = new ArrayList<>();
 
@@ -78,15 +76,15 @@ public class PollManagementController {
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam("questionId") Integer selectedQuestionId) {
-        Question currentQuestion = questionService.findQuestion(selectedQuestionId);
+    public String delete(Integer questionId, Authentication authentication) {;
+        JPAUserDetails user = (JPAUserDetails) authentication.getPrincipal();
+        Question currentQuestion = questionService.findQuestion(questionId);
 
-        /*
-        if (login.getUserId() == null) return "redirect:/login";
-        if (login.getRole() != 1 && !currentQuestion.getCreatorId().equals(login.getUserId()))
+        if (user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER")) &&
+                !currentQuestion.getCreatorId().equals(user.getUserId()))
             return "redirect:/poll-list";
 
-        questionService.deleteQuestion(currentQuestion); */
+        questionService.deleteQuestion(currentQuestion);
         return "redirect:/poll-list";
     }
 }

@@ -22,6 +22,10 @@ public class JPAUserDetails implements UserDetails {
         this.appUser = appUser;
     }
 
+    public Integer getUserId() {
+        return appUser.getUserId();
+    }
+
     @Override
     public String getUsername() {
         return appUser.getUsername();
