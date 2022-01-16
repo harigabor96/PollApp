@@ -56,6 +56,14 @@ public class JPAUserDetailsManager implements UserDetailsManager {
         return false;
     }
 
+    public String validateUser(UserDetails user) {
+        AppUser userEntity = ((JPAUserDetails) user).getAsEntity();
+        Set<ConstraintViolation<AppUser>> violations = entityValidatorService.validate(userEntity);
+        if (!violations.isEmpty())
+            return entityValidatorService.printViolationsAsString(violations);
+        return null;
+    }
+
     @Override
     public void updateUser(UserDetails user) { }
 
@@ -64,12 +72,4 @@ public class JPAUserDetailsManager implements UserDetailsManager {
 
     @Override
     public void changePassword(String oldPassword, String newPassword) { }
-
-    public String validateUser(UserDetails user) {
-        AppUser userEntity = ((JPAUserDetails) user).getAsEntity();
-        Set<ConstraintViolation<AppUser>> violations = entityValidatorService.validate(userEntity);
-        if (!violations.isEmpty())
-            return entityValidatorService.printViolationsAsString(violations);
-        return null;
-    }
 }
