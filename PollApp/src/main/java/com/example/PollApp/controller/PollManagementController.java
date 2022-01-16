@@ -72,7 +72,7 @@ public class PollManagementController {
         Integer questionId = questionService.saveQuestion(currentQuestion);
         currentAnswers.forEach(ans -> ans.setQuestionId(questionId));
         answerService.saveAnswers(currentAnswers);
-        return "redirect:/poll-list";
+        return "redirect:/";
     }
 
     @PostMapping("/delete")
@@ -82,9 +82,9 @@ public class PollManagementController {
 
         if (user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER")) &&
                 !currentQuestion.getCreatorId().equals(user.getUserId()))
-            return "redirect:/poll-list";
+            return "redirect:/";
 
         questionService.deleteQuestion(currentQuestion);
-        return "redirect:/poll-list";
+        return "redirect:/";
     }
 }
