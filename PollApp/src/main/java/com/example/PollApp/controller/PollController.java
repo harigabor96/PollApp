@@ -75,7 +75,7 @@ public class PollController {
         }
 
         ResultsDTO results = questionService.getResults(questionId);
-        ArrayList<ArrayList<Object>> chartData = answerService.answersAsChartData((ArrayList) results.getAnswers());
+        ArrayList<ArrayList<Object>> chartData = questionService.convertResultsToChartData(results);
 
         model.addAttribute("userId", user.getUserId());
         model.addAttribute("results", results);
