@@ -8,7 +8,6 @@ import com.example.PollApp.service.AnswerService;
 import com.example.PollApp.service.QuestionService;
 import com.example.PollApp.service.VoteService;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -82,7 +81,6 @@ public class PollController {
         ArrayList<ArrayList<Object>> chartData = answerService.answersAsChartData((ArrayList) results.getAnswers());
 
         model.addAttribute("userId", user.getUserId());
-        model.addAttribute("userRole", (((ArrayList<GrantedAuthority>) user.getAuthorities()).get(0)));
         model.addAttribute("results", results);
         model.addAttribute("chartData", chartData);
         return "results";

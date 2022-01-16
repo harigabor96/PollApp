@@ -46,9 +46,15 @@
             </tr>
         </table>
     </div>
-    <form class="results-delete-form" th:if="${userRole == 1 || userId == results.creatorId}">
-        <button class="results-delete-button" formaction="/poll-management/delete" formmethod="post"
-                name="questionId" th:value="${results.questionId}" th:text="#{results.delete}"/>
+    <form class="results-delete-form" sec:authorize="hasRole('ADMIN')"
+          th:action="@{/poll-management/delete}" method="post">
+        <button class="results-delete-button" name="questionId" th:value="${results.questionId}"
+                th:text="#{results.delete}"/>
+    </form>
+    <form class="results-delete-form" sec:authorize="hasRole('USER')" th:if="${userId == results.creatorId}"
+          th:action="@{/poll-management/delete}" method="post">
+        <button class="results-delete-button" name="questionId" th:value="${results.questionId}"
+                th:text="#{results.delete}"/>
     </form>
 </section>
 </body>

@@ -36,8 +36,8 @@
             </div>
             <button class="vote-button" type="submit" th:text="#{poll.submit}"/>
         </form>
-        <form th:if="${userId == pollForm.question.creatorId}">
-            <button class="poll-delete-button" formaction="/poll-management/delete" formmethod="post"
+        <form th:if="${userId == pollForm.question.creatorId}" th:action="@{/poll-management/delete}" method="post">
+            <button class="poll-delete-button"
                     name="questionId" th:value="${pollForm.question.questionId}" th:text="#{poll.delete}"/>
         </form>
     </div>

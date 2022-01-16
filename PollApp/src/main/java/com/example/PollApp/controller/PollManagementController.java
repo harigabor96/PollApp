@@ -76,9 +76,9 @@ public class PollManagementController {
     }
 
     @PostMapping("/delete")
-    public String delete(Integer questionId, Authentication authentication) {;
+    public String delete(@RequestParam("questionId") Integer selectedQuestionId, Authentication authentication) {
         JPAUserDetails user = (JPAUserDetails) authentication.getPrincipal();
-        Question currentQuestion = questionService.findQuestion(questionId);
+        Question currentQuestion = questionService.findQuestion(selectedQuestionId);
 
         if (user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER")) &&
                 !currentQuestion.getCreatorId().equals(user.getUserId()))
