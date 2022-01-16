@@ -1,47 +1,56 @@
 package com.example.PollApp.controller;
 
+import com.example.PollApp.security.JPAUserDetails;
+import com.example.PollApp.security.JPAUserDetailsManager;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/registration")
 public class RegistrationController {
 
-    /*
-    private final AppUserService appUserService;
-    //private final Login login;
+    private final JPAUserDetailsManager jpaUserDetailsManager;
     private final MessageSource messageSource;
 
-    public LoginController(AppUserService appUserService, Login login, MessageSource messageSource) {
-        this.appUserService = appUserService;
-        //this.login = login;
+    public RegistrationController(JPAUserDetailsManager jpaUserDetailsManager, MessageSource messageSource) {
+        this.jpaUserDetailsManager = jpaUserDetailsManager;
         this.messageSource = messageSource;
-    } */
-
-    /*
-    @PostMapping()
-    public String register(AppUser currentUser, RedirectAttributes redirectAttributes) {
-
-        if (appUserService.checkIfUserNameExists(currentUser)) {
-            redirectAttributes.addFlashAttribute("errorMsg",
-                    messageSource.getMessage("errRegExistUsr",null, Locale.getDefault()));
-            return "redirect:/login";
-        }
-
-        if (!appUserService.validateUser(currentUser)) {
-            redirectAttributes.addFlashAttribute("errorMsg", appUserService.getValidationErrors());
-            return "redirect:/login";
-        }
-
-        appUserService.hashPassword(currentUser);
-
-        currentUser.setRoleId(2);
-
-        appUserService.saveUser(currentUser);
-        //login.setUserId(currentUser.getUserId());
-        //login.setUsername(currentUser.getUsername());
-        //login.setRole(currentUser.getRoleId());
-        return "redirect:/poll-list";
     }
-    */
+
+    @PostMapping()
+    public String register(@RequestParam("username") String username, @RequestParam("password") String rawPassword,
+                           RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        JPAUserDetails user = new JPAUserDetails(username, rawPassword, "ROLE_USER");
+
+        if (jpaUserDetailsManager.userExists(user.getUsername())) {
+            redirectAttributes.addFlashAttribute("errorMsg",
+                    messageSource.getMessage("errUsrExist",null, Locale.getDefault()));
+            return "redirect:/login";
+        }
+
+        String validationErrors = jpaUserDetailsManager.validateUser(user);
+        if (validationErrors != null) {
+            redirectAttributes.addFlashAttribute("errorMsg", validationErrors);
+            return "redirect:/login";
+        }
+
+        jpaUserDetailsManager.createUser(user);
+
+        try {
+            request.login(username, rawPassword);
+            return "redirect:/";
+        } catch (ServletException e) {
+            redirectAttributes.addFlashAttribute("errorMsg",
+                    messageSource.getMessage("errLogin",null, Locale.getDefault()));
+            return "redirect:/login";
+        }
+    }
 }

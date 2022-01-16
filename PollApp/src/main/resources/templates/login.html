@@ -12,7 +12,7 @@
 <header>
     <h1 class="title" th:text="#{appName}"/>
     <!-- Thymeleaf + Spring Security Login error -->
-    <h3 class="error-box" th:if="${param.error}" th:text="#{errLogin}"/>
+    <h3 class="error-box" th:if="${param.error}" th:text="#{errLoginCredentials}"/>
     <!-- Generic errors -->
     <h3 class="error-box" th:if="${errorMsg != null}" th:text="${errorMsg}"/>
 </header>
@@ -29,7 +29,7 @@
                 </label>
                 <button class="login-button" type="submit" th:text="#{login.sign-in}"/>
                 <span class="login-type-span" th:text="#{login.or}"/>
-                <button class="login-button" formaction="/login/register" type="submit" th:text="#{login.register}"/>
+                <button class="login-button" formaction="/registration" type="submit" th:text="#{login.register}"/>
             </form>
         </div>
         <div class="grid-item-logo">
