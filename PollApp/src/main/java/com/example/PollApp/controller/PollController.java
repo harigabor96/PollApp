@@ -34,7 +34,6 @@ public class PollController {
                        RedirectAttributes redirectAttributes) {
 
         JPAUserDetails user = (JPAUserDetails) authentication.getPrincipal();
-
         if (voteService.checkIfUserVoted(questionId, user.getUserId())) {
             redirectAttributes.addAttribute("questionId", questionId);
             return "redirect:/poll/results";
@@ -48,12 +47,11 @@ public class PollController {
     }
 
     @PostMapping("/submit-vote")
-    public String submitVote(PollForm pollForm, Authentication authentication, RedirectAttributes redirectAttributes) {
+    public String submitVote(@RequestParam("selectedQuestionId") Integer questionId,
+                             @RequestParam("selectedAnswerId") Integer answerId, Authentication authentication,
+                             RedirectAttributes redirectAttributes) {
 
         JPAUserDetails user = (JPAUserDetails) authentication.getPrincipal();
-        Integer questionId = pollForm.getSelectedQuestionId();
-        Integer answerId = pollForm.getSelectedAnswerId();
-
         if(voteService.checkIfUserVoted(questionId, user.getUserId())) {
             redirectAttributes.addAttribute("questionId", questionId);
             return "redirect:/poll/results";
@@ -70,7 +68,6 @@ public class PollController {
                            Authentication authentication, RedirectAttributes redirectAttributes) {
 
         JPAUserDetails user = (JPAUserDetails) authentication.getPrincipal();
-
         if (user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER")) &&
                 !voteService.checkIfUserVoted(questionId, user.getUserId())) {
             redirectAttributes.addAttribute("questionId", questionId);
