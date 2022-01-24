@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
-import javax.validation.ConstraintViolation;
 import java.util.Locale;
 import java.util.Set;
 
@@ -50,15 +49,12 @@ public class JPAUserDetailsManager implements UserDetailsManager {
     @Override
     public boolean userExists(String username) {
         AppUser userEntity = appUserRepository.findAppUserByUsername(username);
-        if (userEntity != null && username.equalsIgnoreCase(userEntity.getUsername())) {
-            return true;
-        }
-        return false;
+        return userEntity != null && username.equalsIgnoreCase(userEntity.getUsername());
     }
 
     public String validateUser(UserDetails user) {
         AppUser userEntity = ((JPAUserDetails) user).getAsEntity();
-        Set<ConstraintViolation<AppUser>> violations = entityValidatorService.validate(userEntity);
+        Set violations = entityValidatorService.validate(userEntity);
         if (!violations.isEmpty())
             return entityValidatorService.printViolationsAsString(violations);
         return null;
