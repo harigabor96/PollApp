@@ -4,11 +4,11 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
     <meta content="Gábor Hári" name="author"/>
     <title th:text="#{appName}"/>
-    <link rel="shortcut icon" th:href="@{../favicon.png}" type="image/png"/>
-    <link rel="stylesheet" th:href="@{../css/main.css}">
+    <link rel="shortcut icon" th:href="@{/favicon.png}" type="image/png"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
     <script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
     <script th:inline="javascript">let chartData = [[${chartData}]];</script>
-    <script th:src="@{../js/chart.js}" type="text/javascript"></script>
+    <script th:src="@{/js/chart.js}" type="text/javascript"></script>
     <style>
         .goog-tooltip {
             color: rgb(18, 35, 51);
@@ -19,7 +19,7 @@
 <nav>
     <div class="nav-grid-container">
         <div class="grid-item-nav-title" th:text="#{appName}"/>
-        <img alt="PollApp small logo" class="grid-item-nav-img" th:src="@{../images/logo_inverted_small.png}">
+        <img alt="PollApp small logo" class="grid-item-nav-img" th:src="@{/images/logo_inverted_small.png}">
         <a class="grid-item-nav-polls" href="/poll-list" th:text="#{navbar.poll-list}"/>
         <a class="grid-item-nav-create" href="/poll-management/creation" th:text="#{navbar.creation}"/>
         <a class="grid-item-sign-out-link" href="/logout" th:text="#{navbar.sign-out}"/>
@@ -46,9 +46,15 @@
             </tr>
         </table>
     </div>
-    <form class="results-delete-form" th:if="${userRole == 1 || userId == results.creatorId}">
-        <button class="results-delete-button" formaction="/poll-management/delete" formmethod="post"
-                name="questionId" th:value="${results.questionId}" th:text="#{results.delete}"/>
+    <form class="results-delete-form" method="post"
+          sec:authorize="hasRole('ADMIN')" th:action="@{/poll-management/delete}">
+        <button class="results-delete-button" name="questionId" th:text="#{results.delete}"
+                th:value="${results.questionId}"/>
+    </form>
+    <form class="results-delete-form" method="post" sec:authorize="hasRole('USER')"
+          th:action="@{/poll-management/delete}" th:if="${userId == results.creatorId}">
+        <button class="results-delete-button" name="questionId" th:text="#{results.delete}"
+                th:value="${results.questionId}"/>
     </form>
 </section>
 </body>

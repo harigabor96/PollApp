@@ -20,7 +20,7 @@ public class AppUser {
     @Size(min = 6, max = 50)
     private String password;
 
-    private Integer roleId;
+    private String role;
 
     public AppUser() {
     }
@@ -37,7 +37,7 @@ public class AppUser {
 
     public void setPassword(String password) { this.password = password; }
 
-    public Integer getRoleId() { return roleId; }
+    public String getRole() { return role; }
 
-    public void setRoleId(Integer roleId) { this.roleId = roleId; }
+    public void setRole(String role) { this.role = role; }
 }

@@ -24,6 +24,17 @@ public class QuestionService {
         return questionRepository.getResults(questionId);
     }
 
+    public ArrayList<ArrayList<Object>> convertResultsToChartData(ResultsDTO results) {
+        ArrayList<ArrayList<Object>> chartList = new ArrayList<>();
+        results.getAnswers().forEach( ans -> {
+            ArrayList<Object> row = new ArrayList<>();
+            row.add(ans.getAnswer());
+            row.add(ans.getVoteCount());
+            chartList.add(row);
+        });
+        return chartList;
+    }
+
     public ArrayList<PollListDTO> getPollList() {
         return (ArrayList<PollListDTO>) questionRepository.getPollList();
     }

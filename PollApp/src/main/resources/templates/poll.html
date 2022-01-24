@@ -4,14 +4,14 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
     <meta content="Gábor Hári" name="author"/>
     <title th:text="#{appName}"/>
-    <link rel="stylesheet" th:href="@{../css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="shortcut icon" th:href="@{favicon.png}" type="image/png"/>
 </head>
 <body>
 <nav>
     <div class="nav-grid-container">
         <div class="grid-item-nav-title" th:text="#{appName}"/>
-        <img alt="PollApp small logo" class="grid-item-nav-img" th:src="@{../images/logo_inverted_small.png}">
+        <img alt="PollApp small logo" class="grid-item-nav-img" th:src="@{/images/logo_inverted_small.png}">
         <a class="grid-item-nav-polls" href="/poll-list" th:text="#{navbar.poll-list}"/>
         <a class="grid-item-nav-create" href="/poll-management/creation" th:text="#{navbar.creation}"/>
         <a class="grid-item-sign-out-link" href="/logout" th:text="#{navbar.sign-out}"/>
@@ -34,11 +34,11 @@
                     <div class="poll-radio-display" th:text="*{answerList[__${stat.index}__].answer}"/>
                 </label>
             </div>
-            <button class="vote-button" type="submit" th:text="#{poll.submit}"/>
+            <button class="vote-button" th:text="#{poll.submit}" type="submit"/>
         </form>
-        <form th:if="${userId == pollForm.question.creatorId}">
-            <button class="poll-delete-button" formaction="/poll-management/delete" formmethod="post"
-                    name="questionId" th:value="${pollForm.question.questionId}" th:text="#{poll.delete}"/>
+        <form method="post" th:action="@{/poll-management/delete}" th:if="${userId == pollForm.question.creatorId}">
+            <button class="poll-delete-button"
+                    name="questionId" th:text="#{poll.delete}" th:value="${pollForm.question.questionId}"/>
         </form>
     </div>
 </section>
