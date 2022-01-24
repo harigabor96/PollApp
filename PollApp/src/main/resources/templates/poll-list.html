@@ -34,15 +34,15 @@
                 <td class="td-creator" th:text="${poll.creator}"/>
                 <td class="td-votes" th:text="${poll.voteCount}"/>
                 <td>
-                    <button sec:authorize="hasRole('USER')"
+                    <button class="view-button"
                             formaction="/poll"
-                            class="view-button" id="userViewButton" name="questionId"
+                            id="userViewButton" name="questionId" sec:authorize="hasRole('USER')"
                             th:text="#{poll-list.viewButton}"
                             th:value="${poll.questionId}"
                             type="submit"/>
-                    <button sec:authorize="hasRole('ADMIN')"
+                    <button class="view-button"
                             formaction="/poll/results"
-                            class="view-button" id="adminViewButton" name="questionId"
+                            id="adminViewButton" name="questionId" sec:authorize="hasRole('ADMIN')"
                             th:text="#{poll-list.viewButton}"
                             th:value="${poll.questionId}"
                             type="submit"/>

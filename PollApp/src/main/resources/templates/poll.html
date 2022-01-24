@@ -34,11 +34,11 @@
                     <div class="poll-radio-display" th:text="*{answerList[__${stat.index}__].answer}"/>
                 </label>
             </div>
-            <button class="vote-button" type="submit" th:text="#{poll.submit}"/>
+            <button class="vote-button" th:text="#{poll.submit}" type="submit"/>
         </form>
-        <form th:if="${userId == pollForm.question.creatorId}" th:action="@{/poll-management/delete}" method="post">
+        <form method="post" th:action="@{/poll-management/delete}" th:if="${userId == pollForm.question.creatorId}">
             <button class="poll-delete-button"
-                    name="questionId" th:value="${pollForm.question.questionId}" th:text="#{poll.delete}"/>
+                    name="questionId" th:text="#{poll.delete}" th:value="${pollForm.question.questionId}"/>
         </form>
     </div>
 </section>

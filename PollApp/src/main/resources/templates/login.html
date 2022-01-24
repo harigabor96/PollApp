@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://thymeleaf.org">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Gábor Hári" name="author"/>
     <title th:text="#{appName}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}">
@@ -19,17 +19,17 @@
 <section id="sign-in">
     <div class="sign-in-grid-container">
         <div class="grid-item-sign-in">
-            <form method="post" th:action="@{/sign-in}" >
+            <form method="post" th:action="@{/sign-in}">
                 <label><span th:text="#{login.username}"/>
-                    <input autocomplete="off" class="login-text-input" required id="username" name="username"
+                    <input autocomplete="off" class="login-text-input" id="username" name="username" required
                            type="text"/>
                 </label>
                 <label><span th:text="#{login.password}"/>
-                    <input class="login-text-input" required id="password" name="password" type="password"/>
+                    <input class="login-text-input" id="password" name="password" required type="password"/>
                 </label>
-                <button class="login-button" type="submit" th:text="#{login.sign-in}"/>
+                <button class="login-button" th:text="#{login.sign-in}" type="submit"/>
                 <span class="login-type-span" th:text="#{login.or}"/>
-                <button class="login-button" formaction="/registration" type="submit" th:text="#{login.register}"/>
+                <button class="login-button" formaction="/registration" th:text="#{login.register}" type="submit"/>
             </form>
         </div>
         <div class="grid-item-logo">
